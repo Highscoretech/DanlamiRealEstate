@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Cta from "@/components/site/Cta";
+import InvestorFaq from "@/components/site/InvestorFaq";
 import PageHero from "@/components/site/PageHero";
 
 export const metadata: Metadata = {
@@ -8,16 +9,6 @@ export const metadata: Metadata = {
   description:
     "Your capital deserves a strategy. How Dan Lami Real Estate helps investors understand an opportunity before they commit capital.",
 };
-
-const questions = [
-  "Where is the property?",
-  "Why is the location important?",
-  "What is changing around it?",
-  "Who is the likely buyer or tenant?",
-  "What could drive demand?",
-  "What is the potential income?",
-  "What is the potential appreciation?",
-];
 
 export default function InvestorsPage() {
   return (
@@ -40,14 +31,7 @@ export default function InvestorsPage() {
               </p>
             </div>
 
-            <ul className="questions">
-              {questions.map((q) => (
-                <li key={q}>{q}</li>
-              ))}
-              <li style={{ color: "var(--teal-deep)" }}>
-                And ultimately &mdash; what is the exit?
-              </li>
-            </ul>
+            <InvestorFaq />
           </div>
         </div>
       </section>
