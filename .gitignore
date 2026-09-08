@@ -13,3 +13,6 @@ yarn-debug.log*
 yarn-error.log*
 .vercel
 *.tsbuildinfo
+
+# Raw client dump — reorganised and renamed under assets/
+project-images-doc/
