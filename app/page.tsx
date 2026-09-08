@@ -1,86 +1,312 @@
-import PartBrand from "@/components/brief/PartBrand";
-import PartHomepage from "@/components/brief/PartHomepage";
-import PartProjects from "@/components/brief/PartProjects";
-import PartData from "@/components/brief/PartData";
-import PartRest from "@/components/brief/PartRest";
-import PrintButton from "@/components/brief/PrintButton";
+import Image from "next/image";
+import Link from "next/link";
+import Cta from "@/components/site/Cta";
+import PhotoSlot from "@/components/site/PhotoSlot";
+import { properties } from "@/content/properties";
 
-/* ------------------------------------------------------------------
-   TEMPORARY PAGE — the client brief for danlamirealestate.com.
+/* Homepage. Copy is the client's own, section 1 of docs/client-content.md.
+   No headline statistics anywhere — the client explicitly asked that no
+   unverified numbers go on the site yet. */
 
-   This whole route exists to show the client what we need from them.
-   When the real build starts, delete this file, components/brief/,
-   and the brief styles in app/globals.css. Nothing else depends on it.
-   ------------------------------------------------------------------ */
+const featured = properties.slice(0, 3);
 
-export default function BriefPage() {
+export default function HomePage() {
   return (
     <>
-      <div className="topbar no-print">
-        <div className="topbar-in">
-          <span className="topbar-mark">
-            <b>Danlami Real Estate</b> &middot; website brief
-          </span>
-          <PrintButton />
-        </div>
-      </div>
+      {/* ---------- hero ---------- */}
+      <section className="band band-white" style={{ paddingBottom: 0 }}>
+        <div className="shell">
+          <div className="split split-trail" style={{ alignItems: "center" }}>
+            <div className="stack stack-3">
+              <p className="eyebrow">Africa&rsquo;s Luxury Real Estate Authority</p>
+              <h1>
+                Own More Than Property.
+                <br />
+                Own an Asset Built to Last.
+              </h1>
+              <p className="lede">
+                At Dan Lami Real Estate, we believe luxury real estate is more
+                than a beautiful address. It is about owning the right asset, in
+                the right location, at the right time &mdash; with the right
+                strategy behind it.
+              </p>
+              <p className="body">
+                We help investors acquire premium real estate opportunities
+                designed to create value today and preserve wealth for
+                generations to come.
+              </p>
+              <div className="btn-row" style={{ marginTop: ".5rem" }}>
+                <Link href="/developments" className="btn btn-primary">
+                  Explore Our Developments
+                </Link>
+                <Link href="/contact" className="btn btn-outline">
+                  Speak With an Investment Advisor
+                </Link>
+              </div>
+            </div>
 
-      <div className="wrap">
-        <header className="masthead">
-          <p className="eyebrow">What we need from you</p>
-          <h1>
-            Building <em>danlamirealestate.com</em>
-          </h1>
-          <p className="lede">
-            This document is a walk through your future website. It shows each part of the site as we
-            propose to build it, and beside each part, exactly what we need from you to fill it in.
-          </p>
-          <p className="lede">
-            You do not need to have every answer ready. Where you are unsure, say so and we will
-            either fill the gap ourselves or send you options to choose from. Nothing here should
-            stop us getting started.
-          </p>
-          <div className="masthead-meta">
-            <span>
-              Domain <b>danlamirealestate.com</b>
-            </span>
-            <span>
-              Prepared <b>13 August 2026</b>
-            </span>
-            <span className="no-print">
-              Press <b>Save as PDF</b> above to keep a copy
-            </span>
+            <PhotoSlot
+              alt="Dan Lami Real Estate"
+              height="clamp(20rem, 46vw, 30rem)"
+              note="Hero photograph pending"
+            />
           </div>
-        </header>
+        </div>
+      </section>
 
-        <PartBrand />
-        <PartHomepage />
-        <PartProjects />
-        <PartData />
-        <PartRest />
+      {/* ---------- the difference ---------- */}
+      <section className="band">
+        <div className="shell stack stack-4">
+          <p className="rule-label">The Dan Lami difference</p>
 
-        <footer className="foot">
-          <h2>How to send everything</h2>
-          <p>
-            Put it all in one Google&nbsp;Drive folder and share the link &mdash; logo, photographs
-            organised per project, documents, and a spreadsheet or document with the written answers.
-            One folder is far easier for both of us than fifty separate messages.
+          <div className="split split-lead">
+            <div className="stack stack-2">
+              <h2>
+                We don&rsquo;t just sell property. We help you understand the
+                investment.
+              </h2>
+            </div>
+            <div className="stack stack-3">
+              <p className="body">
+                Anyone can show you a property. We go further.
+              </p>
+              <p className="body">
+                Before recommending a real estate asset, we examine the factors
+                that can influence its long-term value &mdash; including
+                location, development trajectory, demand, rental potential,
+                capital appreciation, infrastructure, accessibility and exit
+                opportunities.
+              </p>
+              <p className="body">Because the question isn&rsquo;t simply:</p>
+              <p className="pull">&ldquo;Do you like the property?&rdquo;</p>
+              <p className="body">The better question is:</p>
+              <p className="pull pull-teal">
+                &ldquo;Why should you own it?&rdquo;
+              </p>
+              <p className="body">
+                That is the difference between buying property and building a
+                real estate portfolio.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- featured properties ---------- */}
+      <section className="band band-white">
+        <div className="shell stack stack-4">
+          <div className="split" style={{ alignItems: "end", gap: "1.5rem" }}>
+            <div className="stack stack-2">
+              <p className="eyebrow">Currently available</p>
+              <h2>Selected properties</h2>
+            </div>
+            <div style={{ justifySelf: "start" }}>
+              <Link href="/properties" className="link-arrow">
+                View all properties &rarr;
+              </Link>
+            </div>
+          </div>
+
+          <div className="grid-3">
+            {featured.map((p) => (
+              <Link
+                key={p.slug}
+                href={`/properties/${p.slug}`}
+                className="property-card"
+              >
+                <PhotoSlot src={p.image} alt={p.title} height="12rem" />
+                <div className="property-card-body">
+                  <span className="tag">{p.status}</span>
+                  <h3>{p.title}</h3>
+                  <p className="property-where">{p.location}</p>
+                  <p className="property-price">{p.price}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- what we do ---------- */}
+      <section className="band">
+        <div className="shell stack stack-4">
+          <div className="split split-lead" style={{ alignItems: "start" }}>
+            <div className="stack stack-2">
+              <p className="eyebrow">What we do</p>
+              <h2>Four ways we work</h2>
+              <Link href="/services" className="link-arrow" style={{ marginTop: ".5rem" }}>
+                All services &rarr;
+              </Link>
+            </div>
+
+            <div>
+              {[
+                {
+                  n: "01",
+                  t: "Luxury real estate sales",
+                  d: "Access carefully selected luxury residential and investment properties across premium locations, from apartments and waterfront residences to exclusive land opportunities.",
+                },
+                {
+                  n: "02",
+                  t: "Real estate investment advisory",
+                  d: "We help clients understand the investment opportunity behind a property before they commit their capital.",
+                },
+                {
+                  n: "03",
+                  t: "Strategic development",
+                  d: "We work with property owners, developers and strategic partners to bring high-quality developments to market.",
+                },
+                {
+                  n: "04",
+                  t: "Property acquisition",
+                  d: "For clients who prefer a hands-off approach, we identify and evaluate opportunities against their objectives, budget and investment horizon.",
+                },
+              ].map((s) => (
+                <div className="numbered" key={s.n}>
+                  <span className="numbered-idx">{s.n}</span>
+                  <div>
+                    <h4>{s.t}</h4>
+                    <p>{s.d}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- signature developments ---------- */}
+      <section className="band band-white">
+        <div className="shell">
+          <div className="split" style={{ alignItems: "center" }}>
+            <PhotoSlot
+              alt="Signature Developments"
+              height="clamp(16rem, 34vw, 24rem)"
+              note="Development photography pending"
+            />
+            <div className="stack stack-3">
+              <p className="eyebrow">Signature Developments</p>
+              <h2>
+                Developments with purpose. Assets designed for the future.
+              </h2>
+              <p className="body">
+                Our Signature Developments represent a new chapter in the Dan
+                Lami Real Estate brand. These are not simply projects.
+              </p>
+              <p className="body">
+                They are opportunities to own strategically positioned real
+                estate assets designed around lifestyle, demand, location and
+                long-term value.
+              </p>
+              <Link href="/developments" className="link-arrow">
+                Explore Signature Developments &rarr;
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- for investors ---------- */}
+      <section className="band band-sunk">
+        <div className="shell stack stack-4">
+          <div className="split split-lead">
+            <div className="stack stack-2">
+              <p className="eyebrow">For investors</p>
+              <h2>Your capital deserves a strategy.</h2>
+              <p className="body" style={{ marginTop: ".5rem" }}>
+                Real estate investment shouldn&rsquo;t be based solely on
+                emotion. Before committing capital, investors need to
+                understand:
+              </p>
+              <Link href="/investors" className="link-arrow" style={{ marginTop: "1rem" }}>
+                How we advise investors &rarr;
+              </Link>
+            </div>
+
+            <ul className="questions">
+              {[
+                "Where is the property?",
+                "Why is the location important?",
+                "What is changing around it?",
+                "Who is the likely buyer or tenant?",
+                "What could drive demand?",
+                "What is the potential income?",
+                "What is the potential appreciation?",
+              ].map((q) => (
+                <li key={q}>{q}</li>
+              ))}
+              <li style={{ color: "var(--teal-deep)" }}>
+                And ultimately &mdash; what is the exit?
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- the closer ---------- */}
+      <section className="band band-white">
+        <div className="shell">
+          <div className="split split-lead" style={{ alignItems: "center" }}>
+            <div
+              style={{
+                position: "relative",
+                aspectRatio: "4 / 5",
+                background: "var(--surface-sunk)",
+              }}
+            >
+              <Image
+                src="/team/danlami-ojo.jpg"
+                alt="Danlami Ojo, Founder and CEO"
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="(max-width: 54rem) 100vw, 40vw"
+              />
+            </div>
+
+            <div className="stack stack-3">
+              <p className="eyebrow">The Closer</p>
+              <h2>Meet Danlami Ojo</h2>
+              <p className="body">
+                Danlami Ojo is the Founder and CEO of Dan Lami Real Estate and is
+                widely known as <strong>&ldquo;The Closer.&rdquo;</strong> His
+                approach to real estate goes beyond closing transactions.
+              </p>
+              <p className="body">
+                He believes the real value of a property professional is not
+                simply in selling a property, but in helping clients understand
+                the opportunity behind the asset.
+              </p>
+              <p className="pull pull-teal" style={{ marginTop: ".5rem" }}>
+                Don&rsquo;t just acquire property. Acquire assets that make
+                sense.
+              </p>
+              <Link href="/the-closer" className="link-arrow">
+                Read more &rarr;
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- brand promise ---------- */}
+      <section className="band">
+        <div className="shell shell-narrow stack stack-3" style={{ textAlign: "center", alignItems: "center" }}>
+          <p className="eyebrow">Our brand promise</p>
+          <h2 style={{ maxWidth: "20ch" }}>
+            We don&rsquo;t just help you buy property. We help you buy with
+            purpose.
+          </h2>
+          <p className="body" style={{ textAlign: "center" }}>
+            Because the right property can become a home. An income-producing
+            asset. A capital-growth opportunity. A family asset. A portfolio.
           </p>
-          <p>
-            <b>Please avoid sending photographs through WhatsApp.</b> It compresses every image it
-            touches, and what looks sharp on your phone turns blurry across a website. Google&nbsp;
-            Drive, WeTransfer or plain email attachments keep the original quality.
+          <p className="pull pull-teal" style={{ maxWidth: "none" }}>
+            And ultimately, a legacy.
           </p>
-          <p>
-            <b>Typing is not required.</b> For any written section &mdash; your company story, a
-            project description, what you offer investors &mdash; record a voice note instead. We
-            will write it up properly and send it back for your approval.
-          </p>
-          <p className="foot-mark">
-            Prepared for Danlami Real Estate &middot; danlamirealestate.com &middot; 13 August 2026
-          </p>
-        </footer>
-      </div>
+        </div>
+      </section>
+
+      <Cta />
     </>
   );
 }
