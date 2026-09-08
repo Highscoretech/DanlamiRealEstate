@@ -10,8 +10,11 @@ import { properties } from "@/content/properties";
    No headline statistics anywhere — the client explicitly asked that no
    unverified numbers go on the site yet. */
 
-/* Feature only listings that already have photography. */
-const featured = properties.filter((p) => p.image).slice(0, 4);
+/* Feature only listings that already have photography, priciest first. */
+const featured = properties
+  .filter((p) => p.image)
+  .sort((a, b) => Number(b.price.replace(/\D/g, "")) - Number(a.price.replace(/\D/g, "")))
+  .slice(0, 4);
 
 export default function HomePage() {
   return (
