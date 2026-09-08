@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Cta from "@/components/site/Cta";
+import Gallery from "@/components/site/Gallery";
 import PhotoSlot from "@/components/site/PhotoSlot";
 import { properties } from "@/content/properties";
 import { site } from "@/content/site";
@@ -71,6 +72,19 @@ export default async function PropertyPage({ params }: Params) {
           </div>
         </div>
       </section>
+
+      {property.images?.length ? (
+        <section className="band-tight band-white">
+          <div className="shell">
+            <Gallery
+              images={[property.image, ...property.images].filter(
+                (s): s is string => Boolean(s)
+              )}
+              alt={`${property.title}, ${property.location}`}
+            />
+          </div>
+        </section>
+      ) : null}
 
       <section className="band">
         <div className="shell">

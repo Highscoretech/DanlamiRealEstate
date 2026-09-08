@@ -38,7 +38,14 @@ export default function PhotoSlot({
 
   return (
     <div className="photo-slot" style={{ height }}>
-      <Image src="/brand/mark.png" alt="" width={492} height={449} aria-hidden />
+      <Image
+        src="/brand/mark.png"
+        alt=""
+        width={492}
+        height={449}
+        aria-hidden
+        className="photo-slot-mark"
+      />
       {note ? <span className="photo-slot-note">{note}</span> : null}
     </div>
   );

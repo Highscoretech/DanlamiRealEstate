@@ -1,55 +1,53 @@
 import Image from "next/image";
 import Link from "next/link";
 import Cta from "@/components/site/Cta";
+import HeroSlider from "@/components/site/HeroSlider";
 import PhotoSlot from "@/components/site/PhotoSlot";
+import Reveal from "@/components/site/Reveal";
 import { properties } from "@/content/properties";
 
 /* Homepage. Copy is the client's own, section 1 of docs/client-content.md.
    No headline statistics anywhere — the client explicitly asked that no
    unverified numbers go on the site yet. */
 
-const featured = properties.slice(0, 3);
+/* Feature only listings that already have photography. */
+const featured = properties.filter((p) => p.image).slice(0, 4);
 
 export default function HomePage() {
   return (
     <>
       {/* ---------- hero ---------- */}
-      <section className="band band-white" style={{ paddingBottom: 0 }}>
-        <div className="shell">
-          <div className="split split-trail" style={{ alignItems: "center" }}>
-            <div className="stack stack-3">
-              <p className="eyebrow">Africa&rsquo;s Luxury Real Estate Authority</p>
-              <h1>
-                Own More Than Property.
-                <br />
-                Own an Asset Built to Last.
-              </h1>
-              <p className="lede">
-                At Dan Lami Real Estate, we believe luxury real estate is more
-                than a beautiful address. It is about owning the right asset, in
-                the right location, at the right time &mdash; with the right
-                strategy behind it.
-              </p>
-              <p className="body">
-                We help investors acquire premium real estate opportunities
-                designed to create value today and preserve wealth for
-                generations to come.
-              </p>
-              <div className="btn-row" style={{ marginTop: ".5rem" }}>
-                <Link href="/developments" className="btn btn-primary">
-                  Explore Our Developments
-                </Link>
-                <Link href="/contact" className="btn btn-outline">
-                  Speak With an Investment Advisor
-                </Link>
-              </div>
+      <section className="home-hero">
+        <div className="home-hero-media">
+          <HeroSlider height="100%" />
+        </div>
+        <div className="shell home-hero-inner">
+          <div className="stack stack-3">
+            <p className="eyebrow">Africa&rsquo;s Luxury Real Estate Authority</p>
+            <h1>
+              Own More Than Property.
+              <br />
+              Own an Asset Built to Last.
+            </h1>
+            <p className="lede">
+              At Dan Lami Real Estate, we believe luxury real estate is more
+              than a beautiful address. It is about owning the right asset, in
+              the right location, at the right time &mdash; with the right
+              strategy behind it.
+            </p>
+            <p className="body">
+              We help investors acquire premium real estate opportunities
+              designed to create value today and preserve wealth for
+              generations to come.
+            </p>
+            <div className="btn-row" style={{ marginTop: ".5rem" }}>
+              <Link href="/developments" className="btn btn-primary">
+                Explore Our Developments
+              </Link>
+              <Link href="/contact" className="btn btn-ghost-dark">
+                Speak With an Investment Advisor
+              </Link>
             </div>
-
-            <PhotoSlot
-              alt="Dan Lami Real Estate"
-              height="clamp(20rem, 46vw, 30rem)"
-              note="Hero photograph pending"
-            />
           </div>
         </div>
       </section>
@@ -57,16 +55,20 @@ export default function HomePage() {
       {/* ---------- the difference ---------- */}
       <section className="band">
         <div className="shell stack stack-4">
-          <p className="rule-label">The Dan Lami difference</p>
+          <Reveal>
+            <p className="rule-label">The Dan Lami difference</p>
+          </Reveal>
 
           <div className="split split-lead">
-            <div className="stack stack-2">
-              <h2>
-                We don&rsquo;t just sell property. We help you understand the
-                investment.
-              </h2>
-            </div>
-            <div className="stack stack-3">
+            <Reveal>
+              <div className="stack stack-2">
+                <h2>
+                  We don&rsquo;t just sell property. We help you understand the
+                  investment.
+                </h2>
+              </div>
+            </Reveal>
+            <Reveal delay={0.12} className="stack stack-3">
               <p className="body">
                 Anyone can show you a property. We go further.
               </p>
@@ -87,7 +89,7 @@ export default function HomePage() {
                 That is the difference between buying property and building a
                 real estate portfolio.
               </p>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -107,21 +109,23 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="grid-3">
-            {featured.map((p) => (
-              <Link
-                key={p.slug}
-                href={`/properties/${p.slug}`}
-                className="property-card"
-              >
-                <PhotoSlot src={p.image} alt={p.title} height="12rem" />
-                <div className="property-card-body">
-                  <span className="tag">{p.status}</span>
-                  <h3>{p.title}</h3>
-                  <p className="property-where">{p.location}</p>
-                  <p className="property-price">{p.price}</p>
-                </div>
-              </Link>
+          <div className="grid-2">
+            {featured.map((p, i) => (
+              <Reveal key={p.slug} delay={(i % 2) * 0.1}>
+                <Link
+                  href={`/properties/${p.slug}`}
+                  className="property-card"
+                  style={{ height: "100%" }}
+                >
+                  <PhotoSlot src={p.image} alt={p.title} height="clamp(13rem, 24vw, 18rem)" />
+                  <div className="property-card-body">
+                    <span className="tag">{p.status}</span>
+                    <h3>{p.title}</h3>
+                    <p className="property-where">{p.location}</p>
+                    <p className="property-price">{p.price}</p>
+                  </div>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -131,15 +135,17 @@ export default function HomePage() {
       <section className="band">
         <div className="shell stack stack-4">
           <div className="split split-lead" style={{ alignItems: "start" }}>
-            <div className="stack stack-2">
-              <p className="eyebrow">What we do</p>
-              <h2>Four ways we work</h2>
-              <Link href="/services" className="link-arrow" style={{ marginTop: ".5rem" }}>
-                All services &rarr;
-              </Link>
-            </div>
+            <Reveal>
+              <div className="stack stack-2">
+                <p className="eyebrow">What we do</p>
+                <h2>Four ways we work</h2>
+                <Link href="/services" className="link-arrow" style={{ marginTop: ".5rem" }}>
+                  All services &rarr;
+                </Link>
+              </div>
+            </Reveal>
 
-            <div>
+            <Reveal delay={0.12}>
               {[
                 {
                   n: "01",
@@ -170,7 +176,7 @@ export default function HomePage() {
                   </div>
                 </div>
               ))}
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -179,12 +185,14 @@ export default function HomePage() {
       <section className="band band-white">
         <div className="shell">
           <div className="split" style={{ alignItems: "center" }}>
-            <PhotoSlot
-              alt="Signature Developments"
-              height="clamp(16rem, 34vw, 24rem)"
-              note="Development photography pending"
-            />
-            <div className="stack stack-3">
+            <Reveal>
+              <PhotoSlot
+                src="/hero/garelt-court.jpg"
+                alt="Garelt Court, Osapa London, Lekki"
+                height="clamp(16rem, 34vw, 24rem)"
+              />
+            </Reveal>
+            <Reveal delay={0.12} className="stack stack-3">
               <p className="eyebrow">Signature Developments</p>
               <h2>
                 Developments with purpose. Assets designed for the future.
@@ -201,7 +209,7 @@ export default function HomePage() {
               <Link href="/developments" className="link-arrow">
                 Explore Signature Developments &rarr;
               </Link>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -210,19 +218,22 @@ export default function HomePage() {
       <section className="band band-sunk">
         <div className="shell stack stack-4">
           <div className="split split-lead">
-            <div className="stack stack-2">
-              <p className="eyebrow">For investors</p>
-              <h2>Your capital deserves a strategy.</h2>
-              <p className="body" style={{ marginTop: ".5rem" }}>
-                Real estate investment shouldn&rsquo;t be based solely on
-                emotion. Before committing capital, investors need to
-                understand:
-              </p>
-              <Link href="/investors" className="link-arrow" style={{ marginTop: "1rem" }}>
-                How we advise investors &rarr;
-              </Link>
-            </div>
+            <Reveal>
+              <div className="stack stack-2">
+                <p className="eyebrow">For investors</p>
+                <h2>Your capital deserves a strategy.</h2>
+                <p className="body" style={{ marginTop: ".5rem" }}>
+                  Real estate investment shouldn&rsquo;t be based solely on
+                  emotion. Before committing capital, investors need to
+                  understand:
+                </p>
+                <Link href="/investors" className="link-arrow" style={{ marginTop: "1rem" }}>
+                  How we advise investors &rarr;
+                </Link>
+              </div>
+            </Reveal>
 
+            <Reveal delay={0.12}>
             <ul className="questions">
               {[
                 "Where is the property?",
@@ -239,6 +250,7 @@ export default function HomePage() {
                 And ultimately &mdash; what is the exit?
               </li>
             </ul>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -247,23 +259,25 @@ export default function HomePage() {
       <section className="band band-white">
         <div className="shell">
           <div className="split split-lead" style={{ alignItems: "center" }}>
-            <div
-              style={{
-                position: "relative",
-                aspectRatio: "4 / 5",
-                background: "var(--surface-sunk)",
-              }}
-            >
-              <Image
-                src="/team/danlami-ojo.jpg"
-                alt="Danlami Ojo, Founder and CEO"
-                fill
-                style={{ objectFit: "cover" }}
-                sizes="(max-width: 54rem) 100vw, 40vw"
-              />
-            </div>
+            <Reveal>
+              <div
+                style={{
+                  position: "relative",
+                  aspectRatio: "4 / 5",
+                  background: "var(--surface-sunk)",
+                }}
+              >
+                <Image
+                  src="/team/danlami-ojo.jpg"
+                  alt="Danlami Ojo, Founder and CEO"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="(max-width: 54rem) 100vw, 40vw"
+                />
+              </div>
+            </Reveal>
 
-            <div className="stack stack-3">
+            <Reveal delay={0.12} className="stack stack-3">
               <p className="eyebrow">The Closer</p>
               <h2>Meet Danlami Ojo</h2>
               <p className="body">
@@ -283,7 +297,7 @@ export default function HomePage() {
               <Link href="/the-closer" className="link-arrow">
                 Read more &rarr;
               </Link>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -291,18 +305,26 @@ export default function HomePage() {
       {/* ---------- brand promise ---------- */}
       <section className="band">
         <div className="shell shell-narrow stack stack-3" style={{ textAlign: "center", alignItems: "center" }}>
-          <p className="eyebrow">Our brand promise</p>
-          <h2 style={{ maxWidth: "20ch" }}>
-            We don&rsquo;t just help you buy property. We help you buy with
-            purpose.
-          </h2>
-          <p className="body" style={{ textAlign: "center" }}>
-            Because the right property can become a home. An income-producing
-            asset. A capital-growth opportunity. A family asset. A portfolio.
-          </p>
-          <p className="pull pull-teal" style={{ maxWidth: "none" }}>
-            And ultimately, a legacy.
-          </p>
+          <Reveal>
+            <p className="eyebrow">Our brand promise</p>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <h2 style={{ maxWidth: "20ch" }}>
+              We don&rsquo;t just help you buy property. We help you buy with
+              purpose.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <p className="body" style={{ textAlign: "center" }}>
+              Because the right property can become a home. An income-producing
+              asset. A capital-growth opportunity. A family asset. A portfolio.
+            </p>
+          </Reveal>
+          <Reveal delay={0.24}>
+            <p className="pull pull-teal" style={{ maxWidth: "none" }}>
+              And ultimately, a legacy.
+            </p>
+          </Reveal>
         </div>
       </section>
 
