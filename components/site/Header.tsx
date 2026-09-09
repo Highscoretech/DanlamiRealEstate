@@ -18,6 +18,8 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header-in">
+        {/* The client's logo, untouched — the header stays white so the
+            black wordmark always reads. */}
         <Link href="/" className="header-logo" aria-label="Dan Lami Real Estate — home">
           <Image
             src="/brand/lockup.png"

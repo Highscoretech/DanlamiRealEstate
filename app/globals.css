@@ -1,39 +1,47 @@
 /* ============================================================
    Dan Lami Real Estate — design system
 
-   Light editorial. The palette is derived from the one colour the
-   brand actually owns: the teal gradient in the logo mark
-   (#0D90BE → #0A4354, measured in docs/brand.md). Neutrals are
-   biased slightly toward that teal rather than left as flat grey.
+   Navy-first. The client's three brand colours (sample supplied
+   9 Sep 2026): deep navy-teal as the major ground, the bright
+   logo blue as the accent, white for text, buttons and a few
+   white "island" sections (.band-white).
 
    Single theme by choice. This is a brand site, not an app, so it
    commits to one look and paints every colour explicitly.
    ============================================================ */
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
   /* brand */
-  --teal: #0C7EA3;
-  --teal-light: #0D90BE;
+  --teal: #1180B0;
+  --teal-light: #57ABD3;
   --teal-deep: #0A4354;
-  --teal-wash: #E9F2F6;
-  --teal-line: #C5DCE6;
+  --navy: #0E2A3A;
+  --teal-wash: #E8F3F8;
+  --teal-line: #C4DEEB;
 
-  /* neutrals, cooled toward the brand teal */
-  --paper: #F7F8F8;
-  --surface: #FFFFFF;
-  --surface-sunk: #EDF1F1;
-  --ink: #0D1417;
-  --ink-soft: #2C3A41;
-  --muted: #5C6A72;
-  --faint: #8B979D;
-  --line: #E2E6E6;
-  --line-strong: #CED6D6;
+  /* navy grounds and light-on-navy text */
+  --paper: #0E2A3A;
+  --surface: #133649;
+  --surface-sunk: #0B2230;
+  --ink: #F2F8FB;
+  --ink-soft: #D9E7EF;
+  --muted: #A9C0CD;
+  --faint: #7C96A6;
+  --line: rgba(232, 243, 248, .14);
+  --line-strong: rgba(232, 243, 248, .3);
 
-  --shadow-sm: 0 1px 2px rgba(13, 20, 23, .04);
-  --shadow: 0 1px 2px rgba(13, 20, 23, .04), 0 12px 28px -16px rgba(13, 20, 23, .22);
-  --shadow-lg: 0 2px 4px rgba(13, 20, 23, .04), 0 28px 60px -30px rgba(13, 20, 23, .35);
+  /* static values for white island sections (.band-white) */
+  --ink-on-light: #0D1417;
+  --ink-soft-on-light: #2C3A41;
+  --muted-on-light: #5C6A72;
+  --faint-on-light: #8B979D;
+  --line-on-light: #E2E6E6;
+
+  --shadow-sm: 0 1px 2px rgba(4, 12, 18, .2);
+  --shadow: 0 1px 2px rgba(4, 12, 18, .2), 0 12px 28px -16px rgba(4, 12, 18, .55);
+  --shadow-lg: 0 2px 4px rgba(4, 12, 18, .2), 0 28px 60px -30px rgba(4, 12, 18, .7);
 
   /* type */
   --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
@@ -154,11 +162,53 @@ p { margin: 0; }
 .band { padding-block: var(--band); }
 .band-tight { padding-block: clamp(2.5rem, 6vw, 4rem); }
 .band-sunk { background: var(--surface-sunk); }
-.band-white { background: var(--surface); }
 .band-teal { background: var(--teal-deep); color: #fff; }
 .band-teal h2, .band-teal h3 { color: #fff; }
 .band-teal .body { color: rgba(255, 255, 255, .76); }
 .band-teal .eyebrow { color: #7FC4DD; }
+
+/* White island sections — white stays in the design, navy is the major
+   ground. Text inside flips back to dark via the static -on-light values. */
+.band-white { background: #FFFFFF; }
+.band-white h1, .band-white h2, .band-white h3, .band-white h4,
+.band-white .questions li, .band-white .faq-q { color: var(--ink-on-light); }
+.band-white .lede { color: var(--ink-soft-on-light); }
+.band-white .body, .band-white .checks li { color: var(--muted-on-light); }
+.band-white .rule-label, .band-white .disclosure,
+.band-white .property-where { color: var(--faint-on-light); }
+.band-white .rule-label::after { background: var(--line-on-light); }
+.band-white .divider { background: var(--line-on-light); }
+.band-white .numbered { border-color: var(--line-on-light); }
+.band-white .numbered p { color: var(--muted-on-light); }
+.band-white .faq-item { border-color: var(--line-on-light); }
+.band-white .faq-q:hover { color: var(--teal-deep); }
+.band-white .faq-a .body { color: var(--muted-on-light); }
+.band-white .questions li { border-color: var(--line-on-light); }
+.band-white .property-card,
+.band-white .card {
+  background: #fff;
+  border-color: var(--line-on-light);
+}
+.band-white .property-card h3, .band-white .card h3,
+.band-white .card h4 { color: var(--ink-on-light); }
+.band-white .card p { color: var(--muted-on-light); }
+.band-white .property-price {
+  color: var(--teal-deep);
+  border-color: var(--line-on-light);
+}
+.band-white .value-card h4 { color: var(--teal-deep); }
+.band-white .value-card p { color: var(--muted-on-light); }
+.band-white .pull { color: var(--ink-on-light); }
+.band-white .pull-teal, .band-white .link-arrow { color: var(--teal-deep); }
+.band-white .btn-outline { color: var(--ink-on-light); border-color: #CED6D6; }
+.band-white .btn-outline:hover { border-color: var(--ink-on-light); }
+.band-white .field label { color: var(--ink-soft-on-light); }
+.band-white .field input, .band-white .field select, .band-white .field textarea {
+  background: #fff;
+  color: var(--ink-on-light);
+  border-color: #CED6D6;
+}
+.band-white .tag { background: var(--teal-wash); color: var(--teal-deep); }
 
 .stack { display: flex; flex-direction: column; }
 .stack-1 { gap: .5rem; }
@@ -228,24 +278,51 @@ p { margin: 0; }
   gap: .45rem;
   font-size: var(--step--1);
   font-weight: 600;
-  color: var(--teal-deep);
+  color: var(--teal-light);
   text-decoration: none;
-  border-bottom: 1px solid var(--teal-line);
+  border-bottom: 1px solid var(--line-strong);
   padding-bottom: .15rem;
   width: fit-content;
   transition: border-color .18s ease, gap .18s ease;
 }
-.link-arrow:hover { border-color: var(--teal); gap: .7rem; }
+.link-arrow:hover { border-color: var(--teal-light); gap: .7rem; }
 
 /* ---------- header ---------- */
 
+/* Navy header, client's logo displayed exactly as supplied. */
 .header {
   position: sticky;
   top: 0;
   z-index: 60;
-  background: rgba(255, 255, 255, .92);
-  backdrop-filter: saturate(1.4) blur(10px);
+  background: rgba(14, 42, 58, .95);
+  backdrop-filter: saturate(1.2) blur(10px);
   border-bottom: 1px solid var(--line);
+}
+
+/* typographic wordmark — the client's logo files cannot sit on navy
+   (docs/open-questions.md item 1) */
+.wordmark {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+}
+.wordmark strong {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: .1em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.wordmark span {
+  margin-top: .3rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: .56rem;
+  letter-spacing: .5em;
+  color: var(--teal-light);
+  white-space: nowrap;
 }
 .header-in {
   max-width: var(--wide);
@@ -269,7 +346,7 @@ p { margin: 0; }
   border-bottom: 1px solid transparent;
   transition: color .18s ease, border-color .18s ease;
 }
-.nav a:hover { color: var(--teal-deep); border-color: var(--teal); }
+.nav a:hover { color: var(--teal-light); border-color: var(--teal); }
 .nav a[data-active="true"] { color: var(--ink); border-color: var(--teal); }
 
 .header-actions { display: flex; align-items: center; gap: .75rem; }
@@ -337,20 +414,48 @@ p { margin: 0; }
 .card p { color: var(--muted); font-size: var(--step--1); }
 
 .value-card {
+  position: relative;
+  border: 1px solid var(--line);
   border-top: 2px solid var(--teal);
   background: var(--surface);
-  padding: 1.5rem 0 0;
+  padding: 1.6rem 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: .55rem;
+  height: 100%;
+  overflow: hidden;
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
 }
+.value-card::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--teal-light);
+  transition: width .5s ease;
+}
+.value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(87, 171, 211, .45); }
+.value-card:hover::before { width: 100%; }
+.value-card-idx {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  line-height: 1;
+  color: var(--teal-light);
+  opacity: .55;
+  margin-bottom: .35rem;
+  font-variant-numeric: tabular-nums;
+  transition: opacity .3s ease;
+}
+.value-card:hover .value-card-idx { opacity: 1; }
 .value-card h4 {
   font-family: var(--font-body);
   font-size: var(--step--2);
   font-weight: 700;
   letter-spacing: .16em;
   text-transform: uppercase;
-  color: var(--teal-deep);
+  color: var(--teal-light);
 }
 .value-card p { color: var(--muted); font-size: var(--step--1); }
 
@@ -415,7 +520,7 @@ p { margin: 0; }
   border-top: 1px solid var(--line);
   font-size: var(--step-1);
   font-weight: 700;
-  color: var(--teal-deep);
+  color: var(--teal-light);
   font-variant-numeric: tabular-nums;
 }
 
@@ -439,7 +544,7 @@ p { margin: 0; }
   display: grid;
   place-items: center;
   background:
-    linear-gradient(135deg, var(--teal-wash), var(--surface-sunk));
+    linear-gradient(135deg, #16425A, var(--surface-sunk));
   border-bottom: 1px solid var(--line);
   overflow: hidden;
 }
@@ -466,7 +571,7 @@ p { margin: 0; }
   max-width: 22ch;
   text-wrap: balance;
 }
-.pull-teal { color: var(--teal-deep); }
+.pull-teal { color: var(--teal-light); }
 
 /* ---------- question list (investors page) ---------- */
 
@@ -503,7 +608,7 @@ p { margin: 0; }
   color: var(--ink);
   transition: color .2s ease;
 }
-.faq-q:hover { color: var(--teal-deep); }
+.faq-q:hover { color: var(--teal-light); }
 .faq-icon {
   flex: none;
   font-family: var(--font-body);
@@ -571,7 +676,7 @@ p { margin: 0; }
 .field input:focus, .field select:focus, .field textarea:focus {
   outline: none;
   border-color: var(--teal);
-  box-shadow: 0 0 0 3px var(--teal-wash);
+  box-shadow: 0 0 0 3px rgba(17, 128, 176, .25);
 }
 .field-hint { font-size: var(--step--2); color: var(--faint); text-transform: none; letter-spacing: 0; font-weight: 400; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.15rem; }
@@ -635,7 +740,7 @@ p { margin: 0; }
   text-decoration: none;
   list-style: none;
 }
-.footer nav a:hover { color: var(--teal-deep); }
+.footer nav a:hover { color: var(--teal-light); }
 .footer ul { margin: 0; padding: 0; display: flex; flex-direction: column; gap: .5rem; }
 
 .footer-strap {

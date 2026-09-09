@@ -28,7 +28,7 @@ export default function InvestorFaq() {
               className="faq-q"
               aria-expanded={isOpen}
               onClick={() => setOpen(isOpen ? null : i)}
-              style={item.accent ? { color: "var(--teal-deep)" } : undefined}
+              style={item.accent ? { color: "var(--teal-light)" } : undefined}
             >
               {item.q}
               <span className="faq-icon" aria-hidden>

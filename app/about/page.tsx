@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
+import Reveal from "@/components/site/Reveal";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -141,11 +142,16 @@ export default function AboutPage() {
             <h2>Six things we hold to</h2>
           </div>
           <div className="grid-3">
-            {values.map((v) => (
-              <div className="value-card" key={v.name}>
-                <h4>{v.name}</h4>
-                <p>{v.body}</p>
-              </div>
+            {values.map((v, i) => (
+              <Reveal key={v.name} delay={(i % 3) * 0.1}>
+                <div className="value-card">
+                  <span className="value-card-idx">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h4>{v.name}</h4>
+                  <p>{v.body}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
           <Link href="/philosophy" className="link-arrow">
