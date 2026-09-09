@@ -2,6 +2,9 @@ import Link from "next/link";
 import Cta from "@/components/site/Cta";
 import InvestorFaq from "@/components/site/InvestorFaq";
 import PageHero from "@/components/site/PageHero";
+import JsonLd from "@/components/seo/JsonLd";
+import { investorFaqs } from "@/content/investor-faqs";
+import { faqSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -17,6 +20,16 @@ export const metadata = pageMetadata({
 export default function InvestorsPage() {
   return (
     <>
+      {/* The accordion below is real, visible FAQ content, so it is eligible
+          for FAQ rich results. Marked up here and not on the homepage, which
+          renders the same questions — duplicate FAQPage markup across two URLs
+          competes with itself. */}
+      <JsonLd
+        data={faqSchema(
+          investorFaqs.map((item) => ({ question: item.q, answer: item.a }))
+        )}
+      />
+
       <PageHero
         eyebrow="For investors"
         title="Your capital deserves a strategy."
