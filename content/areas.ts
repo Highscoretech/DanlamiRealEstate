@@ -1,0 +1,138 @@
+/**
+ * Location landing pages.
+ *
+ * People do not search for "Dan Lami Real Estate". They search for
+ * "5 bedroom fully detached duplex Ikota Villa Estate" and "houses for sale in
+ * Osapa London". These pages exist to answer those searches with a real page
+ * rather than making Google guess from the listings index.
+ *
+ * STRATEGY NOTE: the head terms ("houses for sale in Lekki") belong to the
+ * portals — PropertyPro lists ~11,000 Lekki properties and Nigeria Property
+ * Centre ~33,000. Six listings will never outrank that on volume. What these
+ * pages can win is the long tail: a named estate, a specific configuration, and
+ * genuine local detail written by someone who actually sells there. That is the
+ * one thing an aggregator cannot fake.
+ *
+ * COPY NOTE: the geography and commute figures below are drawn from public area
+ * guides and are stated plainly, without claims about prices, appreciation or
+ * infrastructure timelines that we cannot stand behind. The client should
+ * enrich these with what they know first-hand — that is what will make these
+ * pages beat the portals. See docs/seo.md.
+ */
+
+export type Area = {
+  slug: string;
+  /** Short name, used in body copy. */
+  name: string;
+  /** How the area is written on a listing, e.g. "Osapa London, Lekki". */
+  fullName: string;
+  h1: string;
+  metaTitle: string;
+  metaDescription: string;
+  intro: string[];
+  /** Short factual points. Rendered as a definition list on the page. */
+  facts: { label: string; value: string }[];
+  /** Values of `property.location` that belong to this area. */
+  locations: string[];
+  /** Other area slugs worth linking to from this page. */
+  related: string[];
+};
+
+export const areas: Area[] = [
+  {
+    slug: "lekki",
+    name: "Lekki",
+    fullName: "Lekki, Lagos",
+    h1: "Property for Sale in Lekki, Lagos",
+    metaTitle: "Property for Sale in Lekki, Lagos — Luxury Duplexes & Apartments",
+    metaDescription:
+      "Duplexes and apartments for sale in Lekki, Lagos — Osapa London, Ikota Villa Estate and Cowrie Creek. Prices, specifications and inspection bookings.",
+    intro: [
+      "Lekki is a peninsula: Victoria Island and Ikoyi sit to its west, the Atlantic to the south, Lagos Lagoon to the north and Lekki Lagoon to the east. It is the corridor along which most of the city's recent premium residential development has run, and it holds the largest concentration of newly built detached and semi-detached duplexes in Lagos.",
+      "The corridor is not one market but several. Osapa London and Ikota Villa Estate are established residential neighbourhoods of gated streets; Cowrie Creek is waterfront and sits at the top of the range. What a naira buys differs sharply between them, which is the first thing worth understanding before you shortlist anything.",
+      "Below are the Lekki properties we currently hold. Title documentation and payment terms are shared on request, and we will walk you through both before you commit to anything.",
+    ],
+    facts: [
+      { label: "Position", value: "Peninsula east of Victoria Island and Ikoyi" },
+      { label: "Main artery", value: "Lekki-Epe Expressway" },
+      { label: "Neighbourhoods we sell in", value: "Osapa London, Ikota Villa Estate, Cowrie Creek" },
+      { label: "Typical stock", value: "Fully-detached and semi-detached duplexes, terraces, apartments" },
+    ],
+    locations: [
+      "Osapa, Lekki",
+      "Ikota Villa Estate, Lekki",
+      "Cowrie Creek, Lekki",
+      "Osapa London, Lekki",
+    ],
+    related: ["osapa-london", "ikota-villa-estate", "cowrie-creek"],
+  },
+  {
+    slug: "osapa-london",
+    name: "Osapa London",
+    fullName: "Osapa London, Lekki",
+    h1: "Property for Sale in Osapa London, Lekki",
+    metaTitle: "Property for Sale in Osapa London, Lekki — Duplexes & Apartments",
+    metaDescription:
+      "Duplexes and apartments for sale in Osapa London, Lekki, Lagos. Current listings with prices, specifications and an area guide from Dan Lami Real Estate.",
+    intro: [
+      "Osapa London sits in the heart of Lekki, between the 5th and 6th roundabouts of the Lekki-Epe Expressway, running from Jakande Estate across to Agungi bus stop. More than half of its housing sits inside gated estates, and the stock is largely newly built — duplexes, terraces and townhouses, both detached and semi-detached.",
+      "Its appeal is position. Victoria Island is roughly fifteen minutes away off-peak and around thirty-five in the morning rush, which is what makes it work for people who need to be on the Island but do not want to pay Ikoyi prices to live near it. The area has been described as affordable luxury, and the mix of professionals, young families and returnees gives it a cosmopolitan character.",
+      "It is also where our own Signature Development, Garelt Court, is being built. These are the Osapa London properties currently available.",
+    ],
+    facts: [
+      { label: "Where", value: "Between the 5th and 6th roundabouts, Lekki-Epe Expressway" },
+      { label: "Extent", value: "Jakande Estate across to Agungi bus stop" },
+      { label: "To Victoria Island", value: "About 15 minutes off-peak, about 35 in the morning rush" },
+      { label: "Housing", value: "Mostly gated estates; new-build duplexes, terraces and townhouses" },
+    ],
+    locations: ["Osapa, Lekki", "Osapa London, Lekki"],
+    related: ["lekki", "ikota-villa-estate", "cowrie-creek"],
+  },
+  {
+    slug: "ikota-villa-estate",
+    name: "Ikota Villa Estate",
+    fullName: "Ikota Villa Estate, Lekki",
+    h1: "Property for Sale in Ikota Villa Estate, Lekki",
+    metaTitle: "5 Bedroom Duplexes for Sale in Ikota Villa Estate, Lekki",
+    metaDescription:
+      "Five bedroom fully-detached duplexes with BQ for sale in Ikota Villa Estate, Lekki, Lagos. Prices, features and inspection bookings with Dan Lami Real Estate.",
+    intro: [
+      "Ikota Villa Estate is one of the longer-established gated estates on the Lekki corridor, sitting off the Lekki-Epe Expressway near Ikota. It remains a consistent source of fully-detached family housing rather than the higher-density stock found closer to the expressway itself, which is why it holds its appeal for buyers who want a house and a compound rather than an apartment.",
+      "The estate's defining product is the five bedroom fully-detached duplex with a boys' quarters — usually all rooms ensuite, fitted kitchen, and in many cases a pool. That configuration is what we hold here.",
+      "Our current Ikota Villa Estate listings are finished and available to inspect.",
+    ],
+    facts: [
+      { label: "Where", value: "Off the Lekki-Epe Expressway, Ikota" },
+      { label: "Type", value: "Long-established gated estate" },
+      { label: "Defining product", value: "5 bedroom fully-detached duplex with BQ" },
+      { label: "Our range here", value: "₦400,000,000 to ₦650,000,000" },
+    ],
+    locations: ["Ikota Villa Estate, Lekki"],
+    related: ["lekki", "osapa-london", "cowrie-creek"],
+  },
+  {
+    slug: "cowrie-creek",
+    name: "Cowrie Creek",
+    fullName: "Cowrie Creek, Lekki",
+    h1: "Property for Sale in Cowrie Creek, Lekki",
+    metaTitle: "Waterfront Homes for Sale in Cowrie Creek, Lekki, Lagos",
+    metaDescription:
+      "Waterfront property for sale in Cowrie Creek Estate, Lekki, Lagos. Current listings, specifications and inspections with Dan Lami Real Estate.",
+    intro: [
+      "Cowrie Creek is a waterfront estate on the Lekki peninsula and sits at the upper end of the residential market there. Waterfront land is finite in a way that inland plots are not, and that scarcity is most of the argument for buying here.",
+      "Stock moves accordingly. If nothing below is currently available, it is worth registering what you are looking for rather than waiting for a listing to appear.",
+    ],
+    facts: [
+      { label: "Where", value: "Waterfront estate, Lekki peninsula" },
+      { label: "Position in the market", value: "Upper end of Lekki residential" },
+      { label: "Typical stock", value: "Detached and semi-detached duplexes" },
+      { label: "Our range here", value: "₦1,400,000,000" },
+    ],
+    locations: ["Cowrie Creek, Lekki"],
+    related: ["lekki", "osapa-london", "ikota-villa-estate"],
+  },
+];
+
+export function findArea(slug: string) {
+  return areas.find((area) => area.slug === slug);
+}

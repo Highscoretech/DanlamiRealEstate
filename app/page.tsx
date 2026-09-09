@@ -4,6 +4,7 @@ import Cta from "@/components/site/Cta";
 import HeroSlider from "@/components/site/HeroSlider";
 import PhotoSlot from "@/components/site/PhotoSlot";
 import Reveal from "@/components/site/Reveal";
+import { areas } from "@/content/areas";
 import { properties } from "@/content/properties";
 
 /* Homepage. Copy is the client's own, section 1 of docs/client-content.md.
@@ -129,6 +130,37 @@ export default function HomePage() {
                   </div>
                 </Link>
               </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- areas ---------- */}
+      <section className="band band-tight">
+        <div className="shell stack stack-3">
+          <div className="split" style={{ alignItems: "end", gap: "1.5rem" }}>
+            <div className="stack stack-2">
+              <p className="eyebrow">Where we sell</p>
+              <h2 style={{ fontSize: "var(--step-4)" }}>
+                Property for sale across the Lekki peninsula
+              </h2>
+            </div>
+            <div style={{ justifySelf: "start" }}>
+              <Link href="/locations" className="link-arrow">
+                All areas we cover &rarr;
+              </Link>
+            </div>
+          </div>
+
+          <div className="btn-row">
+            {areas.map((area) => (
+              <Link
+                key={area.slug}
+                href={`/locations/${area.slug}`}
+                className="btn btn-outline"
+              >
+                Property for sale in {area.name}
+              </Link>
             ))}
           </div>
         </div>

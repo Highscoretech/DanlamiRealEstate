@@ -1,15 +1,20 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
 import PhotoSlot from "@/components/site/PhotoSlot";
 import { developments } from "@/content/properties";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Signature Developments",
+export const metadata = pageMetadata({
+  path: "/developments",
+  title:
+    "Signature Developments — New Build Property in Lekki, Lagos",
+  titleAbsolute: true,
   description:
-    "Developments with purpose. Assets designed for the future. The in-house development arm of Dan Lami Real Estate.",
-};
+    "Garelt Court and the Signature Developments arm of Dan Lami Real Estate: new-build apartments and residences in Osapa London, Lekki, Lagos.",
+  image: "/hero/garelt-court.jpg",
+  imageAlt: "Garelt Court, Osapa London, Lekki",
+});
 
 export default function DevelopmentsPage() {
   return (

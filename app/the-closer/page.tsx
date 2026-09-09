@@ -1,17 +1,26 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
+import JsonLd from "@/components/seo/JsonLd";
+import { personSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "The Closer",
+export const metadata = pageMetadata({
+  path: "/the-closer",
+  title:
+    "Danlami Ojo — Founder & CEO of Dan Lami Real Estate",
+  titleAbsolute: true,
   description:
-    "Danlami Ojo is the Founder and CEO of Dan Lami Real Estate, and is widely known as “The Closer.”",
-};
+    "Danlami Ojo, known as “The Closer,” is the Founder and CEO of Dan Lami Real Estate in Lagos. His approach to property, investment and long-term value.",
+  image: "/team/danlami-ojo.jpg",
+  imageAlt: "Danlami Ojo, Founder and CEO of Dan Lami Real Estate",
+});
 
 export default function TheCloserPage() {
   return (
     <>
+      <JsonLd data={personSchema()} />
+
       <PageHero
         eyebrow="The Closer"
         title="Meet Danlami Ojo"

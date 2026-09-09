@@ -16,8 +16,12 @@ npm run dev      # http://localhost:3000
 | `components/site/` | Header, Footer, Cta band, PageHero, PhotoSlot, LeadForm. |
 | `content/site.ts` | Company facts, navigation, contact details, social links. |
 | `content/properties.ts` | Property listings and Signature Developments. |
+| `content/areas.ts` | Location landing pages — Lekki and the three estates. |
+| `content/guides.ts` | Long-form buyer guides. |
 | `lib/sheets.ts` | Google Sheets append, via a service account. No SDK. |
-| `docs/` | Client copy, brand notes, open questions. Read these first. |
+| `lib/seo.ts` | `pageMetadata()` — every page's title, description and canonical. |
+| `lib/schema.ts` | JSON-LD builders. |
+| `docs/` | Client copy, brand notes, SEO strategy, open questions. Read these first. |
 | `assets/` | Original client material, organised. Not served. |
 | `public/` | Served files — logo, portrait, property photos. |
 
@@ -41,6 +45,20 @@ Type is Fraunces for headings and Manrope for everything else, both loaded throu
 `next/font`. Single theme by choice — this is a brand site, so it commits to one look.
 
 Design tokens are all in `app/globals.css`. There is no CSS framework.
+
+## SEO
+
+Strategy, what is built and what the client still has to do:
+[`docs/seo.md`](docs/seo.md). The short version — we cannot beat PropertyPro and
+Nigeria Property Centre on listing volume, so the site targets the long tail
+(named estates, specific configurations) and the questions the portals do not
+answer.
+
+Two rules when adding a page:
+
+1. Metadata goes through `pageMetadata()` in `lib/seo.ts`. That is what sets the
+   canonical, so nothing may bypass it.
+2. Add the route to `app/sitemap.ts`.
 
 ## Forms
 

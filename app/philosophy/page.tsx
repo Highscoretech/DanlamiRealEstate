@@ -1,12 +1,16 @@
-import type { Metadata } from "next";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Our Philosophy",
+export const metadata = pageMetadata({
+  path: "/philosophy",
+  title:
+    "Our Philosophy — Property Is the Asset, Strategy Is the Difference",
+  titleAbsolute: true,
   description:
-    "Property is the asset. Strategy is the difference. How Dan Lami Real Estate thinks about property as an investment rather than a purchase.",
-};
+    "How Dan Lami Real Estate thinks about property as an investment rather than a purchase, and what that means for the assets we recommend.",
+  image: "/og.jpg",
+});
 
 export default function PhilosophyPage() {
   return (

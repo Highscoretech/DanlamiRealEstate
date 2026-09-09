@@ -4,8 +4,12 @@ import { notFound } from "next/navigation";
 import Cta from "@/components/site/Cta";
 import Gallery from "@/components/site/Gallery";
 import PhotoSlot from "@/components/site/PhotoSlot";
+import JsonLd from "@/components/seo/JsonLd";
+import { areas } from "@/content/areas";
 import { properties } from "@/content/properties";
 import { site } from "@/content/site";
+import { propertySchema } from "@/lib/schema";
+import { pageMetadata, priceShort } from "@/lib/seo";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -17,10 +21,26 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params;
   const property = properties.find((p) => p.slug === slug);
   if (!property) return {};
-  return {
-    title: `${property.title}, ${property.location}`,
-    description: property.summary,
-  };
+
+  // The estate's own name ("Ikota Villa Estate") is what people search and is
+  // shorter than the full listing location, which keeps the title inside what
+  // Google renders.
+  const areaName =
+    areas.find(
+      (a) => a.slug !== "lekki" && a.locations.includes(property.location)
+    )?.name ?? property.location;
+
+  return pageMetadata({
+    path: `/properties/${property.slug}`,
+    // Front-loaded with what people actually type: bedroom count, property
+    // type, "for sale in", the estate by name. The short price form is how the
+    // market writes it and leaves room before Google truncates.
+    title: `${property.title} for Sale in ${areaName} — ${priceShort(property.price)}`,
+    titleAbsolute: true,
+    description: `${priceShort(property.price)}. ${property.summary}`,
+    image: property.image ?? "/og.jpg",
+    imageAlt: `${property.title} for sale in ${property.location}, Lagos`,
+  });
 }
 
 export default async function PropertyPage({ params }: Params) {
@@ -29,20 +49,35 @@ export default async function PropertyPage({ params }: Params) {
   if (!property) notFound();
 
   const others = properties.filter((p) => p.slug !== property.slug).slice(0, 3);
+  const area = areas.find(
+    (a) => a.slug !== "lekki" && a.locations.includes(property.location)
+  );
 
   return (
     <>
+      <JsonLd data={propertySchema(property)} />
+
       <section className="band band-white" style={{ paddingBottom: "0" }}>
         <div className="shell stack stack-3">
-          <Link href="/properties" className="link-arrow">
-            &larr; All properties
-          </Link>
+          <nav aria-label="Breadcrumb" className="crumbs">
+            <Link href="/properties">Properties</Link>
+            <span aria-hidden="true">/</span>
+            {area ? (
+              <>
+                <Link href={`/locations/${area.slug}`}>{area.name}</Link>
+                <span aria-hidden="true">/</span>
+              </>
+            ) : null}
+            <span aria-current="page">{property.title}</span>
+          </nav>
 
           <div className="split split-trail" style={{ alignItems: "start" }}>
             <div className="stack stack-2">
               <span className="tag">{property.status}</span>
-              <h1 style={{ fontSize: "var(--step-5)" }}>{property.title}</h1>
-              <p className="lede">{property.location}</p>
+              <h1 style={{ fontSize: "var(--step-5)" }}>
+                {property.title} in {property.location}
+              </h1>
+              <p className="lede">{property.summary}</p>
               <p
                 style={{
                   fontFamily: "var(--font-display)",
@@ -65,9 +100,10 @@ export default async function PropertyPage({ params }: Params) {
 
             <PhotoSlot
               src={property.image}
-              alt={property.title}
+              alt={`${property.title} for sale in ${property.location}, Lagos`}
               height="clamp(16rem, 38vw, 26rem)"
               note="Photography pending"
+              priority
             />
           </div>
         </div>
@@ -91,7 +127,22 @@ export default async function PropertyPage({ params }: Params) {
           <div className="split split-lead">
             <div className="stack stack-2">
               <p className="rule-label">About this property</p>
-              <p className="body">{property.summary}</p>
+              <p className="body">
+                This {property.type.toLowerCase()} is located in{" "}
+                {property.location}, on the Lekki peninsula in Lagos. Title
+                documentation, payment terms and an inspection can all be
+                arranged through an advisor.
+                {area ? (
+                  <>
+                    {" "}
+                    See every{" "}
+                    <Link href={`/locations/${area.slug}`}>
+                      property for sale in {area.name}
+                    </Link>
+                    .
+                  </>
+                ) : null}
+              </p>
 
               <dl
                 style={{
@@ -150,7 +201,11 @@ export default async function PropertyPage({ params }: Params) {
           <div className="grid-3">
             {others.map((p) => (
               <Link key={p.slug} href={`/properties/${p.slug}`} className="property-card">
-                <PhotoSlot src={p.image} alt={p.title} height="11rem" />
+                <PhotoSlot
+                  src={p.image}
+                  alt={`${p.title} for sale in ${p.location}`}
+                  height="11rem"
+                />
                 <div className="property-card-body">
                   <h3 style={{ fontSize: "var(--step-2)" }}>{p.title}</h3>
                   <p className="property-where">{p.location}</p>

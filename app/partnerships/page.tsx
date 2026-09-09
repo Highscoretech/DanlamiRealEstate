@@ -1,13 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Development Partnerships",
+export const metadata = pageMetadata({
+  path: "/partnerships",
+  title:
+    "Development Partnerships — Joint Ventures in Lagos Real Estate",
+  titleAbsolute: true,
   description:
-    "Building better real estate together. Dan Lami Real Estate partners with property owners, developers, investors, architects and engineers.",
-};
+    "We partner with landowners, developers, investors, architects and engineers to bring Lagos real estate developments to market, from strategy through to sales.",
+  image: "/og.jpg",
+});
 
 const model = [
   "Capital",

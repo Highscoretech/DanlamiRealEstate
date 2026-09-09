@@ -63,13 +63,13 @@ export const properties: Property[] = [
   {
     slug: "5-bedroom-duplex-ikota-400",
     title: "5 Bedroom Fully-Detached Duplex",
-    location: "Ikota Villa, Lekki",
+    location: "Ikota Villa Estate, Lekki",
     price: "₦400,000,000",
     status: "Available",
     beds: 5,
     type: "Fully-detached duplex",
     summary:
-      "A beautiful five bedroom fully-detached duplex with a BQ at Ikota Villa, one of the most established residential pockets on the Lekki corridor.",
+      "A beautiful five bedroom fully-detached duplex with a BQ at Ikota Villa Estate, one of the most established residential pockets on the Lekki corridor.",
     features: [
       "24/7 light",
       "24/7 security",
@@ -106,13 +106,13 @@ export const properties: Property[] = [
   {
     slug: "5-bedroom-duplex-ikota-570",
     title: "5 Bedroom Fully-Detached Duplex",
-    location: "Ikota Villa, Lekki",
+    location: "Ikota Villa Estate, Lekki",
     price: "₦570,000,000",
     status: "Available",
     beds: 5,
     type: "Fully-detached duplex",
     summary:
-      "A luxury five bedroom fully-detached duplex with a BQ and a swimming pool at Ikota Villa, finished and ready for inspection.",
+      "A luxury five bedroom fully-detached duplex with a BQ and a swimming pool at Ikota Villa Estate, finished and ready for inspection.",
     features: [
       "24/7 light",
       "24/7 security",
@@ -152,13 +152,13 @@ export const properties: Property[] = [
   {
     slug: "5-bedroom-duplex-ikota-650",
     title: "5 Bedroom Fully-Detached Duplex",
-    location: "Ikota Villa, Lekki",
+    location: "Ikota Villa Estate, Lekki",
     price: "₦650,000,000",
     status: "Available",
     beds: 5,
     type: "Fully-detached duplex",
     summary:
-      "A beautiful five bedroom fully-detached duplex with a BQ and a swimming pool at Ikota Villa, with contemporary detailing throughout.",
+      "A beautiful five bedroom fully-detached duplex with a BQ and a swimming pool at Ikota Villa Estate, with contemporary detailing throughout.",
     features: [
       "24/7 light",
       "24/7 security",

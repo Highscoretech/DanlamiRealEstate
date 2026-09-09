@@ -1,38 +1,77 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
 import PhotoSlot from "@/components/site/PhotoSlot";
+import JsonLd from "@/components/seo/JsonLd";
+import { areas } from "@/content/areas";
 import { properties } from "@/content/properties";
+import { itemListSchema } from "@/lib/schema";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Properties",
+export const metadata = pageMetadata({
+  path: "/properties",
+  title: "Property for Sale in Lekki, Lagos — Duplexes & Apartments",
+  titleAbsolute: true,
   description:
-    "Luxury residential and investment properties across Lekki, Lagos — Osapa, Ikota Villa and Cowrie Creek.",
-};
+    "Browse luxury duplexes and apartments for sale in Lekki, Lagos — Osapa London, Ikota Villa and Cowrie Creek. Prices, full specifications and inspection bookings.",
+  image: properties.find((p) => p.image)?.image ?? "/og.jpg",
+  imageAlt: "Luxury property for sale in Lekki, Lagos",
+});
 
 export default function PropertiesPage() {
   return (
     <>
+      <JsonLd
+        data={itemListSchema(
+          properties.map((p) => ({
+            name: `${p.title}, ${p.location} — ${p.price}`,
+            path: `/properties/${p.slug}`,
+          })),
+          "Property for sale in Lekki, Lagos"
+        )}
+      />
+
       <PageHero
         eyebrow="Properties"
-        title="Currently available"
-        lede="Carefully selected luxury residential and investment properties across premium Lagos locations."
+        title="Property for Sale in Lekki, Lagos"
+        lede="Carefully selected luxury residential and investment properties across Osapa London, Ikota Villa and Cowrie Creek."
       />
 
       <section className="band">
         <div className="shell stack stack-4">
+          {/* Area links sit above the grid so both people and crawlers reach
+              the location pages from the highest-traffic listing page. */}
+          <div className="stack stack-2">
+            <p className="rule-label">Browse by area</p>
+            <div className="btn-row">
+              {areas.map((area) => (
+                <Link
+                  key={area.slug}
+                  href={`/locations/${area.slug}`}
+                  className="btn btn-outline"
+                >
+                  {area.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
           <div className="grid-3">
-            {properties.map((p) => (
+            {properties.map((p, i) => (
               <Link
                 key={p.slug}
                 href={`/properties/${p.slug}`}
                 className="property-card"
               >
-                <PhotoSlot src={p.image} alt={p.title} height="13rem" />
+                <PhotoSlot
+                  src={p.image}
+                  alt={`${p.title} for sale in ${p.location}, Lagos`}
+                  height="13rem"
+                  priority={i < 3}
+                />
                 <div className="property-card-body">
                   <span className="tag">{p.status}</span>
-                  <h3>{p.title}</h3>
+                  <h2 style={{ fontSize: "var(--step-2)" }}>{p.title}</h2>
                   <p className="property-where">{p.location}</p>
                   <p className="property-price">{p.price}</p>
                 </div>
@@ -44,6 +83,13 @@ export default function PropertiesPage() {
             Prices are quoted in Nigerian Naira and are subject to change and
             availability. Payment plans are available on selected properties.
             Speak with an advisor for current terms and title documentation.
+          </p>
+
+          <p className="body">
+            Not sure where to look? Read our{" "}
+            <Link href="/faq">questions on buying property in Lagos</Link>, or
+            see how we work with{" "}
+            <Link href="/diaspora">buyers outside Nigeria</Link>.
           </p>
         </div>
       </section>

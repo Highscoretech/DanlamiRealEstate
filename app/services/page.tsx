@@ -1,12 +1,16 @@
-import type { Metadata } from "next";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "What We Do",
+export const metadata = pageMetadata({
+  path: "/services",
+  title:
+    "Our Services — Luxury Sales, Investment Advisory & Development",
+  titleAbsolute: true,
   description:
-    "Luxury real estate sales, investment advisory, strategic development, property acquisition, and sales and marketing.",
-};
+    "Luxury real estate sales, investment advisory, strategic development, property acquisition, and sales and marketing across Lagos, Nigeria.",
+  image: "/og.jpg",
+});
 
 const services = [
   {

@@ -1,13 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About Us",
+export const metadata = pageMetadata({
+  path: "/about",
+  title:
+    "About Dan Lami Real Estate — Luxury Property Company in Lagos",
+  titleAbsolute: true,
   description:
-    "Dan Lami Real Estate is a luxury real estate company focused on real estate sales, investment advisory and strategic property development.",
-};
+    "A luxury real estate company in Lagos focused on property sales, investment advisory and strategic development. Our story, mission, vision and values.",
+  image: "/og.jpg",
+});
 
 const values = [
   {
@@ -41,8 +45,8 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About us"
-        title="Who we are"
-        lede="Dan Lami Real Estate is a luxury real estate company focused on real estate sales, investment advisory and strategic property development."
+        title="About Dan Lami Real Estate"
+        lede="A luxury real estate company in Lagos, focused on property sales, investment advisory and strategic development."
       />
 
       <section className="band">

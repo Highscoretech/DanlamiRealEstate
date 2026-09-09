@@ -1,13 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "For Diaspora Clients",
+export const metadata = pageMetadata({
+  path: "/diaspora",
+  title:
+    "Buy Property in Lagos From Abroad — Diaspora Services",
+  titleAbsolute: true,
   description:
-    "Invest in home. Invest in the future. Support for Africans in the diaspora buying Nigerian real estate from abroad.",
-};
+    "Buying Lagos property from the UK, US, Canada or UAE: sourcing, due diligence, developer verification, documentation and management. You need not be in Lagos.",
+  image: "/og.jpg",
+});
 
 const support = [
   "Property sourcing",

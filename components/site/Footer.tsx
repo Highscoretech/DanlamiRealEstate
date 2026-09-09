@@ -34,7 +34,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="footer-top" style={{ marginTop: "3rem" }}>
+        <div className="footer-top footer-row-2" style={{ marginTop: "3rem" }}>
           <div>
             <h5>Get in touch</h5>
             <ul>

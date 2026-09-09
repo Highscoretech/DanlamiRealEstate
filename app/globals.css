@@ -560,11 +560,22 @@ p { margin: 0; }
 }
 .footer-top {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: minmax(0, 1.3fr) repeat(4, minmax(0, 1fr));
+  gap: 2.5rem 2rem;
 }
-@media (max-width: 62rem) { .footer-top { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 34rem) { .footer-top { grid-template-columns: 1fr; } }
+/* The contact row carries only two blocks, so it does not need five tracks. */
+.footer-row-2 { grid-template-columns: minmax(0, 1.3fr) repeat(2, minmax(0, 1fr)); }
+
+@media (max-width: 74rem) {
+  .footer-top { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .footer-row-2 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 52rem) {
+  .footer-top, .footer-row-2 { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 34rem) {
+  .footer-top, .footer-row-2 { grid-template-columns: 1fr; }
+}
 
 .footer img { height: 2.1rem; width: auto; margin-bottom: 1.1rem; }
 .footer h5 {
@@ -805,4 +816,86 @@ p { margin: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+/* ---------- accessibility ---------- */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--teal-deep);
+  color: #fff;
+  padding: .7rem 1.1rem;
+  font-size: var(--step--1);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 0 0 var(--radius) 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* ---------- breadcrumbs ---------- */
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  font-size: var(--step--2);
+  color: var(--muted);
+}
+.crumbs a {
+  color: var(--teal-deep);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.crumbs a:hover { border-color: var(--teal-line); }
+.crumbs span[aria-hidden] { color: var(--line-strong); }
+.crumbs [aria-current="page"] { color: var(--faint); }
+
+/* ---------- long-form guide body ---------- */
+
+.prose > * + * { margin-top: 1.15rem; }
+.prose h2 {
+  font-size: var(--step-3);
+  margin-top: 2.75rem;
+  margin-bottom: -.25rem;
+}
+.prose h3 { font-size: var(--step-2); margin-top: 2rem; }
+.prose p { color: var(--muted); max-width: none; }
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose em { color: var(--ink); font-style: italic; }
+.prose a {
+  color: var(--teal-deep);
+  text-decoration: underline;
+  text-decoration-color: var(--teal-line);
+  text-underline-offset: 3px;
+}
+.prose a:hover { text-decoration-color: var(--teal); }
+.prose > .lede { color: var(--ink-soft); }
+
+/* ---------- area fact list ---------- */
+
+.facts { margin: 0; padding: 0; display: flex; flex-direction: column; }
+.facts > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 1rem;
+  padding-block: .8rem;
+  border-top: 1px solid var(--line);
+}
+.facts > div:last-child { border-bottom: 1px solid var(--line); }
+.facts dt {
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.facts dd { margin: 0; font-size: var(--step--1); color: var(--ink-soft); }
+@media (max-width: 34rem) {
+  .facts > div { grid-template-columns: 1fr; gap: .2rem; }
 }

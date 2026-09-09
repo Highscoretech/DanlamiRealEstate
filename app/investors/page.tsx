@@ -1,13 +1,17 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "For Investors",
+export const metadata = pageMetadata({
+  path: "/investors",
+  title:
+    "Real Estate Investment in Lagos — Advisory for Investors",
+  titleAbsolute: true,
   description:
-    "Your capital deserves a strategy. How Dan Lami Real Estate helps investors understand an opportunity before they commit capital.",
-};
+    "Real estate investment advisory in Lagos. We assess location, market demand, rental income, capital appreciation and exit strategy before you commit capital.",
+  image: "/og.jpg",
+});
 
 const questions = [
   "Where is the property?",

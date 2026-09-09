@@ -1,13 +1,17 @@
-import type { Metadata } from "next";
 import LeadForm, { type Field } from "@/components/site/LeadForm";
 import PageHero from "@/components/site/PageHero";
 import { site } from "@/content/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact",
+export const metadata = pageMetadata({
+  path: "/contact",
+  title:
+    "Contact — Speak With a Property Advisor in Lagos",
+  titleAbsolute: true,
   description:
-    "Speak with an investment advisor at Dan Lami Real Estate. Lagos, Nigeria.",
-};
+    "Contact Dan Lami Real Estate in Lagos. Book an inspection, request title documentation, or speak with an investment advisor by phone, WhatsApp or email.",
+  image: "/og.jpg",
+});
 
 const fields: Field[] = [
   { name: "name", label: "Full name", type: "text", required: true, half: true },

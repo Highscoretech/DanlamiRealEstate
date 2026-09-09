@@ -1,12 +1,16 @@
-import type { Metadata } from "next";
 import LeadForm, { type Field } from "@/components/site/LeadForm";
 import PageHero from "@/components/site/PageHero";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Partner With Us",
+export const metadata = pageMetadata({
+  path: "/partners",
+  title:
+    "Partner With Us — Realtor & Referral Partner Registration",
+  titleAbsolute: true,
   description:
-    "Register as a partner with Dan Lami Real Estate — realtors, referral partners, developers and landowners.",
-};
+    "Register as a realtor, referral partner, landowner, developer or investor with Dan Lami Real Estate in Lagos. Short form, no documents needed to start.",
+  image: "/og.jpg",
+});
 
 /* Deliberately short. Every extra field loses registrations, so the website
    collects enough to start a conversation and nothing more. ID documents,

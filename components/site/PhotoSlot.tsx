@@ -16,11 +16,16 @@ export default function PhotoSlot({
   alt,
   height = "14rem",
   note,
+  priority,
+  sizes = "(max-width: 54rem) 100vw, (max-width: 76rem) 50vw, 33vw",
 }: {
   src?: string | null;
   alt: string;
   height?: string;
   note?: string;
+  /** Set on the largest above-the-fold image so it is not lazy-loaded. */
+  priority?: boolean;
+  sizes?: string;
 }) {
   if (src) {
     return (
@@ -30,7 +35,8 @@ export default function PhotoSlot({
           alt={alt}
           fill
           style={{ objectFit: "cover" }}
-          sizes="(max-width: 60rem) 100vw, 33vw"
+          sizes={sizes}
+          priority={priority}
         />
       </div>
     );
