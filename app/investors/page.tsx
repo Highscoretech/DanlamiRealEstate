@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Cta from "@/components/site/Cta";
+import InvestorFaq from "@/components/site/InvestorFaq";
 import PageHero from "@/components/site/PageHero";
 import { pageMetadata } from "@/lib/seo";
 
@@ -12,16 +13,6 @@ export const metadata = pageMetadata({
     "Real estate investment advisory in Lagos. We assess location, market demand, rental income, capital appreciation and exit strategy before you commit capital.",
   image: "/og.jpg",
 });
-
-const questions = [
-  "Where is the property?",
-  "Why is the location important?",
-  "What is changing around it?",
-  "Who is the likely buyer or tenant?",
-  "What could drive demand?",
-  "What is the potential income?",
-  "What is the potential appreciation?",
-];
 
 export default function InvestorsPage() {
   return (
@@ -44,14 +35,7 @@ export default function InvestorsPage() {
               </p>
             </div>
 
-            <ul className="questions">
-              {questions.map((q) => (
-                <li key={q}>{q}</li>
-              ))}
-              <li style={{ color: "var(--teal-deep)" }}>
-                And ultimately &mdash; what is the exit?
-              </li>
-            </ul>
+            <InvestorFaq />
           </div>
         </div>
       </section>

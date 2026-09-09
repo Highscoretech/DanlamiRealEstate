@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Cta from "@/components/site/Cta";
 import HeroSlider from "@/components/site/HeroSlider";
+import InvestorFaq from "@/components/site/InvestorFaq";
 import PhotoSlot from "@/components/site/PhotoSlot";
 import Reveal from "@/components/site/Reveal";
 import { areas } from "@/content/areas";
@@ -269,22 +270,7 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delay={0.12}>
-            <ul className="questions">
-              {[
-                "Where is the property?",
-                "Why is the location important?",
-                "What is changing around it?",
-                "Who is the likely buyer or tenant?",
-                "What could drive demand?",
-                "What is the potential income?",
-                "What is the potential appreciation?",
-              ].map((q) => (
-                <li key={q}>{q}</li>
-              ))}
-              <li style={{ color: "var(--teal-deep)" }}>
-                And ultimately &mdash; what is the exit?
-              </li>
-            </ul>
+              <InvestorFaq />
             </Reveal>
           </div>
         </div>
