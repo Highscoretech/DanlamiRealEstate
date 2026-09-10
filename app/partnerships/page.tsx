@@ -63,6 +63,35 @@ export default function PartnershipsPage() {
         </div>
       </section>
 
+      {/* ---------- sales partnership cross-link ---------- */}
+      <section className="band band-white">
+        <div className="shell">
+          <div className="split split-lead" style={{ alignItems: "center" }}>
+            <div className="stack stack-2">
+              <p className="eyebrow">Sales Partnership</p>
+              <h2 style={{ fontSize: "var(--step-4)" }}>
+                Not a developer? Sell with us instead.
+              </h2>
+            </div>
+            <div className="stack stack-3">
+              <p className="body">
+                We also partner with realtors, 9-to-5ers and affiliate
+                marketers who sell our properties and earn commissions and
+                incentives.
+              </p>
+              <div className="btn-row">
+                <Link href="/partnerships/sales" className="btn btn-outline">
+                  About Sales Partnership
+                </Link>
+                <Link href="/partners" className="btn btn-primary">
+                  Partner With Us
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Cta />
     </>
   );

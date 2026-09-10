@@ -12,11 +12,11 @@ export const metadata = pageMetadata({
   image: "/og.jpg",
 });
 
-/* Deliberately short. Every extra field loses registrations, so the website
-   collects enough to start a conversation and nothing more. ID documents,
-   bank details and next of kin are collected later, off the site, once the
-   client has decided to work with someone — which also keeps the site out of
-   scope for holding sensitive personal data. */
+/* Account details were added at the client's request (9 Sep 2026) so
+   commissions can be paid to sales partners. They are optional — a partner
+   can register without them and supply them during onboarding. Collecting
+   bank details makes a privacy policy a legal requirement under the NDPA —
+   docs/open-questions.md item 10. */
 
 const fields: Field[] = [
   { name: "name", label: "Full name", type: "text", required: true, half: true },
@@ -25,12 +25,13 @@ const fields: Field[] = [
   { name: "city", label: "City", type: "text", half: true },
   {
     name: "partnerType",
-    label: "I am a",
+    label: "I want to partner as a",
     type: "select",
     required: true,
     options: [
-      "Realtor or agent",
-      "Referral partner",
+      "Realtor or sales agent",
+      "Affiliate marketer",
+      "Referral partner (9–5er)",
       "Landowner",
       "Developer",
       "Investor",
@@ -47,6 +48,20 @@ const fields: Field[] = [
     name: "heardVia",
     label: "How did you hear about us?",
     type: "text",
+  },
+  {
+    name: "accountName",
+    label: "Account name",
+    type: "text",
+    half: true,
+    hint: "For commission payments — sales partners only.",
+  },
+  { name: "bankName", label: "Bank", type: "text", half: true },
+  {
+    name: "accountNumber",
+    label: "Account number",
+    type: "text",
+    hint: "Optional now — you can also provide this during onboarding.",
   },
   {
     name: "message",
@@ -94,11 +109,12 @@ export default function PartnersPage() {
               </div>
 
               <div className="stack stack-2">
-                <p className="rule-label">Why this form is short</p>
+                <p className="rule-label">About your account details</p>
                 <p className="body">
-                  We do not ask for identification documents or bank details on
-                  the website. Those are handled directly with you once we have
-                  spoken, so nothing sensitive travels further than it needs to.
+                  Sales partners earn commissions and incentives, and payments
+                  are made directly to your bank account. Your account details
+                  are optional at registration — you can also provide them
+                  during onboarding — and are used only for paying you.
                 </p>
               </div>
             </div>

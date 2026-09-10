@@ -349,6 +349,48 @@ p { margin: 0; }
 .nav a:hover { color: var(--teal-light); border-color: var(--teal); }
 .nav a[data-active="true"] { color: var(--ink); border-color: var(--teal); }
 
+/* Partnerships dropdown */
+.nav-drop { position: relative; }
+.nav-drop > a { display: inline-flex; align-items: center; gap: .3rem; }
+.nav-caret { font-size: .6rem; opacity: .7; transition: transform .2s ease; }
+.nav-drop:hover .nav-caret, .nav-drop:focus-within .nav-caret { transform: rotate(180deg); }
+.nav-drop-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(.4rem);
+  min-width: 15rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: .4rem;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease, transform .2s ease, visibility .2s;
+}
+.nav-drop:hover .nav-drop-menu,
+.nav-drop:focus-within .nav-drop-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+.nav-drop-menu a {
+  padding: .6rem .8rem;
+  border-bottom: 0;
+  border-radius: var(--radius);
+}
+.nav-drop-menu a:hover { background: rgba(17, 128, 176, .15); border-color: transparent; }
+
+.drawer a.drawer-sub {
+  font-family: var(--font-body);
+  font-size: var(--step--1);
+  color: var(--muted);
+  padding-left: 1.1rem;
+}
+
 .header-actions { display: flex; align-items: center; gap: .75rem; }
 
 .burger {

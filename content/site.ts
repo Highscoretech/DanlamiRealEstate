@@ -33,9 +33,12 @@ export const site = {
     postalCode: "",
   },
 
-  /** Areas the business actually sells in, used for areaServed. */
+  /** Areas the business covers (client-confirmed 9 Sep 2026), for areaServed. */
   areaServed: [
+    "Ikoyi, Lagos",
+    "Victoria Island, Lagos",
     "Lekki, Lagos",
+    "Ajah, Lagos",
     "Osapa London, Lagos",
     "Ikota, Lagos",
     "Cowrie Creek, Lagos",
@@ -60,12 +63,25 @@ export const site = {
   },
 } as const;
 
-export const nav = [
-  { href: "/properties", label: "Properties" },
+/** Order set by the client, 9 Sep 2026: Developments first. Partnerships
+    is a dropdown — Development Partnerships, then Sales Partnership. */
+export const nav: ReadonlyArray<{
+  href: string;
+  label: string;
+  children?: ReadonlyArray<{ href: string; label: string }>;
+}> = [
   { href: "/developments", label: "Developments" },
+  { href: "/properties", label: "Properties" },
   { href: "/services", label: "Services" },
+  {
+    href: "/partnerships",
+    label: "Partnerships",
+    children: [
+      { href: "/partnerships", label: "Development Partnerships" },
+      { href: "/partnerships/sales", label: "Sales Partnership" },
+    ],
+  },
   { href: "/investors", label: "Investors" },
-  { href: "/guides", label: "Guides" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
@@ -77,13 +93,17 @@ export const nav = [
  */
 export const footerNav = {
   Explore: [
-    { href: "/properties", label: "Properties" },
     { href: "/developments", label: "Signature Developments" },
+    { href: "/properties", label: "Properties" },
     { href: "/services", label: "What We Do" },
     { href: "/partnerships", label: "Development Partnerships" },
+    { href: "/partnerships/sales", label: "Sales Partnership" },
   ],
   "Areas we cover": [
+    { href: "/locations/ikoyi", label: "Property in Ikoyi" },
+    { href: "/locations/victoria-island", label: "Property in Victoria Island" },
     { href: "/locations/lekki", label: "Property in Lekki" },
+    { href: "/locations/ajah", label: "Property in Ajah" },
     { href: "/locations/osapa-london", label: "Property in Osapa London" },
     { href: "/locations/ikota-villa-estate", label: "Property in Ikota Villa Estate" },
     { href: "/locations/cowrie-creek", label: "Property in Cowrie Creek" },

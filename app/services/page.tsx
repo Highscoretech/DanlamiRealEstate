@@ -12,9 +12,31 @@ export const metadata = pageMetadata({
   image: "/og.jpg",
 });
 
+/* Order and wording set by the client, 9 Sep 2026: Signature Development
+   comes first, and developments always carry the "Signature" name. */
 const services = [
   {
     n: "01",
+    title: "Signature Development",
+    body: [
+      "We work with landowners, developers and strategic partners to bring high quality developments to the market.",
+    ],
+    list: {
+      label: "Our role can extend across",
+      items: [
+        "Development strategy",
+        "Sales strategy",
+        "Marketing",
+        "Brand positioning",
+        "Investor acquisition",
+        "Sales management",
+        "Market launch",
+        "Distribution",
+      ],
+    },
+  },
+  {
+    n: "02",
     title: "Luxury real estate sales",
     body: [
       "Access carefully selected luxury residential and investment properties across premium locations.",
@@ -22,7 +44,7 @@ const services = [
     ],
   },
   {
-    n: "02",
+    n: "03",
     title: "Real estate investment advisory",
     body: [
       "We help clients understand the investment opportunity behind a property before they commit their capital.",
@@ -39,26 +61,6 @@ const services = [
         "Payment structure",
         "Exit strategy",
         "Long-term asset value",
-      ],
-    },
-  },
-  {
-    n: "03",
-    title: "Strategic development",
-    body: [
-      "We work with property owners, developers and strategic partners to bring high-quality real estate developments to market.",
-    ],
-    list: {
-      label: "Our role can extend across",
-      items: [
-        "Development strategy",
-        "Sales strategy",
-        "Marketing",
-        "Brand positioning",
-        "Investor acquisition",
-        "Sales management",
-        "Market launch",
-        "Distribution",
       ],
     },
   },

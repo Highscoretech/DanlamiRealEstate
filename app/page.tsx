@@ -143,7 +143,7 @@ export default function HomePage() {
             <div className="stack stack-2">
               <p className="eyebrow">Where we sell</p>
               <h2 style={{ fontSize: "var(--step-4)" }}>
-                Property for sale across the Lekki peninsula
+                Ikoyi. Victoria Island. Lekki. Ajah.
               </h2>
             </div>
             <div style={{ justifySelf: "start" }}>
@@ -182,21 +182,23 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delay={0.12}>
+              {/* Order and wording set by the client, 9 Sep 2026:
+                  Signature Development first. */}
               {[
                 {
                   n: "01",
+                  t: "Signature Development",
+                  d: "We work with landowners, developers and strategic partners to bring high quality developments to the market.",
+                },
+                {
+                  n: "02",
                   t: "Luxury real estate sales",
                   d: "Access carefully selected luxury residential and investment properties across premium locations, from apartments and waterfront residences to exclusive land opportunities.",
                 },
                 {
-                  n: "02",
+                  n: "03",
                   t: "Real estate investment advisory",
                   d: "We help clients understand the investment opportunity behind a property before they commit their capital.",
-                },
-                {
-                  n: "03",
-                  t: "Strategic development",
-                  d: "We work with property owners, developers and strategic partners to bring high-quality developments to market.",
                 },
                 {
                   n: "04",

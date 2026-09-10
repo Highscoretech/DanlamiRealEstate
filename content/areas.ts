@@ -131,6 +131,73 @@ export const areas: Area[] = [
     locations: ["Cowrie Creek, Lekki"],
     related: ["lekki", "osapa-london", "ikota-villa-estate"],
   },
+
+  /* Ikoyi, Victoria Island and Ajah added at the client's direction,
+     9 Sep 2026 — these are the areas the business covers alongside Lekki.
+     No listings held there yet, so the pages invite registration. */
+  {
+    slug: "ikoyi",
+    name: "Ikoyi",
+    fullName: "Ikoyi, Lagos",
+    h1: "Property for Sale in Ikoyi, Lagos",
+    metaTitle: "Property for Sale in Ikoyi, Lagos — Luxury Homes & Apartments",
+    metaDescription:
+      "Luxury property in Ikoyi, Lagos with Dan Lami Real Estate. Tell us what you are looking for and we will source it — apartments, penthouses and detached homes.",
+    intro: [
+      "Ikoyi occupies the eastern part of Lagos Island, separated from Victoria Island by Five Cowrie Creek, and is the most established luxury address in Lagos. Its stock runs from serviced luxury apartments and penthouses to detached homes on mature, quiet streets.",
+      "We cover Ikoyi as part of our luxury sales and acquisition work. Listings at this end of the market often move privately rather than publicly, so if you are buying here, tell us what you are looking for and we will source and evaluate it for you.",
+    ],
+    facts: [
+      { label: "Where", value: "Eastern Lagos Island, across Five Cowrie Creek from Victoria Island" },
+      { label: "Character", value: "The most established luxury district in Lagos" },
+      { label: "Typical stock", value: "Luxury apartments, penthouses, detached residences" },
+      { label: "How we work here", value: "Sourcing and acquisition on request" },
+    ],
+    locations: ["Ikoyi, Lagos"],
+    related: ["victoria-island", "lekki"],
+  },
+  {
+    slug: "victoria-island",
+    name: "Victoria Island",
+    fullName: "Victoria Island, Lagos",
+    h1: "Property for Sale in Victoria Island, Lagos",
+    metaTitle: "Property for Sale in Victoria Island, Lagos — Apartments & Investments",
+    metaDescription:
+      "Property in Victoria Island, Lagos with Dan Lami Real Estate — residential and investment opportunities in the city's principal business district.",
+    intro: [
+      "Victoria Island is the principal business district of Lagos and one of its strongest short-let and rental markets, with residential towers and serviced apartments sitting alongside corporate offices and embassies.",
+      "We cover Victoria Island for both residence and investment. If you are looking to buy here, register what you are looking for and we will bring you suitable opportunities as they come to market.",
+    ],
+    facts: [
+      { label: "Where", value: "Between Ikoyi and the Lekki peninsula" },
+      { label: "Character", value: "Principal business district; strong short-let demand" },
+      { label: "Typical stock", value: "Residential towers, serviced apartments" },
+      { label: "How we work here", value: "Sourcing and acquisition on request" },
+    ],
+    locations: ["Victoria Island, Lagos"],
+    related: ["ikoyi", "lekki"],
+  },
+  {
+    slug: "ajah",
+    name: "Ajah",
+    fullName: "Ajah, Lagos",
+    h1: "Property for Sale in Ajah, Lagos",
+    metaTitle: "Property for Sale in Ajah, Lagos — Duplexes, Terraces & Land",
+    metaDescription:
+      "Property in Ajah, Lagos with Dan Lami Real Estate — duplexes, terraces and land along the eastern end of the Lekki-Epe Expressway.",
+    intro: [
+      "Ajah sits along the Lekki-Epe Expressway east of Lekki and is one of the busiest growth corridors in Lagos, with gated estates, terraces and land opportunities at more accessible price points than the inner peninsula.",
+      "We cover Ajah for buyers and investors looking at the eastern corridor. Register what you are looking for and we will bring you opportunities that fit.",
+    ],
+    facts: [
+      { label: "Where", value: "Eastern end of the Lekki-Epe Expressway" },
+      { label: "Character", value: "Fast-growing corridor of gated estates" },
+      { label: "Typical stock", value: "Duplexes, terraces, land" },
+      { label: "How we work here", value: "Sourcing and acquisition on request" },
+    ],
+    locations: ["Ajah, Lagos"],
+    related: ["lekki", "victoria-island"],
+  },
 ];
 
 export function findArea(slug: string) {
