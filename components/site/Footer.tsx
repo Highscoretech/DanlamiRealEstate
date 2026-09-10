@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="footer-top">
           <div>
             <Image
-              src="/brand/lockup.png"
+              src="/brand/lockup-on-dark.png"
               alt={site.name}
               width={1280}
               height={319}
