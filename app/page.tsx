@@ -331,21 +331,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- watch the intro video ---------- */}
+      {/* ---------- featured property tour ---------- */}
       <section className="band">
         <div className="shell shell-narrow stack stack-3" style={{ textAlign: "center", alignItems: "center" }}>
           <Reveal>
-            <p className="eyebrow">Watch</p>
+            <p className="eyebrow">Property tour</p>
           </Reveal>
           <Reveal delay={0.08}>
             <h2 style={{ fontSize: "var(--step-4)" }}>
-              The real estate broker changing the narrative in Lagos.
+              Step inside a Lagos mega mansion.
             </h2>
           </Reveal>
           <Reveal delay={0.16} style={{ width: "100%" }}>
             <YouTubeEmbed
-              videoId="fdQOAQeBE9c"
-              title="The Real Estate Broker Changing the Narrative of Real Estate in Lagos, Nigeria — Danlami Ojo"
+              videoId="SyFNP_qwAEk"
+              title="Inside a ₦1.6B Mega Mansion in Ikate Elegushi — Live in Burna Boy's Estate"
             />
           </Reveal>
         </div>
