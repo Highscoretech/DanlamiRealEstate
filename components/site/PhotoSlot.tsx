@@ -18,6 +18,7 @@ export default function PhotoSlot({
   note,
   priority,
   sizes = "(max-width: 54rem) 100vw, (max-width: 76rem) 50vw, 33vw",
+  focus = "center",
 }: {
   src?: string | null;
   alt: string;
@@ -26,6 +27,9 @@ export default function PhotoSlot({
   /** Set on the largest above-the-fold image so it is not lazy-loaded. */
   priority?: boolean;
   sizes?: string;
+  /** CSS object-position — use for tall/portrait source images where a
+      centred crop cuts off the part that matters (e.g. a poster's title). */
+  focus?: string;
 }) {
   if (src) {
     return (
@@ -34,7 +38,7 @@ export default function PhotoSlot({
           src={src}
           alt={alt}
           fill
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "cover", objectPosition: focus }}
           sizes={sizes}
           priority={priority}
         />

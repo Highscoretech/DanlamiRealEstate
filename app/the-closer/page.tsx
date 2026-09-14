@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
+import YouTubeEmbed from "@/components/site/YouTubeEmbed";
 import JsonLd from "@/components/seo/JsonLd";
 import { personSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
@@ -73,6 +74,16 @@ export default function TheCloserPage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="band band-white" style={{ borderTop: "1px solid var(--line)" }}>
+        <div className="shell shell-narrow stack stack-3">
+          <p className="rule-label">In his own words</p>
+          <YouTubeEmbed
+            videoId="fdQOAQeBE9c"
+            title="The Real Estate Broker Changing the Narrative of Real Estate in Lagos, Nigeria — Danlami Ojo"
+          />
         </div>
       </section>
 

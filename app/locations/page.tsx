@@ -52,6 +52,7 @@ export default function LocationsPage() {
                     src={cover}
                     alt={`Property for sale in ${area.fullName}`}
                     height="13rem"
+                    focus="center 22%"
                   />
                   <div className="property-card-body">
                     <h2 style={{ fontSize: "var(--step-2)" }}>{area.name}</h2>

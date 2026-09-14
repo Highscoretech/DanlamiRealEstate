@@ -104,6 +104,7 @@ export default async function PropertyPage({ params }: Params) {
               height="clamp(16rem, 38vw, 26rem)"
               note="Photography pending"
               priority
+              focus="center 22%"
             />
           </div>
         </div>
@@ -205,6 +206,7 @@ export default async function PropertyPage({ params }: Params) {
                   src={p.image}
                   alt={`${p.title} for sale in ${p.location}`}
                   height="11rem"
+                  focus="center 22%"
                 />
                 <div className="property-card-body">
                   <h3 style={{ fontSize: "var(--step-2)" }}>{p.title}</h3>

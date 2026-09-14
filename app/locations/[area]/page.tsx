@@ -129,6 +129,7 @@ export default async function AreaPage({ params }: Params) {
                       src={p.image}
                       alt={`${p.title} for sale in ${p.location}`}
                       height="13rem"
+                      focus="center 22%"
                     />
                     <div className="property-card-body">
                       <span className="tag">{p.status}</span>

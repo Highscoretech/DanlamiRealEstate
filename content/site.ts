@@ -59,7 +59,7 @@ export const site = {
     instagram: "https://instagram.com/danlamirealestate",
     facebook: "#",
     linkedin: "#",
-    youtube: "#",
+    youtube: "https://www.youtube.com/@danlamiojo",
   },
 } as const;
 
@@ -82,6 +82,7 @@ export const nav: ReadonlyArray<{
     ],
   },
   { href: "/investors", label: "Investors" },
+  { href: "/academy", label: "Academy" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ] as const;
@@ -112,6 +113,7 @@ export const footerNav = {
     { href: "/about", label: "About Us" },
     { href: "/philosophy", label: "Our Philosophy" },
     { href: "/the-closer", label: "The Closer" },
+    { href: "/academy", label: "Dan Lami Academy" },
     { href: "/partners", label: "Partner With Us" },
   ],
   "Invest & learn": [

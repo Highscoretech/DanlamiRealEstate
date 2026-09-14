@@ -57,7 +57,7 @@ export default function Gallery({
                 src={src}
                 alt={`${alt} — photo ${i + 1}`}
                 fill
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "cover", objectPosition: i === 0 ? "center 22%" : "center" }}
                 sizes="(max-width: 54rem) 100vw, 33vw"
               />
             </button>

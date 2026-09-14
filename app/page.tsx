@@ -5,6 +5,7 @@ import HeroSlider from "@/components/site/HeroSlider";
 import InvestorFaq from "@/components/site/InvestorFaq";
 import PhotoSlot from "@/components/site/PhotoSlot";
 import Reveal from "@/components/site/Reveal";
+import YouTubeEmbed from "@/components/site/YouTubeEmbed";
 import { areas } from "@/content/areas";
 import { properties } from "@/content/properties";
 
@@ -122,7 +123,12 @@ export default function HomePage() {
                   className="property-card"
                   style={{ height: "100%" }}
                 >
-                  <PhotoSlot src={p.image} alt={p.title} height="clamp(13rem, 24vw, 18rem)" />
+                  <PhotoSlot
+                    src={p.image}
+                    alt={p.title}
+                    height="clamp(13rem, 24vw, 18rem)"
+                    focus="center 22%"
+                  />
                   <div className="property-card-body">
                     <span className="tag">{p.status}</span>
                     <h3>{p.title}</h3>
@@ -322,6 +328,26 @@ export default function HomePage() {
               </Link>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* ---------- watch the intro video ---------- */}
+      <section className="band">
+        <div className="shell shell-narrow stack stack-3" style={{ textAlign: "center", alignItems: "center" }}>
+          <Reveal>
+            <p className="eyebrow">Watch</p>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <h2 style={{ fontSize: "var(--step-4)" }}>
+              The real estate broker changing the narrative in Lagos.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.16} style={{ width: "100%" }}>
+            <YouTubeEmbed
+              videoId="fdQOAQeBE9c"
+              title="The Real Estate Broker Changing the Narrative of Real Estate in Lagos, Nigeria — Danlami Ojo"
+            />
+          </Reveal>
         </div>
       </section>
 

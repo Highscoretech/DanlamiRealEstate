@@ -9,10 +9,12 @@ import { nav } from "@/content/site";
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [drawerExpanded, setDrawerExpanded] = useState<string | null>(null);
 
   // Close the drawer on navigation, otherwise it stays open over the new page.
   useEffect(() => {
     setOpen(false);
+    setDrawerExpanded(null);
   }, [pathname]);
 
   return (
@@ -85,18 +87,38 @@ export default function Header() {
       {open && (
         <div className="drawer">
           <nav>
-            {nav.map((item) => (
-              <span key={item.label} style={{ display: "contents" }}>
-                <Link href={item.href}>{item.label}</Link>
-                {"children" in item && item.children
-                  ? item.children.map((c) => (
-                      <Link key={c.href} href={c.href} className="drawer-sub">
-                        {c.label}
-                      </Link>
-                    ))
-                  : null}
-              </span>
-            ))}
+            {nav.map((item) =>
+              "children" in item && item.children ? (
+                <div className="drawer-drop" key={item.label} data-open={drawerExpanded === item.label}>
+                  <button
+                    type="button"
+                    className="drawer-drop-toggle"
+                    aria-expanded={drawerExpanded === item.label}
+                    onClick={() =>
+                      setDrawerExpanded((v) => (v === item.label ? null : item.label))
+                    }
+                  >
+                    {item.label}
+                    <span className="nav-caret" aria-hidden>
+                      ▾
+                    </span>
+                  </button>
+                  <div className="drawer-drop-menu">
+                    <div>
+                      {item.children.map((c) => (
+                        <Link key={c.href} href={c.href} className="drawer-sub">
+                          {c.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link key={item.href} href={item.href}>
+                  {item.label}
+                </Link>
+              )
+            )}
           </nav>
           <Link href="/contact" className="btn btn-primary">
             Speak With an Advisor

@@ -68,6 +68,7 @@ export default function PropertiesPage() {
                   alt={`${p.title} for sale in ${p.location}, Lagos`}
                   height="13rem"
                   priority={i < 3}
+                  focus="center 22%"
                 />
                 <div className="property-card-body">
                   <span className="tag">{p.status}</span>
@@ -90,6 +91,18 @@ export default function PropertiesPage() {
             <Link href="/faq">questions on buying property in Lagos</Link>, or
             see how we work with{" "}
             <Link href="/diaspora">buyers outside Nigeria</Link>.
+          </p>
+
+          <p className="body">
+            Prefer to see properties in motion? Watch{" "}
+            <a
+              href="https://www.youtube.com/watch?v=fdQOAQeBE9c"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Danlami Ojo on YouTube
+            </a>
+            .
           </p>
         </div>
       </section>
