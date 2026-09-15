@@ -938,6 +938,47 @@ p { margin: 0; }
   .hero-slide[data-active="true"] img { animation: none; }
 }
 
+/* ---------- academy course cards ---------- */
+
+/* Uniform cards: every poster is cropped to the same shape so the row
+   lines up, the way the client's Selar storefront presents them. */
+.course-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.course-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(87, 171, 211, .45);
+  box-shadow: var(--shadow-lg);
+}
+/* Contained, not cropped: the posters are different shapes and the client
+   needs the full graphic visible. */
+.course-card-art {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--surface-sunk);
+  line-height: 0;
+}
+.course-card-art img { display: block; transition: transform .6s ease; }
+.course-card:hover .course-card-art img { transform: scale(1.03); }
+.course-card-body {
+  padding: 1.15rem 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  flex: 1;
+}
+.course-card-body h3 { color: var(--ink); }
+
 /* ---------- video embed ---------- */
 
 .video-embed {

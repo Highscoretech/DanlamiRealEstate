@@ -15,6 +15,11 @@ export const academy = {
       summary:
         "A pitching masterclass by Danlami Ojo — his approach to pitching real estate as an investment opportunity, not just a listing.",
       image: "/academy/pitch-like-a-closer.png",
+      /** Crop point for the card's 3:2 frame. This poster is 16:9, so a
+          centred crop keeps the whole title. */
+      imageFocus: "center",
+      /** Direct Selar checkout for this course, not the storefront. */
+      buyUrl: "https://selar.com/pitch",
     },
     {
       slug: "the-blueprint-to-selling-luxury-real-estate",
@@ -23,9 +28,10 @@ export const academy = {
       summary:
         "Your fast-track to a successful real estate career — blueprints, scripts and systems built from real closings, used by top closers doing billions in sales.",
       image: "/academy/blueprint-luxury-real-estate.png",
-      /** Portrait poster — anchor near the top so the title shows instead
-          of the centred crop landing mid-torso. */
-      imageFocus: "center 12%",
+      /** Portrait poster — anchor high so the title and his face survive
+          the crop, the way the Selar storefront shows it. */
+      imageFocus: "center 26%",
+      buyUrl: "https://selar.com/closelikedanlamicourse",
     },
   ],
 } as const;

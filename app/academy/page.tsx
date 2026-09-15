@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
-import PhotoSlot from "@/components/site/PhotoSlot";
 import Reveal from "@/components/site/Reveal";
 import { academy } from "@/content/academy";
 import { pageMetadata } from "@/lib/seo";
@@ -14,8 +14,8 @@ export const metadata = pageMetadata({
   image: "/team/danlami-ojo.jpg",
 });
 
-/* Courses are sold and delivered on Selar, not on this site — every card
-   links out to the storefront. See content/academy.ts for sourcing. */
+/* Courses are sold and delivered on Selar — each card links straight to its
+   own checkout page, not the storefront. See content/academy.ts. */
 
 export default function AcademyPage() {
   return (
@@ -34,30 +34,37 @@ export default function AcademyPage() {
           <div className="grid-2">
             {academy.courses.map((c, i) => (
               <Reveal key={c.slug} delay={i * 0.1}>
-                <div className="property-card" style={{ height: "100%" }}>
-                  <PhotoSlot
-                    src={c.image}
-                    alt={c.title}
-                    height="16rem"
-                    focus={"imageFocus" in c ? c.imageFocus : "center"}
-                  />
-                  <div className="property-card-body">
+                <a
+                  href={c.buyUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="course-card"
+                >
+                  {/* Every poster is cropped to the same shape so the row
+                      lines up; `imageFocus` picks the crop point per poster. */}
+                  <div className="course-card-art">
+                    <Image
+                      src={c.image}
+                      alt={c.title}
+                      fill
+                      sizes="(max-width: 54rem) 100vw, 50vw"
+                      style={{ objectFit: "cover", objectPosition: c.imageFocus }}
+                    />
+                  </div>
+                  <div className="course-card-body">
                     <h3>{c.title}</h3>
                     <p className="body" style={{ fontSize: "var(--step--1)" }}>
                       {c.summary}
                     </p>
                     <p className="property-price">{c.priceRange}</p>
-                    <a
-                      href={academy.storeUrl}
-                      target="_blank"
-                      rel="noreferrer"
+                    <span
                       className="btn btn-primary"
                       style={{ marginTop: ".75rem", alignSelf: "flex-start" }}
                     >
                       Buy on Selar
-                    </a>
+                    </span>
                   </div>
-                </div>
+                </a>
               </Reveal>
             ))}
           </div>
