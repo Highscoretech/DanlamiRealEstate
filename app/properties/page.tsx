@@ -3,8 +3,9 @@ import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
 import PhotoSlot from "@/components/site/PhotoSlot";
 import JsonLd from "@/components/seo/JsonLd";
-import { areas } from "@/content/areas";
+import { primaryAreas } from "@/content/areas";
 import { properties } from "@/content/properties";
+import { site } from "@/content/site";
 import { itemListSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
@@ -44,7 +45,7 @@ export default function PropertiesPage() {
           <div className="stack stack-2">
             <p className="rule-label">Browse by area</p>
             <div className="btn-row">
-              {areas.map((area) => (
+              {primaryAreas().map((area) => (
                 <Link
                   key={area.slug}
                   href={`/locations/${area.slug}`}
@@ -93,17 +94,30 @@ export default function PropertiesPage() {
             <Link href="/diaspora">buyers outside Nigeria</Link>.
           </p>
 
-          <p className="body">
-            Prefer to see properties in motion? Watch{" "}
-            <a
-              href="https://www.youtube.com/watch?v=fdQOAQeBE9c"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Danlami Ojo on YouTube
-            </a>
-            .
-          </p>
+          <div className="stack stack-2">
+            <p className="body">
+              Prefer to see properties in motion? New listings and walkthroughs
+              go up on our own channels first.
+            </p>
+            <div className="btn-row">
+              <a
+                href={site.social.instagram}
+                className="btn btn-outline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                More Listings on Instagram
+              </a>
+              <a
+                href={site.social.youtube}
+                className="btn btn-outline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Watch Property Tours on YouTube
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 

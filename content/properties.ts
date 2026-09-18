@@ -293,16 +293,53 @@ export const properties: Property[] = [
 
 /** Signature Developments — the client's own in-house projects.
     Name, location and artwork from the client's own flyers
-    (assets/brand/hero/): "Garelt Court — Osapa London, Lekki". */
-export const developments = [
+    (assets/brand/hero/): "Garelt Court — Osapa London, Lekki".
+
+    UNCONFIRMED: unit mix, sizes, prices, payment plans, completion date and
+    title documents have not been supplied. `facts` carries only what the
+    client's own material states; nothing else is guessed. `brochureUrl` and
+    `videoId` stay null until the client provides them — the development page
+    hides those elements while they are null. */
+export type Development = {
+  slug: string;
+  title: string;
+  location: string;
+  status: "Coming soon" | "Selling" | "Sold out";
+  summary: string;
+  image: string | null;
+  /** Additional renders, shown as a gallery on the development page. */
+  images?: string[];
+  /** Short factual points, rendered as a definition list. */
+  facts?: { label: string; value: string }[];
+  /** PDF in /public/brochures/. Null hides the download button. */
+  brochureUrl?: string | null;
+  /** YouTube id for a walkthrough. Null hides the embed. */
+  videoId?: string | null;
+  confirmed: boolean;
+};
+
+export const developments: Development[] = [
   {
     slug: "garelt-court",
     title: "Garelt Court",
     location: "Osapa London, Lekki",
-    status: "Coming soon" as const,
+    status: "Coming soon",
     summary:
-      "An apartment development introduced on the company's own channels. Details still to be confirmed by the client.",
+      "An apartment development in Osapa London, Lekki — one of the most established residential pockets on the peninsula, roughly fifteen minutes from Victoria Island off-peak.",
     image: "/hero/garelt-court.jpg",
+    images: [
+      "/hero/garelt-court-dusk.jpg",
+      "/hero/garelt-court-night.jpg",
+      "/hero/garelt-court-interior.jpg",
+    ],
+    facts: [
+      { label: "Location", value: "Osapa London, Lekki, Lagos" },
+      { label: "Type", value: "Apartment development" },
+      { label: "Status", value: "Coming soon" },
+      { label: "Unit mix and prices", value: "To be announced" },
+    ],
+    brochureUrl: null,
+    videoId: null,
     confirmed: false,
   },
 ];

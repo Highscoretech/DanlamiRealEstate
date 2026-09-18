@@ -6,18 +6,20 @@ import InvestorFaq from "@/components/site/InvestorFaq";
 import PhotoSlot from "@/components/site/PhotoSlot";
 import Reveal from "@/components/site/Reveal";
 import YouTubeEmbed from "@/components/site/YouTubeEmbed";
-import { areas } from "@/content/areas";
-import { properties } from "@/content/properties";
+import { primaryAreas } from "@/content/areas";
+import { developments, properties } from "@/content/properties";
+import { site } from "@/content/site";
 
 /* Homepage. Copy is the client's own, section 1 of docs/client-content.md.
    No headline statistics anywhere — the client explicitly asked that no
    unverified numbers go on the site yet. */
 
-/* Feature only listings that already have photography, priciest first. */
+/* Feature only listings that already have photography, priciest first.
+   Three on the homepage — the client's call, 9 Sep 2026. */
 const featured = properties
   .filter((p) => p.image)
   .sort((a, b) => Number(b.price.replace(/\D/g, "")) - Number(a.price.replace(/\D/g, "")))
-  .slice(0, 4);
+  .slice(0, 3);
 
 export default function HomePage() {
   return (
@@ -100,75 +102,39 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- featured properties ---------- */}
+      {/* ---------- signature developments ----------
+           Order set by the client, 9 Sep 2026: Signature Developments,
+           then What We Do, then Selected Properties. */}
       <section className="band band-white">
-        <div className="shell stack stack-4">
-          <div className="split" style={{ alignItems: "end", gap: "1.5rem" }}>
-            <div className="stack stack-2">
-              <p className="eyebrow">Currently available</p>
-              <h2>Selected properties</h2>
-            </div>
-            <div style={{ justifySelf: "start" }}>
-              <Link href="/properties" className="link-arrow">
-                View all properties &rarr;
+        <div className="shell">
+          <div className="split" style={{ alignItems: "center" }}>
+            <Reveal>
+              <Link href={`/developments/${developments[0].slug}`}>
+                <PhotoSlot
+                  src="/hero/garelt-court.jpg"
+                  alt="Garelt Court, Osapa London, Lekki"
+                  height="clamp(16rem, 34vw, 24rem)"
+                />
               </Link>
-            </div>
-          </div>
-
-          <div className="grid-2">
-            {featured.map((p, i) => (
-              <Reveal key={p.slug} delay={(i % 2) * 0.1}>
-                <Link
-                  href={`/properties/${p.slug}`}
-                  className="property-card"
-                  style={{ height: "100%" }}
-                >
-                  <PhotoSlot
-                    src={p.image}
-                    alt={p.title}
-                    height="clamp(13rem, 24vw, 18rem)"
-                    focus="center 22%"
-                  />
-                  <div className="property-card-body">
-                    <span className="tag">{p.status}</span>
-                    <h3>{p.title}</h3>
-                    <p className="property-where">{p.location}</p>
-                    <p className="property-price">{p.price}</p>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- areas ---------- */}
-      <section className="band band-tight">
-        <div className="shell stack stack-3">
-          <div className="split" style={{ alignItems: "end", gap: "1.5rem" }}>
-            <div className="stack stack-2">
-              <p className="eyebrow">Where we sell</p>
-              <h2 style={{ fontSize: "var(--step-4)" }}>
-                Ikoyi. Victoria Island. Lekki. Ajah.
+            </Reveal>
+            <Reveal delay={0.12} className="stack stack-3">
+              <p className="eyebrow">Signature Developments</p>
+              <h2>
+                Developments with purpose. Assets designed for the future.
               </h2>
-            </div>
-            <div style={{ justifySelf: "start" }}>
-              <Link href="/locations" className="link-arrow">
-                All areas we cover &rarr;
+              <p className="body">
+                Our Signature Developments represent a new chapter in the Dan
+                Lami Real Estate brand. These are not simply projects.
+              </p>
+              <p className="body">
+                They are opportunities to own strategically positioned real
+                estate assets designed around lifestyle, demand, location and
+                long-term value.
+              </p>
+              <Link href="/developments" className="link-arrow">
+                Explore Signature Developments &rarr;
               </Link>
-            </div>
-          </div>
-
-          <div className="btn-row">
-            {areas.map((area) => (
-              <Link
-                key={area.slug}
-                href={`/locations/${area.slug}`}
-                className="btn btn-outline"
-              >
-                Property for sale in {area.name}
-              </Link>
-            ))}
+            </Reveal>
           </div>
         </div>
       </section>
@@ -225,35 +191,83 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- signature developments ---------- */}
+      {/* ---------- featured properties ---------- */}
       <section className="band band-white">
-        <div className="shell">
-          <div className="split" style={{ alignItems: "center" }}>
-            <Reveal>
-              <PhotoSlot
-                src="/hero/garelt-court.jpg"
-                alt="Garelt Court, Osapa London, Lekki"
-                height="clamp(16rem, 34vw, 24rem)"
-              />
-            </Reveal>
-            <Reveal delay={0.12} className="stack stack-3">
-              <p className="eyebrow">Signature Developments</p>
-              <h2>
-                Developments with purpose. Assets designed for the future.
-              </h2>
-              <p className="body">
-                Our Signature Developments represent a new chapter in the Dan
-                Lami Real Estate brand. These are not simply projects.
-              </p>
-              <p className="body">
-                They are opportunities to own strategically positioned real
-                estate assets designed around lifestyle, demand, location and
-                long-term value.
-              </p>
-              <Link href="/developments" className="link-arrow">
-                Explore Signature Developments &rarr;
+        <div className="shell stack stack-4">
+          <div className="split" style={{ alignItems: "end", gap: "1.5rem" }}>
+            <div className="stack stack-2">
+              <p className="eyebrow">Currently available</p>
+              <h2>Selected properties</h2>
+            </div>
+            <div style={{ justifySelf: "start" }}>
+              <Link href="/properties" className="link-arrow">
+                View all properties &rarr;
               </Link>
-            </Reveal>
+            </div>
+          </div>
+
+          <div className="grid-3">
+            {featured.map((p, i) => (
+              <Reveal key={p.slug} delay={(i % 3) * 0.1}>
+                <Link
+                  href={`/properties/${p.slug}`}
+                  className="property-card"
+                  style={{ height: "100%" }}
+                >
+                  <PhotoSlot
+                    src={p.image}
+                    alt={p.title}
+                    height="clamp(13rem, 24vw, 18rem)"
+                    focus="center 22%"
+                  />
+                  <div className="property-card-body">
+                    <span className="tag">{p.status}</span>
+                    <h3>{p.title}</h3>
+                    <p className="property-where">{p.location}</p>
+                    <p className="property-price">{p.price}</p>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          <p className="body">
+            More listings and walkthroughs go up on Instagram first &mdash;{" "}
+            <a href={site.social.instagram} target="_blank" rel="noreferrer">
+              follow @danlamirealestate
+            </a>
+            .
+          </p>
+        </div>
+      </section>
+
+      {/* ---------- areas ---------- */}
+      <section className="band band-tight">
+        <div className="shell stack stack-3">
+          <div className="split" style={{ alignItems: "end", gap: "1.5rem" }}>
+            <div className="stack stack-2">
+              <p className="eyebrow">Where we sell</p>
+              <h2 style={{ fontSize: "var(--step-4)" }}>
+                Lekki. Ikoyi. Victoria Island.
+              </h2>
+            </div>
+            <div style={{ justifySelf: "start" }}>
+              <Link href="/locations" className="link-arrow">
+                All areas we cover &rarr;
+              </Link>
+            </div>
+          </div>
+
+          <div className="btn-row">
+            {primaryAreas().map((area) => (
+              <Link
+                key={area.slug}
+                href={`/locations/${area.slug}`}
+                className="btn btn-outline"
+              >
+                Property for sale in {area.name}
+              </Link>
+            ))}
           </div>
         </div>
       </section>

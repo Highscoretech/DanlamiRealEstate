@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { areas } from "@/content/areas";
 import { guides } from "@/content/guides";
-import { properties } from "@/content/properties";
+import { developments, properties } from "@/content/properties";
 import { absoluteUrl } from "@/lib/seo";
 
 /**
@@ -59,6 +59,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       // photos become eligible for Google Images and the image thumbnails in
       // web results.
       images: [property.image, ...(property.images ?? [])]
+        .filter((src): src is string => Boolean(src))
+        .map((src) => absoluteUrl(src)),
+    })),
+    ...developments.map((development) => ({
+      url: absoluteUrl(`/developments/${development.slug}`),
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+      images: [development.image, ...(development.images ?? [])]
         .filter((src): src is string => Boolean(src))
         .map((src) => absoluteUrl(src)),
     })),

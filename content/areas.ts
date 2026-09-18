@@ -36,7 +36,16 @@ export type Area = {
   locations: string[];
   /** Other area slugs worth linking to from this page. */
   related: string[];
+  /**
+   * Headline areas shown as browse pills. The client wants those limited to
+   * Lekki, Ikoyi and Victoria Island (9 Sep 2026); the Lekki sub-areas keep
+   * their pages and are reached from /locations and the footer.
+   */
+  primary?: boolean;
 };
+
+/** The three areas shown as browse pills across the site. */
+export const primaryAreas = () => areas.filter((a) => a.primary);
 
 export const areas: Area[] = [
   {
@@ -65,6 +74,7 @@ export const areas: Area[] = [
       "Osapa London, Lekki",
     ],
     related: ["osapa-london", "ikota-villa-estate", "cowrie-creek"],
+    primary: true,
   },
   {
     slug: "osapa-london",
@@ -132,9 +142,11 @@ export const areas: Area[] = [
     related: ["lekki", "osapa-london", "ikota-villa-estate"],
   },
 
-  /* Ikoyi, Victoria Island and Ajah added at the client's direction,
-     9 Sep 2026 — these are the areas the business covers alongside Lekki.
-     No listings held there yet, so the pages invite registration. */
+  /* Ikoyi and Victoria Island added at the client's direction — these are
+     the areas the business covers alongside Lekki. Ajah was removed on
+     9 Sep 2026: the client wants the focus tight on Lekki, Ikoyi and
+     Victoria Island. No listings held in these two yet, so the pages
+     invite registration. */
   {
     slug: "ikoyi",
     name: "Ikoyi",
@@ -155,6 +167,7 @@ export const areas: Area[] = [
     ],
     locations: ["Ikoyi, Lagos"],
     related: ["victoria-island", "lekki"],
+    primary: true,
   },
   {
     slug: "victoria-island",
@@ -176,27 +189,7 @@ export const areas: Area[] = [
     ],
     locations: ["Victoria Island, Lagos"],
     related: ["ikoyi", "lekki"],
-  },
-  {
-    slug: "ajah",
-    name: "Ajah",
-    fullName: "Ajah, Lagos",
-    h1: "Property for Sale in Ajah, Lagos",
-    metaTitle: "Property for Sale in Ajah, Lagos — Duplexes, Terraces & Land",
-    metaDescription:
-      "Property in Ajah, Lagos with Dan Lami Real Estate — duplexes, terraces and land along the eastern end of the Lekki-Epe Expressway.",
-    intro: [
-      "Ajah sits along the Lekki-Epe Expressway east of Lekki and is one of the busiest growth corridors in Lagos, with gated estates, terraces and land opportunities at more accessible price points than the inner peninsula.",
-      "We cover Ajah for buyers and investors looking at the eastern corridor. Register what you are looking for and we will bring you opportunities that fit.",
-    ],
-    facts: [
-      { label: "Where", value: "Eastern end of the Lekki-Epe Expressway" },
-      { label: "Character", value: "Fast-growing corridor of gated estates" },
-      { label: "Typical stock", value: "Duplexes, terraces, land" },
-      { label: "How we work here", value: "Sourcing and acquisition on request" },
-    ],
-    locations: ["Ajah, Lagos"],
-    related: ["lekki", "victoria-island"],
+    primary: true,
   },
 ];
 

@@ -66,35 +66,45 @@ export default function DevelopmentsPage() {
 
           <div className="split" style={{ alignItems: "center" }}>
             <Reveal>
-              <PhotoSlot
-                src={garelt.image}
-                alt={`${garelt.title}, ${garelt.location}`}
-                height="clamp(18rem, 38vw, 28rem)"
-              />
+              <Link href={`/developments/${garelt.slug}`}>
+                <PhotoSlot
+                  src={garelt.image}
+                  alt={`${garelt.title}, ${garelt.location}`}
+                  height="clamp(18rem, 38vw, 28rem)"
+                />
+              </Link>
             </Reveal>
             <Reveal delay={0.12}>
               <div className="stack stack-2">
                 <span className="tag">{garelt.status}</span>
-                <h2>{garelt.title}</h2>
+                <h2>
+                  <Link
+                    href={`/developments/${garelt.slug}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    {garelt.title}
+                  </Link>
+                </h2>
                 <p className="property-where" style={{ marginTop: ".25rem" }}>
                   {garelt.location}
                 </p>
                 <p className="body" style={{ marginTop: ".75rem" }}>
                   {garelt.summary}
                 </p>
-                <Link href="/contact" className="link-arrow" style={{ marginTop: "1rem" }}>
-                  Register your interest &rarr;
-                </Link>
+                <div className="btn-row" style={{ marginTop: "1rem" }}>
+                  <Link href={`/developments/${garelt.slug}`} className="btn btn-primary">
+                    View Development
+                  </Link>
+                  <Link href="/contact" className="btn btn-outline">
+                    Register Your Interest
+                  </Link>
+                </div>
               </div>
             </Reveal>
           </div>
 
           <Gallery
-            images={[
-              "/hero/garelt-court-dusk.jpg",
-              "/hero/garelt-court-night.jpg",
-              "/hero/garelt-court-interior.jpg",
-            ]}
+            images={garelt.images ?? []}
             alt={`${garelt.title}, ${garelt.location}`}
           />
         </div>
