@@ -311,8 +311,12 @@ export type Development = {
   images?: string[];
   /** Short factual points, rendered as a definition list. */
   facts?: { label: string; value: string }[];
-  /** PDF in /public/brochures/. Null hides the download button. */
+  /** PDF in /public/brochures/, or an external link. Null falls back to
+      a "Request the Brochure" button. */
   brochureUrl?: string | null;
+  /** True when brochureUrl points off-site (e.g. an Instagram post), so the
+      link opens rather than triggering a download. */
+  brochureIsExternal?: boolean;
   /** YouTube id for a walkthrough. Null hides the embed. */
   videoId?: string | null;
   confirmed: boolean;
@@ -338,7 +342,10 @@ export const developments: Development[] = [
       { label: "Status", value: "Coming soon" },
       { label: "Unit mix and prices", value: "To be announced" },
     ],
-    brochureUrl: null,
+    /* The client's brochure lives as an Instagram post rather than a PDF
+       (supplied 9 Sep 2026), so this opens the post instead of downloading. */
+    brochureUrl: "https://www.instagram.com/p/DdMpjFUDrEc/",
+    brochureIsExternal: true,
     videoId: null,
     confirmed: false,
   },

@@ -59,18 +59,23 @@ export default async function DevelopmentPage({ params }: Params) {
                 <Link href="/contact" className="btn btn-primary">
                   Register Your Interest
                 </Link>
-                {/* Only rendered once the client supplies a brochure. */}
+                {/* Becomes a direct download the moment a PDF is supplied;
+                    until then it routes the same intent to an advisor. */}
                 {dev.brochureUrl ? (
                   <a
                     href={dev.brochureUrl}
                     className="btn btn-outline"
                     target="_blank"
                     rel="noreferrer"
-                    download
+                    {...(dev.brochureIsExternal ? {} : { download: true })}
                   >
-                    Download Brochure
+                    {dev.brochureIsExternal ? "View the Brochure" : "Download Brochure"}
                   </a>
-                ) : null}
+                ) : (
+                  <Link href="/contact" className="btn btn-outline">
+                    Request the Brochure
+                  </Link>
+                )}
                 <a
                   href={site.whatsapp}
                   className="btn btn-outline"

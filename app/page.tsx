@@ -104,7 +104,7 @@ export default function HomePage() {
 
       {/* ---------- signature developments ----------
            Order set by the client, 9 Sep 2026: Signature Developments,
-           then What We Do, then Selected Properties. */}
+           then Selected Properties, then What We Do. */}
       <section className="band band-white">
         <div className="shell">
           <div className="split" style={{ alignItems: "center" }}>
@@ -139,8 +139,58 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- what we do ---------- */}
+      {/* ---------- featured properties ---------- */}
       <section className="band">
+        <div className="shell stack stack-4">
+          <div className="split" style={{ alignItems: "end", gap: "1.5rem" }}>
+            <div className="stack stack-2">
+              <p className="eyebrow">Currently available</p>
+              <h2>Selected properties</h2>
+            </div>
+            <div style={{ justifySelf: "start" }}>
+              <Link href="/properties" className="link-arrow">
+                View all properties &rarr;
+              </Link>
+            </div>
+          </div>
+
+          <div className="grid-3">
+            {featured.map((p, i) => (
+              <Reveal key={p.slug} delay={(i % 3) * 0.1}>
+                <Link
+                  href={`/properties/${p.slug}`}
+                  className="property-card"
+                  style={{ height: "100%" }}
+                >
+                  <PhotoSlot
+                    src={p.image}
+                    alt={p.title}
+                    height="clamp(13rem, 24vw, 18rem)"
+                    focus="center 22%"
+                  />
+                  <div className="property-card-body">
+                    <span className="tag">{p.status}</span>
+                    <h3>{p.title}</h3>
+                    <p className="property-where">{p.location}</p>
+                    <p className="property-price">{p.price}</p>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          <p className="body">
+            More listings and walkthroughs go up on Instagram first &mdash;{" "}
+            <a href={site.social.instagram} target="_blank" rel="noreferrer">
+              follow @danlamirealestate
+            </a>
+            .
+          </p>
+        </div>
+      </section>
+
+      {/* ---------- what we do ---------- */}
+      <section className="band band-white">
         <div className="shell stack stack-4">
           <div className="split split-lead" style={{ alignItems: "start" }}>
             <Reveal>
@@ -191,56 +241,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- featured properties ---------- */}
-      <section className="band band-white">
-        <div className="shell stack stack-4">
-          <div className="split" style={{ alignItems: "end", gap: "1.5rem" }}>
-            <div className="stack stack-2">
-              <p className="eyebrow">Currently available</p>
-              <h2>Selected properties</h2>
-            </div>
-            <div style={{ justifySelf: "start" }}>
-              <Link href="/properties" className="link-arrow">
-                View all properties &rarr;
-              </Link>
-            </div>
-          </div>
-
-          <div className="grid-3">
-            {featured.map((p, i) => (
-              <Reveal key={p.slug} delay={(i % 3) * 0.1}>
-                <Link
-                  href={`/properties/${p.slug}`}
-                  className="property-card"
-                  style={{ height: "100%" }}
-                >
-                  <PhotoSlot
-                    src={p.image}
-                    alt={p.title}
-                    height="clamp(13rem, 24vw, 18rem)"
-                    focus="center 22%"
-                  />
-                  <div className="property-card-body">
-                    <span className="tag">{p.status}</span>
-                    <h3>{p.title}</h3>
-                    <p className="property-where">{p.location}</p>
-                    <p className="property-price">{p.price}</p>
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-
-          <p className="body">
-            More listings and walkthroughs go up on Instagram first &mdash;{" "}
-            <a href={site.social.instagram} target="_blank" rel="noreferrer">
-              follow @danlamirealestate
-            </a>
-            .
-          </p>
-        </div>
-      </section>
-
       {/* ---------- areas ---------- */}
       <section className="band band-tight">
         <div className="shell stack stack-3">
@@ -258,16 +258,20 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* Homepage keeps the three headline areas; the full browse list,
+              including Ajah, is on /properties. */}
           <div className="btn-row">
-            {primaryAreas().map((area) => (
-              <Link
-                key={area.slug}
-                href={`/locations/${area.slug}`}
-                className="btn btn-outline"
-              >
-                Property for sale in {area.name}
-              </Link>
-            ))}
+            {primaryAreas()
+              .filter((a) => a.slug !== "ajah")
+              .map((area) => (
+                <Link
+                  key={area.slug}
+                  href={`/locations/${area.slug}`}
+                  className="btn btn-outline"
+                >
+                  Property for sale in {area.name}
+                </Link>
+              ))}
           </div>
         </div>
       </section>
@@ -366,7 +370,7 @@ export default function HomePage() {
       </section>
 
       {/* ---------- brand promise ---------- */}
-      <section className="band">
+      <section className="band band-sunk">
         <div className="shell shell-narrow stack stack-3" style={{ textAlign: "center", alignItems: "center" }}>
           <Reveal>
             <p className="eyebrow">Our brand promise</p>

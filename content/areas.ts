@@ -37,14 +37,16 @@ export type Area = {
   /** Other area slugs worth linking to from this page. */
   related: string[];
   /**
-   * Headline areas shown as browse pills. The client wants those limited to
-   * Lekki, Ikoyi and Victoria Island (9 Sep 2026); the Lekki sub-areas keep
-   * their pages and are reached from /locations and the footer.
+   * Headline areas shown as browse pills: Lekki, Victoria Island, Ikoyi and
+   * Ajah. Sub-areas are not pills — they are reached by opening their parent
+   * area, which is how the client wants people to drill in (9 Sep 2026).
    */
   primary?: boolean;
+  /** Slugs of the neighbourhoods inside this area, shown on its page. */
+  children?: string[];
 };
 
-/** The three areas shown as browse pills across the site. */
+/** The areas shown as browse pills across the site. */
 export const primaryAreas = () => areas.filter((a) => a.primary);
 
 export const areas: Area[] = [
@@ -75,6 +77,7 @@ export const areas: Area[] = [
     ],
     related: ["osapa-london", "ikota-villa-estate", "cowrie-creek"],
     primary: true,
+    children: ["osapa-london", "ikota-villa-estate", "cowrie-creek"],
   },
   {
     slug: "osapa-london",
@@ -142,11 +145,9 @@ export const areas: Area[] = [
     related: ["lekki", "osapa-london", "ikota-villa-estate"],
   },
 
-  /* Ikoyi and Victoria Island added at the client's direction — these are
-     the areas the business covers alongside Lekki. Ajah was removed on
-     9 Sep 2026: the client wants the focus tight on Lekki, Ikoyi and
-     Victoria Island. No listings held in these two yet, so the pages
-     invite registration. */
+  /* Ikoyi, Victoria Island and Ajah — the areas the business covers
+     alongside Lekki. No listings held in them yet, so the pages invite
+     registration and list the neighbourhoods we cover inside each. */
   {
     slug: "ikoyi",
     name: "Ikoyi",
@@ -168,6 +169,7 @@ export const areas: Area[] = [
     locations: ["Ikoyi, Lagos"],
     related: ["victoria-island", "lekki"],
     primary: true,
+    children: ["banana-island", "parkview-estate", "old-ikoyi"],
   },
   {
     slug: "victoria-island",
@@ -190,6 +192,183 @@ export const areas: Area[] = [
     locations: ["Victoria Island, Lagos"],
     related: ["ikoyi", "lekki"],
     primary: true,
+    children: ["oniru", "eko-atlantic"],
+  },
+
+  {
+    slug: "ajah",
+    name: "Ajah",
+    fullName: "Ajah, Lagos",
+    h1: "Property for Sale in Ajah, Lagos",
+    metaTitle: "Property for Sale in Ajah, Lagos — Duplexes, Terraces & Land",
+    metaDescription:
+      "Property in Ajah, Lagos with Dan Lami Real Estate — duplexes, terraces and land along the eastern end of the Lekki-Epe Expressway.",
+    intro: [
+      "Ajah sits along the Lekki-Epe Expressway east of Lekki and is one of the busiest growth corridors in Lagos, with gated estates, terraces and land opportunities at more accessible price points than the inner peninsula.",
+      "We cover Ajah for buyers and investors looking at the eastern corridor. Register what you are looking for and we will bring you opportunities that fit.",
+    ],
+    facts: [
+      { label: "Where", value: "Eastern end of the Lekki-Epe Expressway" },
+      { label: "Character", value: "Fast-growing corridor of gated estates" },
+      { label: "Typical stock", value: "Duplexes, terraces, land" },
+      { label: "How we work here", value: "Sourcing and acquisition on request" },
+    ],
+    locations: ["Ajah, Lagos"],
+    related: ["lekki", "victoria-island"],
+    primary: true,
+    children: ["sangotedo", "abraham-adesanya"],
+  },
+
+  /* Neighbourhoods inside the four headline areas. Geography only — no
+     price, appreciation or infrastructure claims, since we hold no
+     listings in most of them yet. The client should enrich these with
+     first-hand detail. See docs/seo.md. */
+  {
+    slug: "banana-island",
+    name: "Banana Island",
+    fullName: "Banana Island, Ikoyi",
+    h1: "Property for Sale in Banana Island, Ikoyi",
+    metaTitle: "Property for Sale in Banana Island, Ikoyi, Lagos",
+    metaDescription:
+      "Luxury property in Banana Island, Ikoyi, Lagos. Sourcing and acquisition with Dan Lami Real Estate — tell us what you are looking for.",
+    intro: [
+      "Banana Island is a man-made island off Ikoyi, reached by a single causeway, and is the most exclusive residential address in Lagos. It is fully planned, with underground services and its own security regime.",
+      "Stock here rarely reaches the open market. If you are buying on Banana Island, tell us your requirement and we will source and evaluate it privately.",
+    ],
+    facts: [
+      { label: "Where", value: "Man-made island off Ikoyi, single causeway access" },
+      { label: "Character", value: "The most exclusive address in Lagos" },
+      { label: "Typical stock", value: "Detached residences, luxury apartments" },
+      { label: "How we work here", value: "Private sourcing on request" },
+    ],
+    locations: ["Banana Island, Ikoyi"],
+    related: ["ikoyi", "victoria-island"],
+  },
+  {
+    slug: "parkview-estate",
+    name: "Parkview Estate",
+    fullName: "Parkview Estate, Ikoyi",
+    h1: "Property for Sale in Parkview Estate, Ikoyi",
+    metaTitle: "Property for Sale in Parkview Estate, Ikoyi, Lagos",
+    metaDescription:
+      "Property in Parkview Estate, Ikoyi, Lagos with Dan Lami Real Estate. Register your requirement for this gated Ikoyi estate.",
+    intro: [
+      "Parkview Estate is a gated estate in Ikoyi, known for being quiet, low-density and tightly managed, with a mix of detached houses and apartment blocks.",
+      "We source in Parkview on request. Tell us the configuration you need and we will bring you what fits.",
+    ],
+    facts: [
+      { label: "Where", value: "Gated estate, Ikoyi" },
+      { label: "Character", value: "Quiet, low-density, tightly managed" },
+      { label: "Typical stock", value: "Detached houses and apartments" },
+      { label: "How we work here", value: "Sourcing and acquisition on request" },
+    ],
+    locations: ["Parkview Estate, Ikoyi"],
+    related: ["ikoyi", "banana-island"],
+  },
+  {
+    slug: "old-ikoyi",
+    name: "Old Ikoyi",
+    fullName: "Old Ikoyi, Lagos",
+    h1: "Property for Sale in Old Ikoyi, Lagos",
+    metaTitle: "Property for Sale in Old Ikoyi, Lagos",
+    metaDescription:
+      "Property in Old Ikoyi, Lagos with Dan Lami Real Estate — the original Ikoyi streets. Sourcing and acquisition on request.",
+    intro: [
+      "Old Ikoyi is the original residential core of Ikoyi — mature, tree-lined streets close to the golf club and the waterfront, where much of the stock is being redeveloped into low-density apartment schemes.",
+      "We cover Old Ikoyi for buyers who want the address rather than a new-build tower. Register what you are looking for.",
+    ],
+    facts: [
+      { label: "Where", value: "Original residential core of Ikoyi" },
+      { label: "Character", value: "Mature, tree-lined, low-density" },
+      { label: "Typical stock", value: "Redeveloped apartment schemes, older detached homes" },
+      { label: "How we work here", value: "Sourcing and acquisition on request" },
+    ],
+    locations: ["Old Ikoyi, Lagos"],
+    related: ["ikoyi", "parkview-estate"],
+  },
+  {
+    slug: "oniru",
+    name: "Oniru",
+    fullName: "Oniru, Victoria Island",
+    h1: "Property for Sale in Oniru, Victoria Island",
+    metaTitle: "Property for Sale in Oniru, Victoria Island, Lagos",
+    metaDescription:
+      "Property in Oniru, Victoria Island, Lagos with Dan Lami Real Estate — apartments and short-let investment stock near the beachfront.",
+    intro: [
+      "Oniru sits at the eastern end of Victoria Island, between VI proper and the Lekki peninsula, with beach access and a dense mix of apartments, hotels and restaurants.",
+      "It is one of the stronger short-let markets in Lagos, which is why it comes up often with investor clients. Register what you are looking for and we will bring you opportunities.",
+    ],
+    facts: [
+      { label: "Where", value: "Eastern Victoria Island, towards the Lekki peninsula" },
+      { label: "Character", value: "Dense, mixed-use, beach access" },
+      { label: "Typical stock", value: "Apartments and serviced units" },
+      { label: "How we work here", value: "Sourcing and acquisition on request" },
+    ],
+    locations: ["Oniru, Victoria Island"],
+    related: ["victoria-island", "ikoyi"],
+  },
+  {
+    slug: "eko-atlantic",
+    name: "Eko Atlantic",
+    fullName: "Eko Atlantic City, Lagos",
+    h1: "Property for Sale in Eko Atlantic City, Lagos",
+    metaTitle: "Property for Sale in Eko Atlantic City, Lagos",
+    metaDescription:
+      "Property in Eko Atlantic City, Lagos with Dan Lami Real Estate — the planned city reclaimed from the Atlantic, beside Victoria Island.",
+    intro: [
+      "Eko Atlantic is a planned city built on land reclaimed from the Atlantic, adjoining Victoria Island and protected by the Great Wall of Lagos. It is being developed in phases, with its own power, drainage and road network.",
+      "Buying here means buying into a project still under construction, so the sequencing matters as much as the unit. Tell us what you are considering and we will walk you through it.",
+    ],
+    facts: [
+      { label: "Where", value: "Reclaimed land adjoining Victoria Island" },
+      { label: "Character", value: "Planned city, phased delivery, own infrastructure" },
+      { label: "Typical stock", value: "Apartment towers, commercial plots" },
+      { label: "How we work here", value: "Advisory and acquisition on request" },
+    ],
+    locations: ["Eko Atlantic, Lagos"],
+    related: ["victoria-island", "ikoyi"],
+  },
+  {
+    slug: "sangotedo",
+    name: "Sangotedo",
+    fullName: "Sangotedo, Ajah",
+    h1: "Property for Sale in Sangotedo, Ajah",
+    metaTitle: "Property for Sale in Sangotedo, Ajah, Lagos",
+    metaDescription:
+      "Property in Sangotedo, Ajah, Lagos with Dan Lami Real Estate — gated estates, terraces and land on the eastern corridor.",
+    intro: [
+      "Sangotedo sits east of Ajah along the Lekki-Epe Expressway and has become one of the busier estate-development pockets on the corridor, with a large concentration of gated schemes.",
+      "We cover Sangotedo for buyers and investors working to a budget that does not stretch to the inner peninsula. Register your requirement.",
+    ],
+    facts: [
+      { label: "Where", value: "East of Ajah, Lekki-Epe Expressway" },
+      { label: "Character", value: "Concentration of gated estate schemes" },
+      { label: "Typical stock", value: "Duplexes, terraces, land" },
+      { label: "How we work here", value: "Sourcing and acquisition on request" },
+    ],
+    locations: ["Sangotedo, Ajah"],
+    related: ["ajah", "lekki"],
+  },
+  {
+    slug: "abraham-adesanya",
+    name: "Abraham Adesanya",
+    fullName: "Abraham Adesanya, Ajah",
+    h1: "Property for Sale in Abraham Adesanya, Ajah",
+    metaTitle: "Property for Sale in Abraham Adesanya, Ajah, Lagos",
+    metaDescription:
+      "Property around Abraham Adesanya, Ajah, Lagos with Dan Lami Real Estate — estates and land off the Lekki-Epe Expressway.",
+    intro: [
+      "Abraham Adesanya is a established junction and estate area in Ajah, off the Lekki-Epe Expressway, and one of the recognised reference points on that stretch of the corridor.",
+      "We cover it as part of our Ajah work. Tell us what you are looking for and we will bring you what fits.",
+    ],
+    facts: [
+      { label: "Where", value: "Off the Lekki-Epe Expressway, Ajah" },
+      { label: "Character", value: "Established junction and estate area" },
+      { label: "Typical stock", value: "Duplexes, terraces, land" },
+      { label: "How we work here", value: "Sourcing and acquisition on request" },
+    ],
+    locations: ["Abraham Adesanya, Ajah"],
+    related: ["ajah", "sangotedo"],
   },
 ];
 

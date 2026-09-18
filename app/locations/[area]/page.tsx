@@ -7,6 +7,7 @@ import PhotoSlot from "@/components/site/PhotoSlot";
 import JsonLd from "@/components/seo/JsonLd";
 import { areas, findArea } from "@/content/areas";
 import { properties } from "@/content/properties";
+import { site } from "@/content/site";
 import { breadcrumbSchema, itemListSchema, placeSchema } from "@/lib/schema";
 import { pageMetadata } from "@/lib/seo";
 
@@ -43,6 +44,19 @@ export default async function AreaPage({ params }: Params) {
   const related = area.related
     .map((s) => findArea(s))
     .filter((a): a is NonNullable<typeof a> => Boolean(a));
+
+  /* Neighbourhoods inside this area, revealed when it is opened. */
+  const children = (area.children ?? [])
+    .map((s) => findArea(s))
+    .filter((a): a is NonNullable<typeof a> => Boolean(a));
+
+  /* We hold no stock in some areas yet. Rather than leaving the page as a
+     wall of text, show what is actually available elsewhere so there is
+     always something to look at. */
+  const elsewhere =
+    listings.length === 0
+      ? properties.filter((p) => p.image).slice(0, 3)
+      : [];
 
   return (
     <>
@@ -142,12 +156,55 @@ export default async function AreaPage({ params }: Params) {
               </div>
             </>
           ) : (
-            <p className="body">
-              We do not have a listing in {area.name} at this moment. Availability
-              here moves quickly &mdash; tell us what you are looking for and we
-              will let you know the day something comes up.
-            </p>
+            <>
+              <p className="body">
+                We do not have a listing in {area.name} at this moment.
+                Availability here moves quickly &mdash; tell us what you are
+                looking for and we will let you know the day something comes
+                up. In the meantime, here is what is currently available.
+              </p>
+              <div className="grid-3">
+                {elsewhere.map((p) => (
+                  <Link
+                    key={p.slug}
+                    href={`/properties/${p.slug}`}
+                    className="property-card"
+                  >
+                    <PhotoSlot
+                      src={p.image}
+                      alt={`${p.title} for sale in ${p.location}`}
+                      height="13rem"
+                      focus="center 22%"
+                    />
+                    <div className="property-card-body">
+                      <span className="tag">{p.status}</span>
+                      <h3>{p.title}</h3>
+                      <p className="property-where">{p.location}</p>
+                      <p className="property-price">{p.price}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </>
           )}
+
+          {/* Neighbourhoods inside this area. */}
+          {children.length > 0 ? (
+            <div className="stack stack-2">
+              <p className="rule-label">Neighbourhoods in {area.name}</p>
+              <div className="btn-row">
+                {children.map((child) => (
+                  <Link
+                    key={child.slug}
+                    href={`/locations/${child.slug}`}
+                    className="btn btn-outline"
+                  >
+                    {child.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : null}
 
           <div className="btn-row">
             <Link href="/contact" className="btn btn-primary">
@@ -156,6 +213,14 @@ export default async function AreaPage({ params }: Params) {
             <Link href="/properties" className="btn btn-outline">
               See every property
             </Link>
+            <a
+              href={site.social.instagram}
+              className="btn btn-outline"
+              target="_blank"
+              rel="noreferrer"
+            >
+              More Listings on Instagram
+            </a>
           </div>
         </div>
       </section>
