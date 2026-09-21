@@ -1,21 +1,36 @@
 import Image from "next/image";
 import Link from "next/link";
-import Cta from "@/components/site/Cta";
 import HeroSlider from "@/components/site/HeroSlider";
-import InvestorFaq from "@/components/site/InvestorFaq";
 import PhotoSlot from "@/components/site/PhotoSlot";
 import Reveal from "@/components/site/Reveal";
 import YouTubeEmbed from "@/components/site/YouTubeEmbed";
 import { primaryAreas } from "@/content/areas";
+import {
+  finalCta,
+  hero,
+  howWeHelp,
+  method,
+  philosophy,
+  problem,
+  realQuestion,
+  signature,
+  thesis,
+  trackRecord,
+  whyUs,
+} from "@/content/homepage";
 import { developments, properties } from "@/content/properties";
 import { site } from "@/content/site";
 
-/* Homepage. Copy is the client's own, section 1 of docs/client-content.md.
-   No headline statistics anywhere — the client explicitly asked that no
-   unverified numbers go on the site yet. */
+/**
+ * Homepage — "Website Brand & Content Direction 2026" (client, 10 Sep 2026).
+ *
+ * The narrative order is the point of this rewrite: you → what you're building
+ * → what stands in your way → our philosophy → how we guide you → the right
+ * asset → ownership → legacy. Copy lives in content/homepage.ts.
+ */
 
-/* Feature only listings that already have photography, priciest first.
-   Three on the homepage — the client's call, 9 Sep 2026. */
+/* Featured opportunities: listings with photography, priciest first. Three on
+   the homepage — the client's call, 9 Sep 2026. */
 const featured = properties
   .filter((p) => p.image)
   .sort((a, b) => Number(b.price.replace(/\D/g, "")) - Number(a.price.replace(/\D/g, "")))
@@ -31,82 +46,245 @@ export default function HomePage() {
         </div>
         <div className="shell home-hero-inner">
           <div className="stack stack-3">
-            <p className="eyebrow">Africa&rsquo;s Luxury Real Estate Authority</p>
+            <p className="eyebrow">{hero.eyebrow}</p>
             <h1>
-              Own More Than Property.
+              {hero.title[0]}
               <br />
-              Own an Asset Built to Last.
+              {hero.title[1]}
             </h1>
-            <p className="lede">
-              At Dan Lami Real Estate, we believe luxury real estate is more
-              than a beautiful address. It is about owning the right asset, in
-              the right location, at the right time &mdash; with the right
-              strategy behind it.
-            </p>
-            <p className="body">
-              We help investors acquire premium real estate opportunities
-              designed to create value today and preserve wealth for
-              generations to come.
-            </p>
+            <p className="lede">{hero.lede}</p>
+            <p className="body">{hero.body}</p>
             <div className="btn-row" style={{ marginTop: ".5rem" }}>
-              <Link href="/developments" className="btn btn-primary">
-                Explore Our Developments
+              <Link href="/properties" className="btn btn-primary">
+                Explore Investment Opportunities
               </Link>
               <Link href="/contact" className="btn btn-ghost-dark">
-                Speak With an Investment Advisor
+                Speak With an Advisor
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ---------- the difference ---------- */}
+      {/* ---------- the real question ---------- */}
       <section className="band">
         <div className="shell stack stack-4">
           <Reveal>
-            <p className="rule-label">The Dan Lami difference</p>
+            <p className="rule-label">{realQuestion.eyebrow}</p>
           </Reveal>
 
           <div className="split split-lead">
             <Reveal>
-              <div className="stack stack-2">
-                <h2>
-                  We don&rsquo;t just sell property. We help you understand the
-                  investment.
-                </h2>
-              </div>
+              <h2>{realQuestion.title}</h2>
             </Reveal>
+
             <Reveal delay={0.12} className="stack stack-3">
-              <p className="body">
-                Anyone can show you a property. We go further.
-              </p>
-              <p className="body">
-                Before recommending a real estate asset, we examine the factors
-                that can influence its long-term value &mdash; including
-                location, development trajectory, demand, rental potential,
-                capital appreciation, infrastructure, accessibility and exit
-                opportunities.
-              </p>
-              <p className="body">Because the question isn&rsquo;t simply:</p>
-              <p className="pull">&ldquo;Do you like the property?&rdquo;</p>
-              <p className="body">The better question is:</p>
-              <p className="pull pull-teal">
-                &ldquo;Why should you own it?&rdquo;
-              </p>
-              <p className="body">
-                That is the difference between buying property and building a
-                real estate portfolio.
-              </p>
+              {realQuestion.intro.map((p) => (
+                <p className="body" key={p}>
+                  {p}
+                </p>
+              ))}
+
+              <ul className="listing-run">
+                {realQuestion.inventory.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+
+              {realQuestion.turn.map((p) => (
+                <p className="body" key={p}>
+                  {p}
+                </p>
+              ))}
+
+              <ul className="questions">
+                {realQuestion.questions.map((q) => (
+                  <li key={q}>{q}</li>
+                ))}
+              </ul>
+
+              {realQuestion.close.map((p) => (
+                <p className="body" key={p}>
+                  {p}
+                </p>
+              ))}
+              <p className="pull pull-teal">{realQuestion.pull}</p>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ---------- signature developments ----------
-           Order set by the client, 9 Sep 2026: Signature Developments,
-           then Selected Properties, then What We Do. */}
+      {/* ---------- our philosophy ---------- */}
       <section className="band band-white">
-        <div className="shell">
+        <div className="shell stack stack-4">
+          <Reveal>
+            <p className="rule-label">{philosophy.eyebrow}</p>
+          </Reveal>
+
+          <div className="split split-lead">
+            <Reveal>
+              <h2>
+                {philosophy.title[0]}
+                <br />
+                {philosophy.title[1]}
+              </h2>
+            </Reveal>
+
+            <Reveal delay={0.12} className="stack stack-3">
+              {philosophy.intro.map((p) => (
+                <p className="body" key={p}>
+                  {p}
+                </p>
+              ))}
+
+              <ul className="listing-run">
+                {philosophy.couldBe.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+
+              <p className="body">{philosophy.bridge}</p>
+              <p className="pull pull-teal">
+                {philosophy.pull[0]}
+                <br />
+                {philosophy.pull[1]}
+              </p>
+              <p className="body">{philosophy.close}</p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- the problem we exist to solve ---------- */}
+      <section className="band">
+        <div className="shell stack stack-4">
+          <Reveal>
+            <p className="rule-label">{problem.eyebrow}</p>
+          </Reveal>
+
+          <div className="split split-lead">
+            <Reveal>
+              <h2>{problem.title}</h2>
+            </Reveal>
+
+            <Reveal delay={0.12} className="stack stack-3">
+              <ul className="listing-run">
+                {problem.truths.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              {problem.body.map((p) => (
+                <p className="body" key={p}>
+                  {p}
+                </p>
+              ))}
+              <p className="pull pull-teal">{problem.pull}</p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- how we help you ---------- */}
+      <section className="band band-white">
+        <div className="shell stack stack-4">
+          <Reveal>
+            <p className="rule-label">{howWeHelp.eyebrow}</p>
+          </Reveal>
+
+          <div className="split split-lead">
+            <Reveal>
+              <h2>{howWeHelp.title}</h2>
+            </Reveal>
+
+            <Reveal delay={0.12} className="stack stack-3">
+              <p className="body">{howWeHelp.intro}</p>
+              <ul className="listing-run">
+                {howWeHelp.objectives.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className="body">{howWeHelp.close}</p>
+              <p className="pull pull-teal">{howWeHelp.pull}</p>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- the Dan Lami Method ---------- */}
+      <section className="band band-sunk">
+        <div className="shell stack stack-4">
+          <Reveal>
+            <div className="stack stack-2">
+              <p className="eyebrow">{method.eyebrow}</p>
+              <h2>{method.title}</h2>
+            </div>
+          </Reveal>
+
+          <div className="grid-3">
+            {method.steps.map((step, i) => (
+              <Reveal key={step.n} delay={i * 0.1}>
+                <div className="method-card">
+                  <span className="numbered-idx">{step.n}</span>
+                  <h3>{step.name}</h3>
+                  <p className="method-headline">{step.headline}</p>
+
+                  {"intro" in step && step.intro ? (
+                    <p className="body">{step.intro}</p>
+                  ) : null}
+
+                  {"points" in step && step.points ? (
+                    <ul className="checks" style={{ gridTemplateColumns: "1fr" }}>
+                      {step.points.map((p) => (
+                        <li key={p}>{p}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+
+                  {"close" in step && step.close ? (
+                    <p className="body">{step.close}</p>
+                  ) : null}
+
+                  {"notAsk" in step && step.notAsk ? (
+                    <div className="stack stack-1" style={{ marginTop: ".75rem" }}>
+                      <p className="method-aside">We don&rsquo;t ask:</p>
+                      <p className="method-quote method-quote-muted">
+                        &ldquo;{step.notAsk}&rdquo;
+                      </p>
+                      <p className="method-aside">We ask:</p>
+                      <p className="method-quote">&ldquo;{step.weAsk}&rdquo;</p>
+                    </div>
+                  ) : null}
+
+                  {"notEnd" in step && step.notEnd ? (
+                    <div className="stack stack-1" style={{ marginTop: ".75rem" }}>
+                      <p className="method-aside">
+                        And the conversation doesn&rsquo;t necessarily end with:
+                      </p>
+                      <p className="method-quote method-quote-muted">
+                        &ldquo;{step.notEnd}&rdquo;
+                      </p>
+                      <p className="method-aside">The next question can become:</p>
+                      <p className="method-quote">
+                        &ldquo;{step.nextQuestion}&rdquo;
+                      </p>
+                    </div>
+                  ) : null}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal>
+            <Link href="/contact" className="btn btn-primary">
+              Start Your Investment Journey
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- signature developments ---------- */}
+      <section className="band band-white">
+        <div className="shell stack stack-4">
           <div className="split" style={{ alignItems: "center" }}>
             <Reveal>
               <Link href={`/developments/${developments[0].slug}`}>
@@ -117,20 +295,31 @@ export default function HomePage() {
                 />
               </Link>
             </Reveal>
+
             <Reveal delay={0.12} className="stack stack-3">
-              <p className="eyebrow">Signature Developments</p>
+              <p className="eyebrow">{signature.eyebrow}</p>
               <h2>
-                Developments with purpose. Assets designed for the future.
+                {signature.title[0]}
+                <br />
+                {signature.title[1]}
               </h2>
-              <p className="body">
-                Our Signature Developments represent a new chapter in the Dan
-                Lami Real Estate brand. These are not simply projects.
-              </p>
-              <p className="body">
-                They are opportunities to own strategically positioned real
-                estate assets designed around lifestyle, demand, location and
-                long-term value.
-              </p>
+              {signature.body.map((p) => (
+                <p className="body" key={p}>
+                  {p}
+                </p>
+              ))}
+              <p className="pull pull-teal">{signature.pull}</p>
+              <ul className="checks">
+                {signature.principles.map((p) => (
+                  <li key={p}>{p}</li>
+                ))}
+              </ul>
+              {signature.close.map((p) => (
+                <p className="body" key={p}>
+                  {p}
+                </p>
+              ))}
+              <p className="pull pull-teal">{signature.closePull}</p>
               <Link href="/developments" className="link-arrow">
                 Explore Signature Developments &rarr;
               </Link>
@@ -139,17 +328,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- featured properties ---------- */}
+      {/* ---------- featured opportunities ---------- */}
       <section className="band">
         <div className="shell stack stack-4">
           <div className="split" style={{ alignItems: "end", gap: "1.5rem" }}>
             <div className="stack stack-2">
-              <p className="eyebrow">Currently available</p>
-              <h2>Selected properties</h2>
+              <p className="eyebrow">Featured opportunities</p>
+              <h2>Opportunities worth understanding</h2>
             </div>
             <div style={{ justifySelf: "start" }}>
               <Link href="/properties" className="link-arrow">
-                View all properties &rarr;
+                View all opportunities &rarr;
               </Link>
             </div>
           </div>
@@ -173,6 +362,9 @@ export default function HomePage() {
                     <h3>{p.title}</h3>
                     <p className="property-where">{p.location}</p>
                     <p className="property-price">{p.price}</p>
+                    <span className="link-arrow" style={{ marginTop: ".75rem" }}>
+                      Understand the investment &rarr;
+                    </span>
                   </div>
                 </Link>
               </Reveal>
@@ -189,60 +381,90 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- what we do ---------- */}
+      {/* ---------- why Dan Lami Real Estate ---------- */}
       <section className="band band-white">
         <div className="shell stack stack-4">
-          <div className="split split-lead" style={{ alignItems: "start" }}>
+          <Reveal>
+            <div className="stack stack-2">
+              <p className="eyebrow">{whyUs.eyebrow}</p>
+              <h2>{whyUs.title}</h2>
+            </div>
+          </Reveal>
+
+          <div className="grid-3">
+            {whyUs.reasons.map((r, i) => (
+              <Reveal key={r.n} delay={(i % 3) * 0.1}>
+                <div className="value-card">
+                  <span className="value-card-idx">{r.n}</span>
+                  <h4>{r.name}</h4>
+                  <p>{r.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- the investment thesis ---------- */}
+      <section className="band">
+        <div className="shell stack stack-4">
+          <div className="split split-lead">
             <Reveal>
               <div className="stack stack-2">
-                <p className="eyebrow">What we do</p>
-                <h2>Four ways we work</h2>
-                <Link href="/services" className="link-arrow" style={{ marginTop: ".5rem" }}>
-                  All services &rarr;
-                </Link>
+                <p className="eyebrow">{thesis.eyebrow}</p>
+                <h2>{thesis.title}</h2>
+                <p className="pull pull-teal" style={{ marginTop: "1.5rem" }}>
+                  {thesis.pull[0]}
+                  <br />
+                  {thesis.pull[1]}
+                </p>
               </div>
             </Reveal>
 
             <Reveal delay={0.12}>
-              {/* Order and wording set by the client, 9 Sep 2026:
-                  Signature Development first. */}
-              {[
-                {
-                  n: "01",
-                  t: "Signature Development",
-                  d: "We work with landowners, developers and strategic partners to bring high quality developments to the market.",
-                },
-                {
-                  n: "02",
-                  t: "Luxury real estate sales",
-                  d: "Access carefully selected luxury residential and investment properties across premium locations, from apartments and waterfront residences to exclusive land opportunities.",
-                },
-                {
-                  n: "03",
-                  t: "Real estate investment advisory",
-                  d: "We help clients understand the investment opportunity behind a property before they commit their capital.",
-                },
-                {
-                  n: "04",
-                  t: "Property acquisition",
-                  d: "For clients who prefer a hands-off approach, we identify and evaluate opportunities against their objectives, budget and investment horizon.",
-                },
-              ].map((s) => (
-                <div className="numbered" key={s.n}>
-                  <span className="numbered-idx">{s.n}</span>
-                  <div>
-                    <h4>{s.t}</h4>
-                    <p>{s.d}</p>
+              <dl className="thesis-list">
+                {thesis.factors.map((f) => (
+                  <div key={f.label}>
+                    <dt>{f.label}</dt>
+                    <dd>{f.question}</dd>
                   </div>
-                </div>
-              ))}
+                ))}
+              </dl>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ---------- areas ---------- */}
-      <section className="band band-tight">
+      {/* ---------- track record ----------
+           Figures confirmed for publication by the client, 10 Sep 2026. */}
+      <section className="band band-sunk">
+        <div className="shell stack stack-4">
+          <Reveal>
+            <div className="stack stack-2">
+              <p className="eyebrow">{trackRecord.eyebrow}</p>
+              <h2>{trackRecord.title}</h2>
+            </div>
+          </Reveal>
+
+          <div className="grid-3">
+            {trackRecord.stats.map((s, i) => (
+              <Reveal key={s.label} delay={i * 0.1}>
+                <div className="stat">
+                  <span className="stat-value">{s.value}</span>
+                  <span className="stat-label">{s.label}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal>
+            <p className="body">{trackRecord.close}</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- where we sell ---------- */}
+      <section className="band band-tight band-white">
         <div className="shell stack stack-3">
           <div className="split" style={{ alignItems: "end", gap: "1.5rem" }}>
             <div className="stack stack-2">
@@ -276,34 +498,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- for investors ---------- */}
-      <section className="band band-sunk">
-        <div className="shell stack stack-4">
-          <div className="split split-lead">
-            <Reveal>
-              <div className="stack stack-2">
-                <p className="eyebrow">For investors</p>
-                <h2>Your capital deserves a strategy.</h2>
-                <p className="body" style={{ marginTop: ".5rem" }}>
-                  Real estate investment shouldn&rsquo;t be based solely on
-                  emotion. Before committing capital, investors need to
-                  understand:
-                </p>
-                <Link href="/investors" className="link-arrow" style={{ marginTop: "1rem" }}>
-                  How we advise investors &rarr;
-                </Link>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.12}>
-              <InvestorFaq />
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ---------- the closer ---------- */}
-      <section className="band band-white">
+      {/* ---------- meet the founder ---------- */}
+      <section className="band">
         <div className="shell">
           <div className="split split-lead" style={{ alignItems: "center" }}>
             <Reveal>
@@ -325,21 +521,27 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delay={0.12} className="stack stack-3">
-              <p className="eyebrow">The Closer</p>
-              <h2>Meet Danlami Ojo</h2>
+              <p className="eyebrow">Meet the founder</p>
+              <h2>Danlami Ojo</h2>
+              <p className="property-where">Founder &amp; CEO &mdash; &ldquo;The Closer&rdquo;</p>
               <p className="body">
-                Danlami Ojo is the Founder and CEO of Dan Lami Real Estate and is
-                widely known as <strong>&ldquo;The Closer.&rdquo;</strong> His
-                approach to real estate goes beyond closing transactions.
+                Danlami Ojo is the Founder and CEO of Dan Lami Real Estate and
+                the real estate professional behind The Closer.
               </p>
               <p className="body">
-                He believes the real value of a property professional is not
-                simply in selling a property, but in helping clients understand
-                the opportunity behind the asset.
+                His career in real estate began with selling property. But years
+                of working with buyers, investors and developers revealed a
+                bigger problem:
               </p>
-              <p className="pull pull-teal" style={{ marginTop: ".5rem" }}>
-                Don&rsquo;t just acquire property. Acquire assets that make
-                sense.
+              <p className="pull pull-teal">
+                People didn&rsquo;t simply need more properties to choose from.
+                They needed help understanding which properties were worth
+                owning.
+              </p>
+              <p className="body">
+                That insight has shaped the evolution of Dan Lami Real Estate
+                from brokerage into a luxury real estate investment and
+                development company.
               </p>
               <Link href="/the-closer" className="link-arrow">
                 Read more &rarr;
@@ -349,9 +551,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- featured property tour ---------- */}
-      <section className="band">
-        <div className="shell shell-narrow stack stack-3" style={{ textAlign: "center", alignItems: "center" }}>
+      {/* ---------- property tour ---------- */}
+      <section className="band band-white">
+        <div
+          className="shell shell-narrow stack stack-3"
+          style={{ textAlign: "center", alignItems: "center" }}
+        >
           <Reveal>
             <p className="eyebrow">Property tour</p>
           </Reveal>
@@ -369,33 +574,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ---------- brand promise ---------- */}
-      <section className="band band-sunk">
-        <div className="shell shell-narrow stack stack-3" style={{ textAlign: "center", alignItems: "center" }}>
-          <Reveal>
-            <p className="eyebrow">Our brand promise</p>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <h2 style={{ maxWidth: "20ch" }}>
-              We don&rsquo;t just help you buy property. We help you buy with
-              purpose.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.16}>
-            <p className="body" style={{ textAlign: "center" }}>
-              Because the right property can become a home. An income-producing
-              asset. A capital-growth opportunity. A family asset. A portfolio.
-            </p>
-          </Reveal>
-          <Reveal delay={0.24}>
-            <p className="pull pull-teal" style={{ maxWidth: "none" }}>
-              And ultimately, a legacy.
-            </p>
-          </Reveal>
+      {/* ---------- final call to action ---------- */}
+      <section className="band band-teal">
+        <div className="shell stack stack-3">
+          <p className="eyebrow">{finalCta.eyebrow}</p>
+          <h2 style={{ maxWidth: "18ch" }}>
+            {finalCta.title[0]}
+            <br />
+            {finalCta.title[1]}
+          </h2>
+          <p className="body" style={{ fontSize: "1.0625rem" }}>
+            {finalCta.body}
+          </p>
+          <p className="pull pull-teal" style={{ maxWidth: "34ch" }}>
+            {finalCta.pull[0]}
+            <br />
+            {finalCta.pull[1]}
+          </p>
+          <div className="btn-row" style={{ marginTop: ".5rem" }}>
+            <Link href="/contact" className="btn btn-on-dark">
+              Speak With an Investment Advisor
+            </Link>
+            <Link href="/properties" className="btn btn-ghost-dark">
+              Explore Investment Opportunities
+            </Link>
+            <Link href="/developments" className="btn btn-ghost-dark">
+              Explore Our Developments
+            </Link>
+          </div>
         </div>
       </section>
-
-      <Cta />
     </>
   );
 }
