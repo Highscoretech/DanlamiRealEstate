@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import CountUp from "@/components/site/CountUp";
 import HeroSlider from "@/components/site/HeroSlider";
 import PhotoSlot from "@/components/site/PhotoSlot";
 import Reveal from "@/components/site/Reveal";
@@ -450,7 +451,9 @@ export default function HomePage() {
             {trackRecord.stats.map((s, i) => (
               <Reveal key={s.label} delay={i * 0.1}>
                 <div className="stat">
-                  <span className="stat-value">{s.value}</span>
+                  <span className="stat-value">
+                    <CountUp value={s.value} />
+                  </span>
                   <span className="stat-label">{s.label}</span>
                 </div>
               </Reveal>

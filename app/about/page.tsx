@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CountUp from "@/components/site/CountUp";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
 import Reveal from "@/components/site/Reveal";
@@ -173,7 +174,9 @@ export default function AboutPage() {
             {trackRecord.stats.map((s, i) => (
               <Reveal key={s.label} delay={i * 0.1}>
                 <div className="stat">
-                  <span className="stat-value">{s.value}</span>
+                  <span className="stat-value">
+                    <CountUp value={s.value} />
+                  </span>
                   <span className="stat-label">{s.label}</span>
                 </div>
               </Reveal>
