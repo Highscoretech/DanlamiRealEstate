@@ -361,11 +361,25 @@ export default function HomePage() {
                     height="clamp(13rem, 24vw, 18rem)"
                     focus="center 22%"
                   />
+                  {/* Card format per §9: name, location, starting price,
+                      property type, then why this opportunity. */}
                   <div className="property-card-body">
                     <span className="tag">{p.status}</span>
                     <h3>{p.title}</h3>
                     <p className="property-where">{p.location}</p>
-                    <p className="property-price">{p.price}</p>
+                    <p className="property-type">{p.type}</p>
+                    <p className="property-price">
+                      <span className="price-label">Starting price</span>
+                      {p.price}
+                    </p>
+
+                    {p.thesis ? (
+                      <div className="thesis-block">
+                        <p className="rule-label">Why this opportunity</p>
+                        <p>{p.thesis}</p>
+                      </div>
+                    ) : null}
+
                     <span className="link-arrow" style={{ marginTop: ".75rem" }}>
                       Understand the investment &rarr;
                     </span>

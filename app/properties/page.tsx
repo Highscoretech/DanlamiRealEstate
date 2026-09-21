@@ -71,11 +71,27 @@ export default function PropertiesPage() {
                   priority={i < 3}
                   focus="center 22%"
                 />
+                {/* Card format per §9 of the 2026 brand direction. */}
                 <div className="property-card-body">
                   <span className="tag">{p.status}</span>
                   <h2 style={{ fontSize: "var(--step-2)" }}>{p.title}</h2>
                   <p className="property-where">{p.location}</p>
-                  <p className="property-price">{p.price}</p>
+                  <p className="property-type">{p.type}</p>
+                  <p className="property-price">
+                    <span className="price-label">Starting price</span>
+                    {p.price}
+                  </p>
+
+                  {p.thesis ? (
+                    <div className="thesis-block">
+                      <p className="rule-label">Why this opportunity</p>
+                      <p>{p.thesis}</p>
+                    </div>
+                  ) : null}
+
+                  <span className="link-arrow" style={{ marginTop: ".75rem" }}>
+                    Understand the investment &rarr;
+                  </span>
                 </div>
               </Link>
             ))}

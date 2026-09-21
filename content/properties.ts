@@ -25,6 +25,13 @@ export type Property = {
   image: string | null;
   /** Additional photos shown as a gallery on the property page. */
   images?: string[];
+  /**
+   * "Why this opportunity" — the 2–3 sentence investment thesis the 2026
+   * brand direction asks for on every card (§9). This has to be the client's
+   * own market judgement, so it stays undefined until Danlami writes it; the
+   * card simply omits the block rather than guessing at a thesis.
+   */
+  thesis?: string;
   confirmed: boolean;
 };
 

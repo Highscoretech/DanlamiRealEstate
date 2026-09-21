@@ -78,6 +78,13 @@ export default async function PropertyPage({ params }: Params) {
                 {property.title} in {property.location}
               </h1>
               <p className="lede">{property.summary}</p>
+              {/* §9: the investment thesis, once the client writes it. */}
+              {property.thesis ? (
+                <div className="thesis-block" style={{ marginTop: "1rem" }}>
+                  <p className="rule-label">Why this opportunity</p>
+                  <p>{property.thesis}</p>
+                </div>
+              ) : null}
               <p
                 style={{
                   fontFamily: "var(--font-display)",

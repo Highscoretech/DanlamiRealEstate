@@ -606,6 +606,44 @@ p { margin: 0; }
   font-size: var(--step--1);
   color: var(--muted);
 }
+/* Property type, per §9's card format. */
+.property-type {
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+.band-white .property-type { color: var(--muted-on-light); }
+
+/* "Starting price" rather than a bare figure — the client wants these read
+   as investment opportunities, not catalogue entries. */
+.price-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: .15rem;
+}
+.band-white .price-label { color: var(--faint-on-light); }
+
+/* The investment thesis. Only rendered when the client has written one. */
+.thesis-block {
+  margin-top: .9rem;
+  padding-top: .9rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+}
+.thesis-block p:last-child {
+  font-size: var(--step--1);
+  color: var(--muted);
+  line-height: 1.6;
+}
+.band-white .thesis-block { border-color: var(--line-on-light); }
+.band-white .thesis-block p:last-child { color: var(--muted-on-light); }
+
 .property-price {
   margin-top: .6rem;
   padding-top: .8rem;
