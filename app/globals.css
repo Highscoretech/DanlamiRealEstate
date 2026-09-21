@@ -184,8 +184,14 @@ p { margin: 0; }
 .band-white .faq-q:hover { color: var(--teal-deep); }
 .band-white .faq-a .body { color: var(--muted-on-light); }
 .band-white .questions li { border-color: var(--line-on-light); }
+/* Cards default to the navy surface. Inside a white band they have to flip
+   to a light surface too, or the on-light text overrides below land dark
+   text on a dark card. */
 .band-white .property-card,
-.band-white .card {
+.band-white .card,
+.band-white .value-card,
+.band-white .method-card,
+.band-white .course-card {
   background: #fff;
   border-color: var(--line-on-light);
 }
@@ -198,6 +204,18 @@ p { margin: 0; }
 }
 .band-white .value-card h4 { color: var(--teal-deep); }
 .band-white .value-card p { color: var(--muted-on-light); }
+.band-white .value-card-idx { color: var(--teal); opacity: .75; }
+.band-white .method-card h3 { color: var(--teal-deep); }
+.band-white .method-headline { color: var(--ink-on-light); }
+.band-white .method-card .body { color: var(--muted-on-light); }
+.band-white .method-card .checks li { color: var(--ink-soft-on-light); }
+.band-white .method-aside { color: var(--faint-on-light); }
+.band-white .method-quote { color: var(--teal-deep); }
+.band-white .method-quote-muted { color: var(--faint-on-light); }
+.band-white .course-card-body h3 { color: var(--ink-on-light); }
+.band-white .thesis-list dd { color: var(--ink-on-light); }
+.band-white .thesis-list > div { border-color: var(--line-on-light); }
+.band-white .listing-run li { color: var(--ink-on-light); }
 .band-white .pull { color: var(--ink-on-light); }
 .band-white .pull-teal, .band-white .link-arrow { color: var(--teal-deep); }
 .band-white .btn-outline { color: var(--ink-on-light); border-color: #CED6D6; }
