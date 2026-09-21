@@ -1,109 +1,49 @@
+import Link from "next/link";
 import Cta from "@/components/site/Cta";
 import PageHero from "@/components/site/PageHero";
+import Reveal from "@/components/site/Reveal";
+import { services } from "@/content/homepage";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
   path: "/services",
-  title:
-    "Our Services — Luxury Sales, Investment Advisory & Development",
+  title: "What We Do — Real Estate Built Around Your Objective",
   titleAbsolute: true,
   description:
-    "Luxury real estate sales, investment advisory, strategic development, property acquisition, and sales and marketing across Lagos, Nigeria.",
+    "Luxury real estate, investment advisory, property acquisition, development, development partnerships, and sales and marketing in Lagos, Nigeria.",
   image: "/og.jpg",
 });
 
-/* Order and wording set by the client, 9 Sep 2026: Signature Development
-   comes first, and developments always carry the "Signature" name. */
-const services = [
-  {
-    n: "01",
-    title: "Signature Development",
-    body: [
-      "We work with landowners, developers and strategic partners to bring high quality developments to the market.",
-    ],
-    list: {
-      label: "Our role can extend across",
-      items: [
-        "Development strategy",
-        "Sales strategy",
-        "Marketing",
-        "Brand positioning",
-        "Investor acquisition",
-        "Sales management",
-        "Market launch",
-        "Distribution",
-      ],
-    },
-  },
-  {
-    n: "02",
-    title: "Luxury real estate sales",
-    body: [
-      "Access carefully selected luxury residential and investment properties across premium locations.",
-      "From luxury apartments and waterfront residences to exclusive land opportunities, we help clients find properties aligned with their lifestyle and investment objectives.",
-    ],
-  },
-  {
-    n: "03",
-    title: "Real estate investment advisory",
-    body: [
-      "We help clients understand the investment opportunity behind a property before they commit their capital.",
-    ],
-    list: {
-      label: "Our advisory approach considers",
-      items: [
-        "Location",
-        "Market demand",
-        "Development trajectory",
-        "Capital appreciation potential",
-        "Rental income potential",
-        "Short-let / Airbnb potential",
-        "Payment structure",
-        "Exit strategy",
-        "Long-term asset value",
-      ],
-    },
-  },
-  {
-    n: "04",
-    title: "Property acquisition",
-    body: [
-      "For clients who prefer a more hands-off approach, we help identify and evaluate suitable property acquisition opportunities based on their objectives, budget and investment horizon.",
-    ],
-  },
-  {
-    n: "05",
-    title: "Real estate sales & marketing",
-    body: [
-      "We build and execute sales systems designed to position developments properly, attract qualified buyers and convert market demand into completed transactions.",
-    ],
-  },
-];
+/* Copy: docs/brand-direction-2026.md §7. */
 
 export default function ServicesPage() {
   return (
     <>
       <PageHero
-        eyebrow="What we do"
-        title="Our services"
-        lede="Five ways we work with buyers, investors, owners and developers."
+        eyebrow={services.eyebrow}
+        title={services.title}
+        lede="Six ways we work with buyers, investors, landowners and developers."
       />
 
       <section className="band">
         <div className="shell stack stack-5">
-          {services.map((s) => (
+          {services.items.map((s) => (
             <div className="split split-lead" key={s.n}>
-              <div className="stack stack-2">
-                <span className="numbered-idx">{s.n}</span>
-                <h2 style={{ fontSize: "var(--step-4)" }}>{s.title}</h2>
-              </div>
-              <div className="stack stack-3">
+              <Reveal>
+                <div className="stack stack-2">
+                  <span className="numbered-idx">{s.n}</span>
+                  <h2 style={{ fontSize: "var(--step-4)" }}>{s.name}</h2>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.1} className="stack stack-3">
                 {s.body.map((p) => (
                   <p className="body" key={p}>
                     {p}
                   </p>
                 ))}
-                {s.list ? (
+
+                {"list" in s && s.list ? (
                   <div className="stack stack-2" style={{ marginTop: ".5rem" }}>
                     <p className="rule-label">{s.list.label}</p>
                     <ul className="checks">
@@ -113,7 +53,11 @@ export default function ServicesPage() {
                     </ul>
                   </div>
                 ) : null}
-              </div>
+
+                <Link href={s.cta.href} className="link-arrow">
+                  {s.cta.label} &rarr;
+                </Link>
+              </Reveal>
             </div>
           ))}
         </div>

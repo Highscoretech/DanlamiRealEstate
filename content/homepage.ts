@@ -266,6 +266,235 @@ export const trackRecord = {
     "Numbers tell part of the story. What matters most is what those transactions represent: people turning capital into ownership.",
 };
 
+/** §6 — About Dan Lami Real Estate. */
+export const about = {
+  eyebrow: "About Dan Lami Real Estate",
+  title: "We exist to help people own better.",
+  intro:
+    "Dan Lami Real Estate is a luxury real estate investment and development company helping individuals, families and investors acquire strategically positioned real estate assets in Nigeria.",
+  intersectionLabel: "Our work sits at the intersection of",
+  intersection: [
+    "Luxury Real Estate.",
+    "Investment Strategy.",
+    "Development.",
+    "Wealth Creation.",
+    "Legacy.",
+  ],
+  body: [
+    "We combine market intelligence, strategic advisory, development expertise and relationship-driven service to help our clients make informed property decisions.",
+    "We serve successful professionals, entrepreneurs, high-net-worth individuals, families, investors and members of the African diaspora seeking quality real estate opportunities in Nigeria.",
+    "But our ambition extends beyond transactions.",
+  ],
+  pull: "We want to help build a generation of Africans who don't simply earn wealth — but own it, preserve it and pass it forward.",
+};
+
+/** §16 / §17 — Mission and vision. */
+export const missionVision = {
+  mission: {
+    eyebrow: "Our mission",
+    body: "To help individuals, families and investors transform today's wealth into strategically owned real estate assets capable of creating value, preserving capital and contributing to lasting legacy.",
+  },
+  vision: {
+    eyebrow: "Our vision",
+    body: "To build Africa's most trusted luxury real estate investment and development company — helping create a generation of strategic property owners and developing landmark assets that remain relevant across generations.",
+  },
+};
+
+/** §18 — Our higher purpose. The client asked for this as its own section. */
+export const higherPurpose = {
+  eyebrow: "Our higher purpose",
+  title: "Building a generation of owners.",
+  intro: [
+    "Africa is producing a new generation of entrepreneurs, professionals, creators and investors.",
+  ],
+  rise: ["People are earning more.", "Building businesses.", "Creating wealth."],
+  turn: "But wealth creation is only the beginning.",
+  challenge: "The next challenge is ownership.",
+  steps: [
+    "Turning income into assets.",
+    "Turning assets into portfolios.",
+    "Preserving what has been built.",
+    "And transferring meaningful wealth from one generation to another.",
+  ],
+  body: [
+    "We believe real estate can play an important role in that journey.",
+    "That is why our ambition goes beyond selling property.",
+  ],
+  close: "We are building a generation of Africans who don't just earn wealth.",
+  pull: ["They own it.", "They preserve it.", "They pass it forward."],
+};
+
+/** §19 — Core values. The client simplified the old six into five. */
+export const coreValues = {
+  eyebrow: "Our core values",
+  title: "Five things we hold to.",
+  values: [
+    { name: "Integrity", body: "Trust before transaction." },
+    { name: "Strategy", body: "Purpose before property." },
+    {
+      name: "Excellence",
+      body: "Exceptional standards in what we sell, build and deliver.",
+    },
+    {
+      name: "Stewardship",
+      body: "We understand the responsibility involved when clients entrust capital to a real estate decision.",
+    },
+    {
+      name: "Legacy",
+      body: "We think beyond today's transaction to what an asset can represent tomorrow.",
+    },
+  ],
+};
+
+/**
+ * §7 — What we do.
+ *
+ * The first service's opening line is obscured in the client's screenshot
+ * ("Carefully selected luxury residential and … locations"), so only the
+ * legible sentence is used.
+ */
+export const services = {
+  eyebrow: "What we do",
+  title: "Real estate built around your objective.",
+  items: [
+    {
+      n: "01",
+      name: "Luxury real estate",
+      body: [
+        "From premium apartments and waterfront residences to exclusive land opportunities and signature developments.",
+      ],
+      cta: { label: "Explore Properties", href: "/properties" },
+    },
+    {
+      n: "02",
+      name: "Real estate investment advisory",
+      body: [
+        "We help investors evaluate the opportunity behind a property before committing capital.",
+        "Our advisory process considers location, demand, infrastructure, development trajectory, pricing, income potential, appreciation, documentation and exit strategy.",
+      ],
+      cta: { label: "Speak With an Advisor", href: "/contact" },
+    },
+    {
+      n: "03",
+      name: "Property acquisition",
+      body: [
+        "Tell us what you're trying to accomplish.",
+        "We help identify and evaluate suitable opportunities based on your objectives, budget and investment horizon.",
+      ],
+      cta: { label: "Start an Acquisition", href: "/contact" },
+    },
+    {
+      n: "04",
+      name: "Real estate development",
+      body: [
+        "We create and participate in strategically positioned developments designed around lifestyle, market demand and long-term value.",
+      ],
+      cta: { label: "Explore Our Developments", href: "/developments" },
+    },
+    {
+      n: "05",
+      name: "Development partnerships",
+      body: [
+        "We partner with landowners, investors, developers and other strategic stakeholders to transform real estate opportunities into commercially viable developments.",
+      ],
+      list: {
+        label: "Our capabilities span",
+        items: [
+          "Development strategy",
+          "Brand positioning",
+          "Marketing",
+          "Investor acquisition",
+          "Sales strategy",
+          "Distribution",
+        ],
+      },
+      cta: { label: "Partner With Us", href: "/partners" },
+    },
+    {
+      n: "06",
+      name: "Real estate sales & marketing",
+      body: [
+        "We help developers take projects from property to proposition.",
+        "Through strategic positioning, storytelling, marketing, distribution and sales systems, we connect developments with the right market.",
+      ],
+      cta: { label: "Discuss a Partnership", href: "/partnerships" },
+    },
+  ],
+};
+
+/** §12 — For diaspora investors. */
+export const diaspora = {
+  eyebrow: "For diaspora investors",
+  title: ["You may live abroad.", "Your wealth can still own at home."],
+  intro:
+    "Investing in Nigerian real estate from thousands of kilometres away introduces different questions.",
+  questions: [
+    "Who can I trust?",
+    "How do I verify the opportunity?",
+    "Is the developer credible?",
+    "Are the documents legitimate?",
+    "Can I monitor progress?",
+    "Am I paying the right price?",
+    "What happens after acquisition?",
+  ],
+  bridge:
+    "Dan Lami Real Estate helps diaspora investors navigate those questions through:",
+  support: [
+    "Property sourcing",
+    "Investment advisory",
+    "Due diligence coordination",
+    "Developer verification",
+    "Documentation support",
+    "Acquisition support",
+    "Payment planning",
+    "Property management support",
+  ],
+  pull: "Distance shouldn't mean investing blindly.",
+};
+
+/** §13 — Development partners. */
+export const developmentPartners = {
+  eyebrow: "Development partners",
+  title: ["Have the land. Capital. Or vision?", "Let's build something that makes sense."],
+  body: [
+    "Great developments require more than construction.",
+    "They require the right market opportunity, product, positioning, capital structure, brand, sales strategy and execution.",
+  ],
+  worksWithLabel: "Dan Lami Real Estate works with",
+  worksWith: [
+    "Landowners",
+    "Developers",
+    "Investors",
+    "Architects",
+    "Engineers",
+    "Capital partners",
+    "Strategic partners",
+  ],
+  close:
+    "to create developments positioned for commercial success and long-term relevance.",
+  equation: ["Capital", "Strategy", "Development", "Brand", "Sales", "Distribution"],
+};
+
+/** §14 — Meet the founder. */
+export const founder = {
+  eyebrow: "Meet the founder",
+  name: "Danlami Ojo",
+  role: "Founder & CEO",
+  alias: "The Closer",
+  body: [
+    "Danlami Ojo is the Founder and CEO of Dan Lami Real Estate and the real estate professional behind The Closer.",
+    "His career in real estate began with selling property.",
+    "But years of working with buyers, investors and developers revealed a bigger problem:",
+  ],
+  pull: "People didn't simply need more properties to choose from. They needed help understanding which properties were worth owning.",
+  after: [
+    "That insight has shaped the evolution of Dan Lami Real Estate from brokerage into a luxury real estate investment and development company.",
+    "Today, Danlami's work spans luxury real estate, investment advisory, development, sales strategy and real estate education.",
+  ],
+  philosophyLabel: "His philosophy is simple",
+  philosophy: ["Don't just acquire property.", "Acquire assets that make sense."],
+};
+
 /** §22 — Final call to action. */
 export const finalCta = {
   eyebrow: "Your next move",
