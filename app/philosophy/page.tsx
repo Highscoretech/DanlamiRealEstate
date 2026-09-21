@@ -130,7 +130,7 @@ export default function PhilosophyPage() {
                   ) : null}
 
                   {"points" in step && step.points ? (
-                    <ul className="checks" style={{ gridTemplateColumns: "1fr" }}>
+                    <ul className="checks">
                       {step.points.map((p) => (
                         <li key={p}>{p}</li>
                       ))}

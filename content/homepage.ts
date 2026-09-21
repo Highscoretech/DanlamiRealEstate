@@ -495,6 +495,43 @@ export const founder = {
   philosophy: ["Don't just acquire property.", "Acquire assets that make sense."],
 };
 
+/**
+ * §20 — Testimonials.
+ *
+ * SOURCE: transcribed verbatim from the client's own Instagram "REVIEWS"
+ * highlight (@danlamiluxuryhomes), screenshotted by the client on 10 Sep
+ * 2026. These are real WhatsApp messages from real buyers that the company
+ * has already published publicly itself. Nothing here is written by us.
+ *
+ * BEFORE LAUNCH, two things are needed from the client:
+ *   1. Attribution. The screenshots carry no names, so each quote is
+ *      credited only as a buyer. Ask whether these clients are willing to be
+ *      named, or at least initialled and given a property/area.
+ *   2. Consent to republish on the website. They were posted to a public
+ *      story, which is not the same as agreeing to appear on the site.
+ *
+ * The client's §20 direction also asks for fuller transformation stories —
+ * what they were trying to accomplish, what worried them, what changed after
+ * acquisition. These short quotes are a start, not the finished section.
+ */
+export const testimonials = {
+  eyebrow: "From investors to owners",
+  title: "What it is like to buy through us.",
+  items: [
+    {
+      quote:
+        "Oh it was beautiful. You stuck with me for months despite my exacting demands, you still didn't give up until I found this house. You are great at what you do. Kudos.",
+      attribution: "Buyer, via WhatsApp",
+    },
+    {
+      quote:
+        "Thanks Dan, you're the most reliable broker I've met so far. I'll make sure I refer you to my network.",
+      attribution: "Buyer, via WhatsApp",
+    },
+  ],
+  note: "Client messages shared with permission. Further reviews are on our Instagram.",
+};
+
 /** §22 — Final call to action. */
 export const finalCta = {
   eyebrow: "Your next move",

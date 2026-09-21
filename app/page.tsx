@@ -15,6 +15,7 @@ import {
   problem,
   realQuestion,
   signature,
+  testimonials,
   thesis,
   trackRecord,
   whyUs,
@@ -234,7 +235,7 @@ export default function HomePage() {
                   ) : null}
 
                   {"points" in step && step.points ? (
-                    <ul className="checks" style={{ gridTemplateColumns: "1fr" }}>
+                    <ul className="checks">
                       {step.points.map((p) => (
                         <li key={p}>{p}</li>
                       ))}
@@ -462,6 +463,42 @@ export default function HomePage() {
 
           <Reveal>
             <p className="body">{trackRecord.close}</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ---------- testimonials ----------
+           Real client messages from the company's own Instagram REVIEWS
+           highlight. Attribution and republication consent still to be
+           confirmed — see content/homepage.ts. */}
+      <section className="band band-white">
+        <div className="shell stack stack-4">
+          <Reveal>
+            <div className="stack stack-2">
+              <p className="eyebrow">{testimonials.eyebrow}</p>
+              <h2>{testimonials.title}</h2>
+            </div>
+          </Reveal>
+
+          <div className="grid-2">
+            {testimonials.items.map((t, i) => (
+              <Reveal key={t.quote} delay={(i % 2) * 0.1}>
+                <figure className="quote-card">
+                  <blockquote>{t.quote}</blockquote>
+                  <figcaption>{t.attribution}</figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal>
+            <p className="disclosure">
+              {testimonials.note}{" "}
+              <a href={site.social.instagram} target="_blank" rel="noreferrer">
+                See more on Instagram
+              </a>
+              .
+            </p>
           </Reveal>
         </div>
       </section>

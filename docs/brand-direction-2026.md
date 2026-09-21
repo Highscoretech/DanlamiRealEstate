@@ -725,8 +725,33 @@ Instead, your testimonials should tell transformation stories:
 
 That's your brand narrative demonstrated through real people.
 
-**Status:** no real testimonials supplied. Nothing is published until the client
-provides them.
+### Status — real reviews supplied 10 Sep 2026
+
+The client sent screenshots of their own Instagram **REVIEWS** highlight
+(`@danlamiluxuryhomes`, posted ~323 weeks ago): real WhatsApp messages from
+buyers, already published publicly by the company. Two distinct reviews are
+legible and are now live in `content/homepage.ts`:
+
+> "Oh it was beautiful. You stuck with me for months despite my exacting
+> demands, you still didn't give up until I found this house. You are great at
+> what you do. Kudos."
+
+> "Thanks Dan, you're the most reliable broker I've met so far. I'll make sure
+> I refer you to my network."
+
+**Two things still needed before launch:**
+
+1. **Attribution.** The screenshots carry no names. Each quote currently reads
+   "Buyer, via WhatsApp". Ask whether these clients will be named, or at least
+   give initials and the area they bought in — an attributed quote is worth far
+   more than an anonymous one.
+2. **Consent to republish.** Posting to a public Instagram story is not the
+   same as agreeing to appear on the company website. Worth a message to each.
+
+These are short endorsements rather than the transformation stories §20 asks
+for. The five interview questions above are still the goal: ask three or four
+past clients what they were trying to accomplish, what worried them, why they
+chose the asset, how the company helped and what changed afterwards.
 
 ---
 
