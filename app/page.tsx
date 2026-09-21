@@ -55,6 +55,8 @@ export default function HomePage() {
               {hero.title[1]}
             </h1>
             <p className="lede">{hero.lede}</p>
+            <p className="hero-prompt">{hero.prompt}</p>
+            <p className="hero-question">{hero.question}</p>
             <p className="body">{hero.body}</p>
             <div className="btn-row" style={{ marginTop: ".5rem" }}>
               <Link href="/properties" className="btn btn-primary">

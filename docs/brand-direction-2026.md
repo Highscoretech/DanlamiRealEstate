@@ -8,9 +8,10 @@ This document **supersedes** the 2026 copy document in
 disagree, this one wins — it is the later direction and it changes the site's
 architecture, not just its wording.
 
-> **Transcription rule:** where a screenshot cut off mid-sentence, the break is
-> marked `[cut off]` and nothing is invented to complete it. Those gaps are
-> listed at the end of this file.
+> **Update, 21 September 2026:** the client sent the document as **full text**
+> rather than screenshots. Every sentence the screenshots had cut off is now
+> filled in from that text, and the gap list at the end of this file is closed.
+> Nothing in this document is invented.
 
 ---
 
@@ -34,12 +35,13 @@ architecture, not just its wording.
 
 You worked hard to create wealth.
 
-The next question is: *[cut off — the line after this never appears in any
-screenshot]*
+The next question is:
 
-At Dan Lami Real Estate, we help individuals, families and investors acquire
-strategically positioned real estate assets that create value, preserve capital
-and build lasting legacy.
+**What will your wealth become?**
+
+At Dan Lami Real Estate, we help individuals, families and investors identify,
+acquire and develop strategically positioned real estate assets designed to
+create value, preserve wealth and build lasting legacy.
 
 - [Explore Investment Opportunities]
 - [Speak With an Advisor]
@@ -272,7 +274,8 @@ but own it, preserve it and pass it forward.**
 
 ### Luxury real estate
 
-Carefully selected luxury residential and *[cut off]* locations.
+Carefully selected luxury residential and investment opportunities across
+strategic locations.
 
 From premium apartments and waterfront residences to exclusive land
 opportunities and signature developments.
@@ -615,7 +618,7 @@ Then:
 > **Numbers tell part of the story. What matters most is what those
 > transactions represent: people turning capital into ownership.**
 
-That final sentence brings the numbers back to the *[cut off]*
+That final sentence brings the numbers back to the hero.
 
 **Publication status (10 Sep 2026):** the client confirmed ₦20B+, 300+ and
 8+ years for publication. `[XX]+ Investment Transactions` is still an unfilled
@@ -862,20 +865,30 @@ Those three together give the rebrand a very coherent language.
 
 ---
 
-## Gaps in the transcription
+## Gaps — closed 21 September 2026
 
-Places where a screenshot cut off mid-sentence. Nothing has been invented to
-fill these — ask the client for the missing lines.
+The client resent the document as full text. All three cut-off sentences are
+now filled in above:
 
-1. **§1 Hero** — "You worked hard to create wealth. The next question is:" The
-   line that follows is never visible in any screenshot. This is the most
-   important gap: it is the hook of the whole page.
-2. **§7 What We Do → Luxury real estate** — "Carefully selected luxury
-   residential and … locations." The middle of the sentence is obscured.
-3. **§15 Track Record** — "That final sentence brings the numbers back to the …"
-4. **§9 Featured Opportunities** — the format is specified but each property
-   needs its own 2–3 sentence investment thesis, in the client's words. Only the
-   Osapa London example is given.
+1. **§1 Hero** — the missing line is **"What will your wealth become?"** The
+   body paragraph also differs slightly from the screenshot reading: it is
+   "identify, acquire and develop … designed to create value, preserve wealth
+   and build lasting legacy."
+2. **§7 Luxury real estate** — "Carefully selected luxury residential and
+   **investment opportunities across strategic** locations."
+3. **§15 Track Record** — "That final sentence brings the numbers back to the
+   **hero**." Commentary to the client, not site copy.
+
+## Still outstanding
+
+Not gaps in the document — content the document asks for but does not contain.
+
+1. **§9 Featured Opportunities** — each property needs its own 2–3 sentence
+   investment thesis in the client's words. Only the Osapa London example is
+   given. This is the last substantive piece of the rebrand.
+2. **§20 Testimonials** — the two real Instagram reviews are live but
+   unattributed. Names and republication consent still needed, and fuller
+   transformation stories would be better than short endorsements.
 
 ## What this changes on the site
 

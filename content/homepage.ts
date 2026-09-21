@@ -22,7 +22,10 @@ export const hero = {
   eyebrow: "Africa's Luxury Real Estate Authority",
   title: ["Don't just buy property.", "Own assets that make sense."],
   lede: "You worked hard to create wealth.",
-  body: "At Dan Lami Real Estate, we help individuals, families and investors acquire strategically positioned real estate assets that create value, preserve capital and build lasting legacy.",
+  /* The turn the whole page hangs on. */
+  prompt: "The next question is:",
+  question: "What will your wealth become?",
+  body: "At Dan Lami Real Estate, we help individuals, families and investors identify, acquire and develop strategically positioned real estate assets designed to create value, preserve wealth and build lasting legacy.",
 };
 
 /** §1 — "The real question", the section under the hero. */
@@ -346,13 +349,7 @@ export const coreValues = {
   ],
 };
 
-/**
- * §7 — What we do.
- *
- * The first service's opening line is obscured in the client's screenshot
- * ("Carefully selected luxury residential and … locations"), so only the
- * legible sentence is used.
- */
+/** §7 — What we do. */
 export const services = {
   eyebrow: "What we do",
   title: "Real estate built around your objective.",
@@ -361,6 +358,7 @@ export const services = {
       n: "01",
       name: "Luxury real estate",
       body: [
+        "Carefully selected luxury residential and investment opportunities across strategic locations.",
         "From premium apartments and waterfront residences to exclusive land opportunities and signature developments.",
       ],
       cta: { label: "Explore Properties", href: "/properties" },

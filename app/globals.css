@@ -956,6 +956,23 @@ p { margin: 0; }
   .hero-slide[data-active="true"] img { animation: none; }
 }
 
+/* The hero's turn: "The next question is: / What will your wealth become?"
+   The question is the line the whole page hangs on, so it is set larger than
+   the body and in the brand blue. */
+.hero-prompt {
+  font-size: var(--step--1);
+  color: rgba(255, 255, 255, .7);
+  margin-top: -.6rem;
+}
+.hero-question {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  line-height: 1.2;
+  color: #7FC4DD;
+  max-width: 20ch;
+  margin-top: -1rem;
+}
+
 /* ---------- 2026 brand direction: narrative sections ---------- */
 
 /* A run of short declarative lines — "A home. / An income-producing asset."
