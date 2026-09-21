@@ -82,13 +82,8 @@ export default function PropertiesPage() {
                     {p.price}
                   </p>
 
-                  {p.thesis ? (
-                    <div className="thesis-block">
-                      <p className="rule-label">Why this opportunity</p>
-                      <p>{p.thesis}</p>
-                    </div>
-                  ) : null}
-
+                  {/* The "why this opportunity" thesis lives on the property
+                      page, not the card — the card's job is to earn the click. */}
                   <span className="link-arrow" style={{ marginTop: ".75rem" }}>
                     Understand the investment &rarr;
                   </span>

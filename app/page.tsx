@@ -373,13 +373,7 @@ export default function HomePage() {
                       {p.price}
                     </p>
 
-                    {p.thesis ? (
-                      <div className="thesis-block">
-                        <p className="rule-label">Why this opportunity</p>
-                        <p>{p.thesis}</p>
-                      </div>
-                    ) : null}
-
+                    {/* The thesis lives on the property page, not the card. */}
                     <span className="link-arrow" style={{ marginTop: ".75rem" }}>
                       Understand the investment &rarr;
                     </span>

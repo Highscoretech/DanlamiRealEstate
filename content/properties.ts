@@ -65,6 +65,15 @@ export const properties: Property[] = [
       "Swimming pool",
     ],
     image: "/properties/2-bedroom-apartment-osapa.jpg",
+    /**
+     * PLACEHOLDER — this is the client's own worked example from §9 of the
+     * 2026 brand direction, not a thesis written for this specific property.
+     * It is here so the card format can be seen in full. Replace it with
+     * Danlami's own words for this apartment, and write one for each of the
+     * other five properties.
+     */
+    thesis:
+      "Strategically positioned in Osapa London, Lekki, this development combines premium residential demand with proximity to some of Lagos' most established commercial and lifestyle corridors.",
     confirmed: false,
   },
   {
