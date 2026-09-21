@@ -48,3 +48,20 @@ export const guides: Guide[] = [
 export function findGuide(slug: string) {
   return guides.find((guide) => guide.slug === slug);
 }
+
+/**
+ * §21 of the 2026 brand direction — "The Intelligent Investor".
+ *
+ * The client listed seven topics they want this section to cover. Two are
+ * written; the rest are listed as planned so the section shows its intent
+ * rather than pretending to be finished. Nothing is published until it is
+ * actually written — a listed topic is a promise, not an article.
+ */
+export const plannedTopics: string[] = [
+  "Where Lagos Is Growing Next",
+  "Rental Yield vs Capital Appreciation",
+  "How to Evaluate an Off-Plan Investment",
+  "How Infrastructure Creates Real Estate Value",
+  "The Questions You Should Ask Before Buying Property",
+  "Understanding Your Exit Before You Enter",
+];

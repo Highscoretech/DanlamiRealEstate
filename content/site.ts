@@ -117,6 +117,7 @@ export const footerNav = {
   "Invest & learn": [
     { href: "/investors", label: "For Investors" },
     { href: "/diaspora", label: "For Diaspora Clients" },
+    { href: "/guides", label: "The Intelligent Investor" },
     { href: "/guides/land-titles-in-lagos", label: "Lagos Land Titles Explained" },
     { href: "/guides/buying-property-in-lagos-from-abroad", label: "Buying From Abroad" },
     { href: "/faq", label: "Questions Answered" },
