@@ -42,6 +42,12 @@ function ownerAddress() {
   return process.env.NOTIFY_EMAIL || site.email;
 }
 
+/**
+ * The visible From line. Defaults to the authenticated account, which is the
+ * safest option: sending under a different address than the one we logged in
+ * as is legitimate but costs reputation with spam filters, so an explicit
+ * SMTP_FROM should stay on the same domain.
+ */
 function fromAddress() {
   return process.env.SMTP_FROM || `${site.name} <${process.env.SMTP_USER}>`;
 }
@@ -65,7 +71,25 @@ async function send(mail: Mail) {
     return false;
   }
   try {
-    const info = await transporter().sendMail({ from: fromAddress(), ...mail });
+    const info = await transporter().sendMail({
+      from: fromAddress(),
+      /* Return-Path is set to the account we actually authenticated as. SPF is
+         checked against this, while DMARC compares its domain to the From
+         domain — both are danlamirealestate.com, so alignment passes even
+         though we send under the partners@ identity. Without this the two can
+         diverge and Gmail treats the message as unaligned. */
+      envelope: {
+        from: process.env.SMTP_USER,
+        to: mail.to,
+      },
+      /* Transactional mail, not marketing. Saying so plainly keeps it out of
+         Gmail's Promotions tab and discourages bulk-mail heuristics. */
+      headers: {
+        "Auto-Submitted": "auto-generated",
+        "X-Entity-Ref-ID": Date.now().toString(36),
+      },
+      ...mail,
+    });
 
     /* Ethereal is a throwaway mailbox used to check templates without a real
        account. It does not deliver; it just hosts a preview of what would
