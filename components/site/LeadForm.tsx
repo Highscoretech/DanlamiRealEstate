@@ -228,13 +228,16 @@ export default function LeadForm({
                 >
                   Join the WhatsApp Group
                 </a>
-                <button
-                  type="button"
+                {/* The secondary action sends them somewhere rather than just
+                    dismissing: a partner who is not ready for the group still
+                    needs to see what there is to sell. */}
+                <Link
+                  href="/developments"
                   className="btn btn-outline"
                   onClick={() => setModalOpen(false)}
                 >
-                  Maybe later
-                </button>
+                  Explore our Developments
+                </Link>
               </div>
             </div>
           </div>

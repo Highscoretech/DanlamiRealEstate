@@ -87,8 +87,8 @@ export default function SalesPartnershipPage() {
                   },
                   {
                     n: "03",
-                    t: "Sell and earn",
-                    d: "Bring buyers to our properties and earn commissions and incentives on completed transactions, paid to your account.",
+                    t: "Learn, sell & earn",
+                    d: "Get access to Dan Lami Academy and learn how to sell luxury real estate. Sell our exclusive developments and earn attractive commissions and incentives on every completed transaction — paid directly to your account.",
                   },
                 ].map((s) => (
                   <div className="numbered" key={s.n}>
