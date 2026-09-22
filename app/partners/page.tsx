@@ -31,6 +31,13 @@ const fields: Field[] = [
   },
   { name: "city", label: "City", type: "text", half: true },
   {
+    name: "instagram",
+    label: "Instagram handle",
+    type: "text",
+    half: true,
+    hint: "e.g. @danlamirealestate",
+  },
+  {
     name: "partnerType",
     label: "I want to partner as a",
     type: "select",

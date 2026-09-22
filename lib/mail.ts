@@ -65,7 +65,14 @@ async function send(mail: Mail) {
     return false;
   }
   try {
-    await transporter().sendMail({ from: fromAddress(), ...mail });
+    const info = await transporter().sendMail({ from: fromAddress(), ...mail });
+
+    /* Ethereal is a throwaway mailbox used to check templates without a real
+       account. It does not deliver; it just hosts a preview of what would
+       have arrived. */
+    const preview = nodemailer.getTestMessageUrl(info);
+    if (preview) console.log(`[mail] preview (${mail.to}): ${preview}`);
+
     return true;
   } catch (error) {
     console.error(`[mail] failed to send to ${mail.to}`, error);

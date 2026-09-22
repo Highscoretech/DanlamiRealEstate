@@ -16,6 +16,7 @@ const LABELS: Record<string, string> = {
   email: "Email",
   phone: "Phone",
   whatsapp: "WhatsApp",
+  instagram: "Instagram",
   city: "City",
   location: "Location",
   partnerType: "Partnering as",
