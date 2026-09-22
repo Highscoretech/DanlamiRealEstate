@@ -94,7 +94,7 @@ export default function PartnersPage() {
               form="partner"
               fields={fields}
               submitLabel="Register as a partner"
-              successMessage="Thanks for submitting. The team will get in touch with you shortly. A confirmation is on its way to your email."
+              successMessage="Submitted successfully."
               consent="We use your details only to assess and manage this partnership. We do not sell or share them."
             />
 

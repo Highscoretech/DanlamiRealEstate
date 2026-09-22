@@ -1,45 +1,14 @@
 import { NextResponse } from "next/server";
+import { COLUMNS, isSalesPartner, sheetFor } from "@/lib/lead-routing";
 import { sendConfirmation, sendOwnerNotification } from "@/lib/mail";
 import { appendRow, sheetsConfigured } from "@/lib/sheets";
 
 export const runtime = "nodejs";
 
-/* Both forms post here. Enquiries and partner registrations go to separate
-   tabs of the same spreadsheet — one document for the client to open, two
-   tables inside it. */
+/* Both forms post here. The destination tab depends on what the person
+   picked rather than which page they were on — see lib/lead-routing.ts. */
 
-const TABS: Record<string, { tab: string; fields: string[] }> = {
-  enquiry: {
-    tab: "Enquiries",
-    fields: [
-      "name",
-      "email",
-      "phone",
-      "whatsapp",
-      "location",
-      "interest",
-      "budget",
-      "message",
-    ],
-  },
-  partner: {
-    tab: "Partners",
-    fields: [
-      "name",
-      "email",
-      "phone",
-      "whatsapp",
-      "city",
-      "partnerType",
-      "experience",
-      "heardVia",
-      "accountName",
-      "bankName",
-      "accountNumber",
-      "message",
-    ],
-  },
-};
+const FORMS = ["enquiry", "partner"];
 
 /** Human labels for the notification email, in the order they are shown. */
 const LABELS: Record<string, string> = {
@@ -60,16 +29,6 @@ const LABELS: Record<string, string> = {
   message: "Message",
 };
 
-/**
- * Partner types that sell on our behalf. These are the ones invited into the
- * WhatsApp group on success — landowners, developers and investors are not
- * sales partners and should not be dropped into a sellers' group.
- */
-const SALES_PARTNER_TYPES = [
-  "Realtor or sales agent",
-  "Affiliate marketer",
-  "Referral partner (9–5er)",
-];
 
 export async function POST(request: Request) {
   let payload: Record<string, unknown>;
@@ -86,10 +45,14 @@ export async function POST(request: Request) {
   }
 
   const form = String(payload.form ?? "");
-  const spec = TABS[form];
-  if (!spec) {
+  if (!FORMS.includes(form)) {
     return NextResponse.json({ error: "Unknown form." }, { status: 400 });
   }
+
+  const partnerType = String(payload.partnerType ?? "").trim();
+  const interest = String(payload.interest ?? "").trim();
+  const tab = sheetFor(form, { partnerType, interest });
+  const columns = COLUMNS[tab];
 
   const name = String(payload.name ?? "").trim();
   const email = String(payload.email ?? "").trim();
@@ -113,13 +76,13 @@ export async function POST(request: Request) {
 
   const row = [
     new Date().toISOString(),
-    ...spec.fields.map((f) => String(payload[f] ?? "")),
+    ...columns.map((f) => String(payload[f] ?? "")),
   ];
 
   let stored = false;
   if (sheetsConfigured()) {
     try {
-      await appendRow(spec.tab, row);
+      await appendRow(tab, row);
       stored = true;
     } catch (error) {
       console.error("[leads] append failed", error);
@@ -129,17 +92,13 @@ export async function POST(request: Request) {
       );
     }
   } else {
-    // Until the client gives us their Google account, keep the form working and
-    // record the lead in the server log so nothing is silently lost.
-    console.warn(
-      `[leads] Google Sheets not configured — ${spec.tab} row not saved:`,
-      row
-    );
+    /* The browser also posts straight to the client's Apps Script, which is
+       what actually fills the spreadsheet today. This path is the fallback
+       for when the Sheets API is wired up instead. */
+    console.warn(`[leads] Sheets API not configured — ${tab} row not written here:`, row);
   }
 
-  const partnerType = String(payload.partnerType ?? "").trim();
-  const isSalesPartner =
-    form === "partner" && SALES_PARTNER_TYPES.includes(partnerType);
+  const salesPartner = form === "partner" && isSalesPartner(partnerType);
   const groupUrl = process.env.NEXT_PUBLIC_WHATSAPP_GROUP_URL;
 
   /* Email is best-effort and deliberately not awaited as a condition of
@@ -150,13 +109,14 @@ export async function POST(request: Request) {
       ? sendConfirmation({
           to: email,
           name,
-          whatsappGroupUrl: isSalesPartner ? groupUrl : undefined,
+          whatsappGroupUrl: salesPartner ? groupUrl : undefined,
         })
       : Promise.resolve(false),
     sendOwnerNotification({
       kind: form as "enquiry" | "partner",
+      tab,
       replyTo: email || undefined,
-      fields: spec.fields
+      fields: columns
         .map((f) => [LABELS[f] ?? f, String(payload[f] ?? "")] as [string, string])
         .filter(([, v]) => v),
     }),
@@ -165,7 +125,8 @@ export async function POST(request: Request) {
   return NextResponse.json({
     ok: true,
     stored,
+    tab,
     // Tells the form whether to offer the WhatsApp group on success.
-    salesPartner: isSalesPartner,
+    salesPartner,
   });
 }

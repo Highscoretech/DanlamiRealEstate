@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { sheetFor } from "@/lib/lead-routing";
 
 export type Field =
   | { name: string; label: string; type: "text" | "email" | "tel"; required?: boolean; hint?: string; half?: boolean }
@@ -61,26 +62,30 @@ export default function LeadForm({
     const data = Object.fromEntries(formData.entries());
 
     try {
-      const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
+      /* Two destinations, deliberately. The Apps Script writes the row into
+         the client's spreadsheet; our own route sends the confirmation and
+         the office notification. Earlier this was either/or, which meant
+         turning the spreadsheet on silently turned the emails off.
 
+         The Apps Script call is fire-and-forget: `no-cors` makes its response
+         opaque, so there is nothing to check, and a spreadsheet problem must
+         not fail a submission the visitor has completed. */
+      const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
       if (scriptUrl) {
-        // Frontend-only submission to Google Apps Script.
         formData.append("form", form);
-        await fetch(scriptUrl, {
+        // The tab depends on what they picked, not which page they were on.
+        formData.append(
+          "sheet",
+          sheetFor(form, {
+            partnerType: String(data.partnerType ?? ""),
+            interest: String(data.interest ?? ""),
+          })
+        );
+        void fetch(scriptUrl, {
           method: "POST",
           mode: "no-cors",
           body: formData,
-        });
-        // With no-cors the response is opaque, so decide locally whether this
-        // registration should see the group invitation.
-        const type = String(data.partnerType ?? "");
-        setStatus({
-          state: "sent",
-          salesPartner:
-            form === "partner" &&
-            /realtor|affiliate|referral/i.test(type),
-        });
-        return;
+        }).catch((error) => console.error("[leads] sheet write failed", error));
       }
 
       const res = await fetch("/api/leads", {

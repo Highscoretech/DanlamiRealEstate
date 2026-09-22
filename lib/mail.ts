@@ -116,15 +116,15 @@ export async function sendConfirmation(opts: {
 
   return send({
     to: opts.to,
-    subject: `We have your details, ${first}`,
-    text: `Hi ${first},\n\nThanks for getting in touch with ${site.name}. Your details have reached us and a member of the team will contact you shortly.\n\nIf it is urgent, call or WhatsApp us on ${site.phone}.${
+    subject: `Thanks for submitting your form, ${first}`,
+    text: `Hi ${first},\n\nThanks for submitting your form. Our team will get in touch with you shortly.\n\nIf it is urgent, call or WhatsApp us on ${site.phone}.${
       opts.whatsappGroupUrl
         ? `\n\nJoin our partners WhatsApp group: ${opts.whatsappGroupUrl}`
         : ""
-    }\n\n${site.name}\n${site.authority}`,
+    }\n\n${site.name}\n${site.authority}\n${site.strapline}`,
     html: shell(
       `Thanks, ${first}.`,
-      `<p style="margin:0">We have your details and a member of the team will get in touch with you shortly.</p>
+      `<p style="margin:0;font-size:1.05rem">Thanks for submitting your form. Our team will get in touch with you shortly.</p>
        <p style="margin:1rem 0 0">If it is urgent, call or WhatsApp us on <a href="tel:${site.phoneE164}" style="color:#1180B0">${site.phone}</a>.</p>
        ${groupBlock}`
     ),
@@ -134,21 +134,26 @@ export async function sendConfirmation(opts: {
 /** Notification to the company that a new submission has landed. */
 export async function sendOwnerNotification(opts: {
   kind: "enquiry" | "partner";
+  /** Spreadsheet tab the row went to — named in the subject so the office
+      can see at a glance which pipeline this belongs to. */
+  tab?: string;
   fields: [string, string][];
   replyTo?: string;
 }) {
   const heading =
     opts.kind === "partner" ? "New partner registration" : "New enquiry";
   const who = opts.fields.find(([k]) => k === "Name")?.[1] ?? "Someone";
+  const where = opts.tab ? ` [${opts.tab}]` : "";
 
   return send({
     to: ownerAddress(),
     replyTo: opts.replyTo,
-    subject: `${heading} — ${who}`,
+    subject: `${heading}${where} — ${who}`,
     text: opts.fields.map(([k, v]) => `${k}: ${v}`).join("\n"),
     html: shell(
       heading,
-      `<table style="border-collapse:collapse;width:100%">${rows(opts.fields)}</table>`
+      `${opts.tab ? `<p style="margin:0 0 1rem;font-size:.85rem;color:#5C6A72">Filed under <strong>${opts.tab}</strong></p>` : ""}
+       <table style="border-collapse:collapse;width:100%">${rows(opts.fields)}</table>`
     ),
   });
 }

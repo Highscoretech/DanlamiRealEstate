@@ -57,7 +57,7 @@ export default function ContactPage() {
               form="enquiry"
               fields={fields}
               submitLabel="Send message"
-              successMessage="Thanks for submitting. The team will get in touch with you shortly. A confirmation is on its way to your email — if it is urgent, call or WhatsApp us on the number on this page."
+              successMessage="Submitted successfully."
               consent="We use your details only to respond to this enquiry. We do not sell or share them."
             />
 
