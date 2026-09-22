@@ -4,20 +4,44 @@ Paste this whole file's code block into the Apps Script editor attached to the
 **DAN LAMI SALES PARTNERS** spreadsheet, replacing everything that is there.
 
 The website works out which tab a submission belongs in and sends it as a
-`sheet` parameter, so this script does not have to guess.
+`sheet` parameter. The script can also work it out on its own from what the
+person picked, so nothing is ever misfiled if that parameter goes missing.
+
+All five tabs are handled: `Enquires`, `Investors`, `LandOwner`, `Developers`
+and `SalesPartners`.
 
 ---
 
 ## The script
 
 ```js
-function doPost(e) {
-  // The website sends the destination tab as `sheet`.
-  // The fallback covers anything older that does not.
-  var sheetName = e.parameter.sheet;
-  if (!sheetName) {
-    sheetName = (e.parameter.form === 'enquiry') ? 'Enquires' : 'SalesPartners';
+// Works out which tab a submission belongs in, from what the person picked.
+// The website sends the answer as `sheet`, but this function means the script
+// can also work it out on its own — so a submission is never misfiled.
+function pickSheet(e) {
+  if (e.parameter.sheet) {
+    return e.parameter.sheet;
   }
+
+  var partnerType = e.parameter.partnerType || '';
+  var interest = e.parameter.interest || '';
+
+  if (partnerType === 'Realtor or sales agent') { return 'SalesPartners'; }
+  if (partnerType === 'Affiliate marketer')     { return 'SalesPartners'; }
+  if (partnerType.indexOf('Referral partner') === 0) { return 'SalesPartners'; }
+  if (partnerType === 'Landowner') { return 'LandOwner'; }
+  if (partnerType === 'Developer') { return 'Developers'; }
+  if (partnerType === 'Investor')  { return 'Investors'; }
+
+  if (interest === 'Investment Opportunity') { return 'Investors'; }
+  if (interest === 'Diaspora Investment')    { return 'Investors'; }
+  if (interest === 'Development Partnership') { return 'Developers'; }
+
+  return 'Enquires';
+}
+
+function doPost(e) {
+  var sheetName = pickSheet(e);
 
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
 
