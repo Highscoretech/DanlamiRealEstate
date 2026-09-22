@@ -202,7 +202,10 @@ export default function LeadForm({
   }
 
   return (
-    <form className="form" onSubmit={handleSubmit} noValidate>
+    /* Browser validation is left on: `required` on a field has to actually
+       stop the submission, and the native messages are accessible and
+       translated for free. */
+    <form className="form" onSubmit={handleSubmit}>
       {/* Honeypot — hidden from people, tempting to bots. */}
       <input
         type="text"
