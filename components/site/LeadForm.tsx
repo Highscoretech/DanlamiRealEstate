@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 export type Field =
   | { name: string; label: string; type: "text" | "email" | "tel"; required?: boolean; hint?: string; half?: boolean }
@@ -10,7 +11,7 @@ export type Field =
 type Status =
   | { state: "idle" }
   | { state: "sending" }
-  | { state: "sent" }
+  | { state: "sent"; salesPartner: boolean }
   | { state: "error"; message: string };
 
 export default function LeadForm({
@@ -27,6 +28,30 @@ export default function LeadForm({
   consent?: string;
 }) {
   const [status, setStatus] = useState<Status>({ state: "idle" });
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const groupUrl = process.env.NEXT_PUBLIC_WHATSAPP_GROUP_URL;
+
+  /* Sales partners are invited into the WhatsApp group the moment they
+     register — that is where the client actually runs the sales team. */
+  useEffect(() => {
+    if (status.state === "sent" && status.salesPartner && groupUrl) {
+      setModalOpen(true);
+    }
+  }, [status, groupUrl]);
+
+  useEffect(() => {
+    if (!modalOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setModalOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [modalOpen]);
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -36,40 +61,43 @@ export default function LeadForm({
     const data = Object.fromEntries(formData.entries());
 
     try {
-      let res;
-      let body: any = {};
-      
       const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
 
       if (scriptUrl) {
-        // Frontend-only submission to Google Apps Script
+        // Frontend-only submission to Google Apps Script.
         formData.append("form", form);
         await fetch(scriptUrl, {
           method: "POST",
           mode: "no-cors",
           body: formData,
         });
-        // With no-cors, the response is opaque. We just assume success if it didn't throw.
-        setStatus({ state: "sent" });
-        return;
-      } else {
-        // Fallback to Next.js API route
-        res = await fetch("/api/leads", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...data, form }),
+        // With no-cors the response is opaque, so decide locally whether this
+        // registration should see the group invitation.
+        const type = String(data.partnerType ?? "");
+        setStatus({
+          state: "sent",
+          salesPartner:
+            form === "partner" &&
+            /realtor|affiliate|referral/i.test(type),
         });
-        body = await res.json().catch(() => ({}));
+        return;
       }
 
-      if (!res?.ok) {
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...data, form }),
+      });
+      const body = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
         setStatus({
           state: "error",
           message: body?.error ?? "Something went wrong. Please try again.",
         });
         return;
       }
-      setStatus({ state: "sent" });
+      setStatus({ state: "sent", salesPartner: Boolean(body?.salesPartner) });
     } catch {
       setStatus({
         state: "error",
@@ -80,9 +108,79 @@ export default function LeadForm({
 
   if (status.state === "sent") {
     return (
-      <div className="form-status form-status-ok" role="status">
-        {successMessage}
-      </div>
+      <>
+        <div className="stack stack-3">
+          <div className="form-status form-status-ok" role="status">
+            {successMessage}
+          </div>
+
+          <div className="btn-row">
+            {status.salesPartner && groupUrl ? (
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => setModalOpen(true)}
+              >
+                Join the WhatsApp Group
+              </button>
+            ) : null}
+            <Link href="/developments" className="btn btn-outline">
+              Explore Our Developments
+            </Link>
+          </div>
+        </div>
+
+        {modalOpen && groupUrl ? (
+          <div
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="group-modal-title"
+            onClick={() => setModalOpen(false)}
+          >
+            <div className="modal-panel" onClick={(e) => e.stopPropagation()}>
+              <button
+                type="button"
+                className="modal-close"
+                onClick={() => setModalOpen(false)}
+                aria-label="Close"
+              >
+                ×
+              </button>
+
+              <p className="eyebrow">You&rsquo;re registered</p>
+              <h2 id="group-modal-title" style={{ fontSize: "var(--step-4)" }}>
+                One more step.
+              </h2>
+              <p className="body">
+                Our sales partners work out of a WhatsApp group &mdash; new
+                listings, commissions, marketing materials and training are
+                shared there first. Join it now so you don&rsquo;t miss the
+                next opportunity.
+              </p>
+
+              <div className="btn-row" style={{ marginTop: ".5rem" }}>
+                <a
+                  href={groupUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-primary"
+                  onClick={() => setModalOpen(false)}
+                >
+                  Join the WhatsApp Group
+                </a>
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  onClick={() => setModalOpen(false)}
+                >
+                  Maybe later
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </>
     );
   }
 

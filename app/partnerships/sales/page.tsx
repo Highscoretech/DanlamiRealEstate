@@ -38,7 +38,7 @@ export default function SalesPartnershipPage() {
     <>
       <PageHero
         eyebrow="Sales Partnership"
-        title="Sell with us. Earn with us."
+        title="Learn. Sell. Earn."
         lede="We work with realtors, 9-to-5ers and affiliate marketers to sell our properties — and earn commissions and incentives."
       />
 

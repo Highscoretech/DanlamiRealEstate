@@ -15,8 +15,15 @@ export const metadata = pageMetadata({
 
 const fields: Field[] = [
   { name: "name", label: "Full name", type: "text", required: true, half: true },
-  { name: "phone", label: "Phone or WhatsApp", type: "tel", required: true, half: true },
-  { name: "email", label: "Email address", type: "email", required: true },
+  { name: "email", label: "Email address", type: "email", required: true, half: true },
+  { name: "phone", label: "Phone number", type: "tel", required: true, half: true },
+  {
+    name: "whatsapp",
+    label: "WhatsApp number",
+    type: "tel",
+    half: true,
+    hint: "If different from your phone number.",
+  },
   {
     name: "interest",
     label: "I am interested in",
@@ -50,7 +57,7 @@ export default function ContactPage() {
               form="enquiry"
               fields={fields}
               submitLabel="Send message"
-              successMessage="Thank you — your message has reached us. We will be in touch shortly. If it is urgent, call or WhatsApp us on the number on this page."
+              successMessage="Thanks for submitting. The team will get in touch with you shortly. A confirmation is on its way to your email — if it is urgent, call or WhatsApp us on the number on this page."
               consent="We use your details only to respond to this enquiry. We do not sell or share them."
             />
 

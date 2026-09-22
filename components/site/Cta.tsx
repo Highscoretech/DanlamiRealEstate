@@ -18,7 +18,7 @@ export default function Cta() {
         </p>
         <div className="btn-row" style={{ marginTop: ".5rem" }}>
           <Link href="/properties" className="btn btn-on-dark">
-            Explore Our Properties
+            Explore Our Luxury Listings
           </Link>
           <Link href="/developments" className="btn btn-ghost-dark">
             Explore Our Developments

@@ -20,8 +20,15 @@ export const metadata = pageMetadata({
 
 const fields: Field[] = [
   { name: "name", label: "Full name", type: "text", required: true, half: true },
-  { name: "phone", label: "Phone or WhatsApp", type: "tel", required: true, half: true },
   { name: "email", label: "Email address", type: "email", required: true, half: true },
+  { name: "phone", label: "Phone number", type: "tel", required: true, half: true },
+  {
+    name: "whatsapp",
+    label: "WhatsApp number",
+    type: "tel",
+    half: true,
+    hint: "If different from your phone number.",
+  },
   { name: "city", label: "City", type: "text", half: true },
   {
     name: "partnerType",
@@ -75,7 +82,7 @@ export default function PartnersPage() {
   return (
     <>
       <PageHero
-        eyebrow="Partner with us"
+        eyebrow="Be a Dan Lami partner"
         title="Building better real estate together."
         lede="We work with realtors, referral partners, landowners, developers and investors. Register below and our team will come back to you."
       />
@@ -87,7 +94,7 @@ export default function PartnersPage() {
               form="partner"
               fields={fields}
               submitLabel="Register as a partner"
-              successMessage="Thank you — your registration has reached us. Our team will review it and come back to you. Nothing further is needed from you right now."
+              successMessage="Thanks for submitting. The team will get in touch with you shortly. A confirmation is on its way to your email."
               consent="We use your details only to assess and manage this partnership. We do not sell or share them."
             />
 
