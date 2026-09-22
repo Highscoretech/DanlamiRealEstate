@@ -23,6 +23,18 @@ export function mailConfigured() {
   );
 }
 
+/**
+ * The reason the last send failed, if it did.
+ *
+ * Kept so the API can report it: on a serverless host the console output is
+ * buried in the platform's logs, and "the email did not arrive" is otherwise
+ * indistinguishable from a blocked port, a bad password or a timeout.
+ */
+let lastError: string | null = null;
+export function lastMailError() {
+  return lastError;
+}
+
 function transporter() {
   const port = Number(process.env.SMTP_PORT ?? 587);
   return nodemailer.createTransport({
@@ -34,6 +46,13 @@ function transporter() {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASSWORD,
     },
+    /* Serverless functions are killed after about ten seconds. Without these
+       a blocked port hangs until the platform terminates the whole request,
+       which looks like a site error rather than a mail problem. Failing fast
+       lets us return a useful reason instead. */
+    connectionTimeout: 7000,
+    greetingTimeout: 5000,
+    socketTimeout: 7000,
   });
 }
 
@@ -67,6 +86,7 @@ type Mail = {
  */
 async function send(mail: Mail) {
   if (!mailConfigured()) {
+    lastError = "SMTP_HOST, SMTP_USER or SMTP_PASSWORD is not set";
     console.warn(`[mail] SMTP not configured — not sent to ${mail.to}: ${mail.subject}`);
     return false;
   }
@@ -97,8 +117,10 @@ async function send(mail: Mail) {
     const preview = nodemailer.getTestMessageUrl(info);
     if (preview) console.log(`[mail] preview (${mail.to}): ${preview}`);
 
+    lastError = null;
     return true;
   } catch (error) {
+    lastError = error instanceof Error ? error.message : String(error);
     console.error(`[mail] failed to send to ${mail.to}`, error);
     return false;
   }

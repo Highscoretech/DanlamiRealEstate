@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { COLUMNS, isSalesPartner, sheetFor } from "@/lib/lead-routing";
-import { sendConfirmation, sendOwnerNotification } from "@/lib/mail";
+import {
+  lastMailError,
+  mailConfigured,
+  sendConfirmation,
+  sendOwnerNotification,
+} from "@/lib/mail";
 import { appendRow, sheetsConfigured } from "@/lib/sheets";
 
 export const runtime = "nodejs";
@@ -105,7 +110,7 @@ export async function POST(request: Request) {
   /* Email is best-effort and deliberately not awaited as a condition of
      success: the lead is already recorded, so a mail problem must not show
      the visitor an error. Failures are logged inside lib/mail.ts. */
-  await Promise.all([
+  const [confirmationSent, notificationSent] = await Promise.all([
     email
       ? sendConfirmation({
           to: email,
@@ -129,5 +134,14 @@ export async function POST(request: Request) {
     tab,
     // Tells the form whether to offer the WhatsApp group on success.
     salesPartner,
+    /* Reported so a mail problem on the host is visible without reading the
+       platform's function logs. A false here never fails the submission —
+       the lead is already recorded. */
+    mail: {
+      configured: mailConfigured(),
+      confirmationSent,
+      notificationSent,
+      lastError: lastMailError(),
+    },
   });
 }
