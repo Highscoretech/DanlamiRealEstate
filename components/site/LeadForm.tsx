@@ -29,16 +29,22 @@ export default function LeadForm({
   consent?: string;
 }) {
   const [status, setStatus] = useState<Status>({ state: "idle" });
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modal, setModal] = useState<"group" | "explore" | null>(null);
+  const modalOpen = modal !== null;
+  const setModalOpen = (open: boolean) => {
+    if (!open) setModal(null);
+  };
 
   const groupUrl = process.env.NEXT_PUBLIC_WHATSAPP_GROUP_URL;
+  const joinsGroup = status.state === "sent" && status.salesPartner && Boolean(groupUrl);
 
-  /* Sales partners are invited into the WhatsApp group the moment they
-     register — that is where the client actually runs the sales team. */
+  /* Every successful submission gets a next step. Sales partners are invited
+     into the WhatsApp group, which is where the client runs the sales team.
+     Everyone else — landowners, developers, investors, enquiries — is pointed
+     at the properties while they wait to hear back. */
   useEffect(() => {
-    if (status.state === "sent" && status.salesPartner && groupUrl) {
-      setModalOpen(true);
-    }
+    if (status.state !== "sent") return;
+    setModal(status.salesPartner && groupUrl ? "group" : "explore");
   }, [status, groupUrl]);
 
   useEffect(() => {
@@ -120,22 +126,70 @@ export default function LeadForm({
           </div>
 
           <div className="btn-row">
-            {status.salesPartner && groupUrl ? (
+            {joinsGroup ? (
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => setModalOpen(true)}
+                onClick={() => setModal("group")}
               >
                 Join the WhatsApp Group
               </button>
-            ) : null}
+            ) : (
+              <Link href="/properties" className="btn btn-primary">
+                Explore Our Properties
+              </Link>
+            )}
             <Link href="/developments" className="btn btn-outline">
               Explore Our Developments
             </Link>
           </div>
         </div>
 
-        {modalOpen && groupUrl ? (
+        {modal === "explore" ? (
+          <div
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="explore-modal-title"
+            onClick={() => setModalOpen(false)}
+          >
+            <div className="modal-panel" onClick={(e) => e.stopPropagation()}>
+              <button
+                type="button"
+                className="modal-close"
+                onClick={() => setModalOpen(false)}
+                aria-label="Close"
+              >
+                ×
+              </button>
+
+              <p className="eyebrow">Received</p>
+              <h2 id="explore-modal-title" style={{ fontSize: "var(--step-4)" }}>
+                Thank you. We&rsquo;ll be in touch.
+              </h2>
+              <p className="body">
+                While our team reviews your details, take a look at what is
+                available now &mdash; every listing shows its price and full
+                specification.
+              </p>
+
+              <div className="btn-row" style={{ marginTop: ".5rem" }}>
+                <Link href="/properties" className="btn btn-primary">
+                  Explore Our Properties
+                </Link>
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  onClick={() => setModalOpen(false)}
+                >
+                  Maybe later
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
+
+        {modal === "group" && groupUrl ? (
           <div
             className="modal"
             role="dialog"
