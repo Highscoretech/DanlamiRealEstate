@@ -177,13 +177,13 @@ export default function LeadForm({
                 <Link href="/properties" className="btn btn-primary">
                   Explore Our Properties
                 </Link>
-                <button
-                  type="button"
+                <Link
+                  href="/developments"
                   className="btn btn-outline"
                   onClick={() => setModalOpen(false)}
                 >
-                  Maybe later
-                </button>
+                  Explore Our Developments
+                </Link>
               </div>
             </div>
           </div>
@@ -236,7 +236,7 @@ export default function LeadForm({
                   className="btn btn-outline"
                   onClick={() => setModalOpen(false)}
                 >
-                  Explore our Developments
+                  Explore Our Developments
                 </Link>
               </div>
             </div>
